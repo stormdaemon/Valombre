@@ -12,3 +12,7 @@ tools/previews/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Python bytecode written by Blender when the scripts import each other
+__pycache__/
+*.pyc
