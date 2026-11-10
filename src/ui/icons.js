@@ -103,13 +103,13 @@ const WEAPON_GLYPH = { sword: 'sword', dagger: 'dagger', axe: 'axe', mace: 'mace
 const ID_GLYPH = {
   club: 'club', flask: 'flask', bread: 'bread', dried_meat: 'meat', herb_poultice: 'leaf', frost_salve: 'salve', whetstone: 'stone', vigor_elixir: 'flask',
   ember_bomb: 'bomb', return_charm: 'feather', wolf_pelt: 'pelt', spider_silk: 'web', bone_dust: 'bone', troll_hide: 'pelt', cinder_core: 'flame',
-  steel_shard: 'shard', astral_fragment: 'crystal', amber_sap: 'drop', ember_seed: 'seed', wolf_fang: 'fang', garrick_ring: 'ring', chapel_key: 'key', old_letter: 'letter',
+  steel_shard: 'shard', astral_fragment: 'crystal', amber_sap: 'drop', ember_seed: 'seed', wolf_fang: 'fang', garrick_ring: 'ring', chapel_key: 'key', old_letter: 'letter', torch: 'flame',
 };
 const TINTS = [
   [/rusty/, '#b87548'], [/fang/, '#e9e1cd'], [/drowned/, '#74b9ab'], [/colossus|frost/, '#a9dcf0'], [/dawn/, '#ffd98a'], [/watcher/, '#e3c47c'], [/royal/, '#e6c56c'],
   [/steel|plate/, '#cfd9df'], [/chain/, '#b7bcc0'], [/iron|mace|morningstar|war_|great_|claymore|hatchet|dagger/, '#c2bcae'],
   [/leather|bandit/, '#b98858'], [/robe/, '#9aa9d0'], [/peasant|club|wood/, '#a98e63'],
-  [/ember|cinder|whetstone/, '#e99a55'], [/amber|bread|meat/, '#e0b060'], [/herb|poultice/, '#9cc76a'], [/vigor/, '#8fd0a0'], [/astral|shard_/, '#8fe0f0'],
+  [/torch|ember|cinder|whetstone/, '#e99a55'], [/amber|bread|meat/, '#e0b060'], [/herb|poultice/, '#9cc76a'], [/vigor/, '#8fd0a0'], [/astral|shard_/, '#8fe0f0'],
   [/silk|bone/, '#d8d2c2'], [/pelt|hide/, '#a8906c'],
 ];
 

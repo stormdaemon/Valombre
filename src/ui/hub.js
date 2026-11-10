@@ -204,9 +204,10 @@ class InventoryTab {
     const btns = h('div.v-card-actions');
     if (equipped) add(btns, h('button.v-btn.primary', { nav: true, type: 'button', text: 'Retirer', onclick: () => this._unequip(sel.slot) }));
     else if (def && def.slot) add(btns, h('button.v-btn.primary', { nav: true, type: 'button', text: 'Équiper', onclick: () => this._primary() }));
+    else if (def && def.tool === 'torch') { const lit = !!(d && d.torchLit); add(btns, h('button.v-btn.primary', { nav: true, type: 'button', text: lit ? 'Éteindre' : 'Allumer', onclick: () => this._primary() })); }
     else if (def && def.type === 'consumable') add(btns, h('button.v-btn.primary', { nav: true, type: 'button', text: 'Utiliser', onclick: () => this._primary() }));
     if (!equipped && !(def && def.type === 'key')) add(btns, h('button.v-btn.ghost', { nav: true, type: 'button', onclick: () => this._drop() }, h('span.v-btn-ico', { html: icon('trash') }), 'Jeter'));
-    if (def && def.type === 'key') add(btns, h('span.v-card-note', { text: 'Objet de quête : ne peut être jeté.' }));
+    if (def && def.type === 'key') add(btns, h('span.v-card-note', { text: def.tool ? `Toujours sur vous · touche ${this.ui.keyLabel('torch')}` : 'Objet de quête : ne peut être jeté.' }));
     if (def && def.type === 'material' && !btns.querySelector('.primary')) btns.prepend(h('span.v-card-note', { text: 'Matériau d\'artisanat.' }));
     add(this.detail, btns);
   }
@@ -226,7 +227,7 @@ class InventoryTab {
     if (!g || !g.player || !sel || sel.kind !== 'inv' || !def) return;
     try {
       if (def.slot) { g.player.equip(sel.index); this.ui.sfx('ui_equip'); }
-      else if (def.type === 'consumable') { if (g.useItem(sel.index) === false) { this.ui.sfx('ui_error'); return; } }
+      else if (def.type === 'consumable' || def.tool) { if (g.useItem(sel.index) === false) { this.ui.sfx('ui_error'); return; } }
       else return;
     } catch (e) { console.error('[ui] item action', e); }
     this._refocus(sel.index);

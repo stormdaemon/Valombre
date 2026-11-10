@@ -96,6 +96,8 @@ g.dialogue        // while talking: { speaker, text, options:[{ label }], choose
 g.quests.list()   // [{ id, title, desc, state:'active'|'done', main:bool, steps:[{ text, done }], tracked }] ; g.quests.track(id)
 g.codex()         // [{ id, title, text, category:'Histoire'|'Lieux'|'Créatures'|'Personnages', found }]
 g.closePanel()    // leave shrine / shop / smith / dialogue
+g.torch.toggle()  // light / put out the torch (item 'torch', given at the start) ; d.torchLit
+g.auto.toggle()   // auto-travel toward the tracked quest marker ; g.auto.active
 ```
 
 ## Bus events (`import { bus } from '../core/events.js'`; `bus.on(type, fn)`)

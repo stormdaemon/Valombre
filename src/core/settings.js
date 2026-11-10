@@ -95,6 +95,7 @@ export const ACTIONS = [
   ['lock', 'Verrouiller une cible', ['Mouse2', 'KeyQ']],
   ['skill1', 'Pouvoir d\'Éclat 1', ['Digit1']], ['skill2', 'Pouvoir d\'Éclat 2', ['Digit2']], ['skill3', 'Pouvoir d\'Éclat 3', ['Digit3']],
   ['flask', 'Boire une fiole', ['KeyR']], ['interact', 'Interagir', ['KeyE']], ['sheathe', 'Rengainer / dégainer', ['KeyX']],
+  ['torch', 'Allumer / éteindre la torche', ['KeyT']], ['autoTravel', 'Aller vers l\'objectif suivi', ['KeyG']],
   ['inventory', 'Inventaire', ['KeyI', 'Tab']], ['map', 'Carte', ['KeyM']], ['journal', 'Journal', ['KeyJ']],
   ['character', 'Personnage', ['KeyP']], ['pause', 'Menu', ['Escape']], ['hideHud', 'Masquer l\'interface', ['F10']],
 ];

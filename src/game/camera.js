@@ -45,6 +45,9 @@ export class FollowCamera {
       if (inp.wheel) s.set('camDistance', clamp(s.get('camDistance') + inp.wheel * 3, 25, 60), true);
     }
     this.dist = s.get('camDistance') / 10;
+    // auto-travel: swing the camera behind the walk unless the player is looking around
+    if (inp.lookDX || inp.lookDY) this.lookIdle = 0; else this.lookIdle = (this.lookIdle || 0) + dt;
+    if (g.auto && g.auto.active && g.auto.moving && this.lookIdle > 1.2 && p.speed > 1) this.yaw = dampAngle(this.yaw, Math.atan2(p.vel.x, p.vel.y), 1.6, dt);
     const t = p.target && !p.target.dead ? p.target : null;
     if (t) {
       // frame the player and the target: look from behind the player toward the target

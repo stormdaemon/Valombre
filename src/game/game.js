@@ -9,6 +9,8 @@ import { ModelFactory } from './models.js';
 import { VFX } from './vfx.js';
 import { FollowCamera } from './camera.js';
 import { Player, newPlayerData } from './player.js';
+import { Torch } from './torch.js';
+import { AutoTravel } from './autotravel.js';
 import { Enemy } from './enemy.js';
 import { Actor } from './actor.js';
 import { Quests } from './quests.js';
@@ -48,6 +50,8 @@ export class Game {
     this.scene.add(this.structures.group, this.vfx.group);
     this.player = null;
     this.quests = new Quests(this);
+    this.torch = new Torch(this);
+    this.auto = new AutoTravel(this);
     this.enemies = []; this.npcs = []; this.projectiles = []; this.hazards = []; this.loot = [];
     this.interactables = []; this.focus = null;
     this.tokens = 0; this.maxTokens = 2;
@@ -181,6 +185,7 @@ export class Game {
     const p = this.player = new Player(this, data);
     p.setModel(this.models.humanoid({ human: true, ...this._playerLook(data) }));
     p.updateGear();
+    if (!p.count('torch')) p.addItem('torch', 1, 0, true);     // saves made before the torch existed
     if (data.pos) { p.pos.set(data.pos[0], data.pos[1], data.pos[2]); p.yaw = data.yaw || 0; }
     else { const s = this.content.shrines[data.lastShrine] || Object.values(this.content.shrines)[0]; p.pos.copy(s.rest); p.yaw = s.yaw + Math.PI; }
     p.pos.y = this.collision.ground(p.pos.x, p.pos.z);
@@ -204,6 +209,8 @@ export class Game {
     for (const e of this.enemies) e.dispose();
     for (const n of this.npcs) n.dispose();
     for (const l of this.loot) this.scene.remove(l.mesh);
+    if (this.torch) this.torch.reset();
+    if (this.auto) this.auto.reset();
     if (this.player) this.player.dispose();
     this.enemies = []; this.npcs = []; this.loot = []; this.projectiles = []; this.hazards = [];
     this.activeGroups.clear(); this.tokens = 0; this.boss = null;
@@ -467,6 +474,7 @@ export class Game {
     const p = this.player, it = p.data.inventory[index], def = it && ITEMS[it.id];
     if (!def) return false;
     if (def.slot) { p.equip(index); return true; }
+    if (def.tool === 'torch') return this.torch.toggle() !== null;
     if (def.type !== 'consumable') return false;
     const e = def.effect;
     if (e.recall) { const s = this.content.shrines[p.data.lastShrine]; if (!s || this.boss) { this.sfx('ui_error'); return false; } this.sfx('fast_travel'); this.engine.pipeline.fade = 1; this._fadeIn = 0.9; p.pos.set(s.rest.x, this.collision.ground(s.rest.x, s.rest.z), s.rest.z); this.cam.snap(p.yaw); }
@@ -962,7 +970,9 @@ export class Game {
       if (this.deathT > 3.2) pipe.fade = clamp((this.deathT - 3.2) / 1.0, 0, 1);
       if (this.deathT > 4.6) this._respawn();
     }
+    this.auto.update(real);
     p.update(dt);
+    this.torch.update(dt);
     U.uPlayerPos.value.copy(p.pos);
     // boss arena keeps the player in
     if (this.boss) {
