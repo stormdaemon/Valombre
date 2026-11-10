@@ -27,6 +27,7 @@ export function newPlayerData(name, originId, appearance) {
   };
   for (const slot in o.gear) d.equipment[slot] = { id: o.gear[slot], up: 0 };
   for (const [id, qty] of o.items) d.inventory.push({ id, qty, up: 0 });
+  d.inventory.push({ id: 'torch', qty: 1, up: 0 });
   if (o.skill) { d.skills.push(o.skill); d.skillSlots[0] = o.skill; }
   const st = derive(d);
   d.hp = st.maxHp; d.stamina = st.maxSt; d.mana = st.maxMana;
@@ -421,6 +422,8 @@ export class Player extends Actor {
       for (let i = 0; i < 3; i++) if (inp.pressed('skill' + (i + 1))) this.queue('skill' + i);
       if (inp.pressed('lock')) this.toggleLock();
       if (inp.pressed('sheathe')) { this.sheathed = !this.sheathed; }
+      if (inp.pressed('torch')) g.torch.toggle();
+      if (inp.pressed('autoTravel')) g.auto.toggle();
       if (inp.pressed('interact') && this.interactLock <= 0 && (this.state === 'free')) { if (g.interact()) this.interactLock = 0.4; }
     }
     const wantBlock = en && inp.down('block') && !this.swimming;
@@ -483,6 +486,8 @@ export class Player extends Actor {
     const g = this.game, inp = g.input, anim = this.anim, d = this.data;
     if (en && this.buffer && this._consumeBuffer()) return;
     const v = en ? this.wishDir(_v2) : _v2.set(0, 0);
+    // auto-travel steers when the player does not; any manual movement takes back control
+    if (g.auto.active) { if (v.lengthSq() > 0.01 || wantBlock) g.auto.stop('manual'); else if (en) g.auto.dir(v); }
     const mag = Math.min(v.length(), 1);
     let top = RUN, sprinting = false;
     if (this.swimming) top = SWIM;

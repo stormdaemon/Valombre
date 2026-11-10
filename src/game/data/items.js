@@ -92,6 +92,7 @@ add(
   K('wolf_fang', 'Croc du Grand Alpha', 'La preuve que Croc-Blême ne hantera plus les lisières.'),
   K('garrick_ring', 'Chevalière de Garrick', 'La bague du chef des Écorcheurs. Volée, comme le reste.'),
   K('chapel_key', 'Clef de la chapelle', 'Ouvre la crypte de la chapelle de Hautefeuille.'),
+  { id: 'torch', name: 'Torche', type: 'key', tool: 'torch', value: 0, stack: 1, desc: 'Un bâton de pin enduit de résine. Il éclaire la nuit, les grottes et les sous-bois. Ne s\'éteint que dans l\'eau.' },
   K('old_letter', 'Lettre scellée', 'Une lettre à l\'encre passée, adressée au dernier Veilleur.'),
 );
 

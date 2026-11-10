@@ -133,6 +133,14 @@ export class Hud {
       bf.appendChild(node);
       this.buffs[k] = { el: node, t, on: false, n: -1 };
     }
+    // lit torch / auto-travel: same chips as the buffs, with their key below
+    this.tools = {};
+    for (const [k, glyph, color, name, action] of [['torch', 'flame', '#f2a04e', 'Torche allumée', 'torch'], ['auto', 'compass', '#e3c47c', 'Déplacement automatique vers l\'objectif', 'autoTravel']]) {
+      const t = h('span.v-buff-t');
+      const node = h('div.v-buff', { title: name, style: { color } }, h('span.v-buff-ico', { html: icon(glyph) }), t);
+      bf.appendChild(node);
+      this.tools[k] = { el: node, t, on: false, action };
+    }
     fx.appendChild(bf);
     this.effects = fx;
 
@@ -356,6 +364,11 @@ export class Hud {
       if (n !== s.n) { s.n = n; s.t.textContent = n + ' s'; s.el.classList.toggle('ending', n <= 5); }
     }
 
+    for (const k in this.tools) {
+      const s = this.tools[k], show = k === 'torch' ? !!d.torchLit : !!(g.auto && g.auto.active);
+      if (show !== s.on) { s.on = show; s.el.classList.toggle('on', show); }
+    }
+
     // ---- quick bar
     const eq = d.equipment || {};
     const sig = (eq.weapon ? eq.weapon.id + ':' + (eq.weapon.up || 0) : '-') + '|' + (eq.offhand ? eq.offhand.id + ':' + (eq.offhand.up || 0) : '-');
@@ -443,6 +456,7 @@ export class Hud {
   _paintKeys() {
     this.flask.key.textContent = this.ui.keyLabel('flask');
     for (let i = 0; i < 3; i++) this.skills[i].key.textContent = this.ui.keyLabel('skill' + (i + 1));
+    for (const k in this.tools) this.tools[k].t.textContent = this.ui.keyLabel(this.tools[k].action);
     this.prompt.k = '';
   }
 
