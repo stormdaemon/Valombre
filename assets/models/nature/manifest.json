@@ -1,0 +1,1845 @@
+{
+ "pack": "nature",
+ "generator": "tools/blender/nat_atlas.py, nat_trees.py, nat_plants.py, nat_rocks.py, nat_finalize.py",
+ "conventions": {
+  "axes": "all vectors below are in glTF / three.js axes: [x, y (up), z]; meters; origin = base on the ground",
+  "lod": "every .glb holds mesh nodes <asset>_LOD0 and (trees, boulders) <asset>_LOD1; LOD1 replaces LOD0 at ~70 m; trees switch to the impostor billboard further away",
+  "vertex_color": "COLOR_0 (linear): R = ambient occlusion (multiply albedo), G = wind flutter weight (0 rigid .. 1 leaf tips), B = random phase per branch / leaf cluster. Rocks, stump, log: G = B = 0. EXCEPTIONS: flowers_a (M_flowers) and mushrooms (M_mushroom): RGB = actual linear colour.",
+  "foliage_normals": "foliage vertices carry custom normals = normalize(0.3 * puffy outward (crown ellipsoid + local clump) + 0.7 * up). Render M_leaves double sided and do NOT flip the normal on back faces. (Weights are the w_global / w_local / w_up arguments of finish_tree in nat_common.py.)",
+  "uv": "foliage UVs address leaves_a.png in glTF convention (v = 0 at the TOP of the image): load the atlas with texture.flipY = false. Bark UV: u = around the trunk (texture repeats), v = metres along the branch (1 m per tile). Rock UV: box projection, 4 m per tile.",
+  "collider": "cylinder: vertical, radius = trunk at chest height, centred on the origin, use the tree height; box: size [x, y, z] + center; sphere: radius + center. None = walk-through.",
+  "ground": "trunks/roots/rocks continue 0.1-1.0 m below y = 0 so that they stay planted on slopes"
+ },
+ "materials": {
+  "M_leaves": "alpha-tested (cutoff 0.5), double sided foliage: assets/textures/leaves_a.png (+ leaves_n.png: RG = normal, B = roughness). Albedo x COLOR_0.R; wind from COLOR_0.G/B.",
+  "M_flowers": "NEW. Same atlas and alpha test as M_leaves, but COLOR_0.rgb is a tint multiplied with the texture (white flower heads become coloured); no wind attributes (sway by height).",
+  "M_mushroom": "NEW. Opaque, no texture needed (or a faint detail map): COLOR_0.rgb is the albedo, roughness ~0.6.",
+  "M_bark_oak": "oak, willow, dead_a, stump, log, bush_b stems",
+  "M_bark_pine": "pine_a, pine_b, dead_b",
+  "M_bark_birch": "birch_a",
+  "M_rock": "rocks, cliffs, pebbles"
+ },
+ "textures": {
+  "leaves_a": {
+   "file": "assets/textures/leaves_a.png",
+   "size": [
+    2048,
+    2048
+   ],
+   "grid": [
+    4,
+    4
+   ],
+   "cell_px": 512,
+   "alpha": "straight, colour bled into transparent texels",
+   "cells": {
+    "oak_twig_a": {
+     "cell": [
+      0,
+      0
+     ],
+     "px": [
+      0,
+      0,
+      512,
+      512
+     ],
+     "content_px": [
+      54,
+      128,
+      498,
+      506
+     ],
+     "anchor": "bottom_center",
+     "description": "oak branchlet, ~55 lobed leaves",
+     "opaque_fraction": 0.334
+    },
+    "oak_twig_b": {
+     "cell": [
+      1,
+      0
+     ],
+     "px": [
+      512,
+      0,
+      1024,
+      512
+     ],
+     "content_px": [
+      579,
+      153,
+      1011,
+      508
+     ],
+     "anchor": "bottom_center",
+     "description": "oak branchlet, variant",
+     "opaque_fraction": 0.331
+    },
+    "birch_twig": {
+     "cell": [
+      2,
+      0
+     ],
+     "px": [
+      1024,
+      0,
+      1536,
+      512
+     ],
+     "content_px": [
+      1053,
+      72,
+      1521,
+      508
+     ],
+     "anchor": "bottom_center",
+     "description": "birch twig fan, small serrated leaves",
+     "opaque_fraction": 0.34
+    },
+    "willow_strands": {
+     "cell": [
+      3,
+      0
+     ],
+     "px": [
+      1536,
+      0,
+      2048,
+      512
+     ],
+     "content_px": [
+      1553,
+      35,
+      2040,
+      512
+     ],
+     "anchor": "bottom_edge",
+     "description": "hanging willow strands (narrow leaves)",
+     "opaque_fraction": 0.283
+    },
+    "pine_spray_a": {
+     "cell": [
+      0,
+      1
+     ],
+     "px": [
+      0,
+      512,
+      512,
+      1024
+     ],
+     "content_px": [
+      64,
+      522,
+      470,
+      1018
+     ],
+     "anchor": "bottom_center",
+     "description": "flat conifer bough seen from above",
+     "opaque_fraction": 0.356
+    },
+    "pine_spray_b": {
+     "cell": [
+      1,
+      1
+     ],
+     "px": [
+      512,
+      512,
+      1024,
+      1024
+     ],
+     "content_px": [
+      512,
+      529,
+      997,
+      1024
+     ],
+     "anchor": "bottom_edge",
+     "description": "conifer branch with drooping needle twigs (branch along the bottom edge)",
+     "opaque_fraction": 0.44
+    },
+    "bush_sprig_a": {
+     "cell": [
+      2,
+      1
+     ],
+     "px": [
+      1024,
+      512,
+      1536,
+      1024
+     ],
+     "content_px": [
+      1095,
+      530,
+      1522,
+      1023
+     ],
+     "anchor": "bottom_center",
+     "description": "broad-leaf bush sprig",
+     "opaque_fraction": 0.344
+    },
+    "bush_sprig_b": {
+     "cell": [
+      3,
+      1
+     ],
+     "px": [
+      1536,
+      512,
+      2048,
+      1024
+     ],
+     "content_px": [
+      1587,
+      610,
+      2033,
+      1024
+     ],
+     "anchor": "bottom_center",
+     "description": "small-leaf bush sprig with red berries",
+     "opaque_fraction": 0.333
+    },
+    "fern_frond": {
+     "cell": [
+      0,
+      2
+     ],
+     "px": [
+      0,
+      1024,
+      512,
+      1536
+     ],
+     "content_px": [
+      123,
+      1035,
+      405,
+      1534
+     ],
+     "anchor": "bottom_center",
+     "description": "fern frond",
+     "opaque_fraction": 0.264
+    },
+    "reed_blades": {
+     "cell": [
+      1,
+      2
+     ],
+     "px": [
+      512,
+      1024,
+      1024,
+      1536
+     ],
+     "content_px": [
+      585,
+      1044,
+      1010,
+      1533
+     ],
+     "anchor": "bottom_center",
+     "description": "reed blades + cattail heads",
+     "opaque_fraction": 0.314
+    },
+    "flower_heads": {
+     "cell": [
+      2,
+      2
+     ],
+     "px": [
+      1024,
+      1024,
+      1536,
+      1536
+     ],
+     "content_px": [
+      1054,
+      1024,
+      1510,
+      1533
+     ],
+     "anchor": "bottom_center",
+     "description": "wild flowers: green stems/leaves (lower half), WHITE heads (upper half, tinted by vertex colour)",
+     "opaque_fraction": 0.236
+    },
+    "weed_tuft": {
+     "cell": [
+      3,
+      2
+     ],
+     "px": [
+      1536,
+      1024,
+      2048,
+      1536
+     ],
+     "content_px": [
+      1553,
+      1146,
+      1968,
+      1533
+     ],
+     "anchor": "bottom_center",
+     "description": "tall grass / weed tuft (spare cell, not used by a mesh of this pack)",
+     "opaque_fraction": 0.168
+    },
+    "oak_dense": {
+     "cell": [
+      0,
+      3
+     ],
+     "px": [
+      0,
+      1536,
+      512,
+      2048
+     ],
+     "content_px": [
+      16,
+      1611,
+      497,
+      2042
+     ],
+     "anchor": "bottom_center",
+     "description": "dense oak foliage mass (LOD1 cards)",
+     "opaque_fraction": 0.448
+    },
+    "pine_dense": {
+     "cell": [
+      1,
+      3
+     ],
+     "px": [
+      512,
+      1536,
+      1024,
+      2048
+     ],
+     "content_px": [
+      547,
+      1546,
+      967,
+      2042
+     ],
+     "anchor": "bottom_center",
+     "description": "dense conifer bough (LOD1 cards)",
+     "opaque_fraction": 0.418
+    },
+    "birch_dense": {
+     "cell": [
+      2,
+      3
+     ],
+     "px": [
+      1024,
+      1536,
+      1536,
+      2048
+     ],
+     "content_px": [
+      1039,
+      1597,
+      1499,
+      2042
+     ],
+     "anchor": "bottom_center",
+     "description": "dense birch foliage mass (LOD1 cards)",
+     "opaque_fraction": 0.394
+    },
+    "willow_dense": {
+     "cell": [
+      3,
+      3
+     ],
+     "px": [
+      1536,
+      1536,
+      2048,
+      2048
+     ],
+     "content_px": [
+      1542,
+      1553,
+      2037,
+      2048
+     ],
+     "anchor": "bottom_edge",
+     "description": "dense willow curtain (LOD1 cards)",
+     "opaque_fraction": 0.4
+    }
+   },
+   "note": "px rects are [x0, y0, x1, y1] from the TOP-LEFT of the image; cell [col, row], row 0 = top"
+  },
+  "leaves_n": {
+   "file": "assets/textures/leaves_n.png",
+   "size": [
+    2048,
+    2048
+   ],
+   "channels": "R,G = tangent-space normal (OpenGL, +Y up), B = roughness, A = 255; same layout"
+  },
+  "impostors_a": {
+   "file": "assets/textures/impostors_a.png",
+   "size": [
+    2048,
+    1024
+   ],
+   "grid": [
+    4,
+    2
+   ],
+   "cell_px": 512,
+   "alpha": "straight, colour bled, alpha test at 0.5",
+   "content": "unlit albedo x AO, orthographic front view (camera looking along Blender +Y = three.js -Z); the engine relights it",
+   "note": "each tree fills the inner 500x500 px of its cell (6 px guard band); the tree base is at the bottom centre. impostor.px = [x0, y0, x1, y1] from the top-left; impostor.uv = [u0, v0, u1, v1] with v measured from the BOTTOM (three.js flipY = true default); the quad is width x height metres, bottom centre on the tree origin."
+  }
+ },
+ "totals": {
+  "assets": 24,
+  "lod0_tris_sum": 23780
+ },
+ "assets": {
+  "oak_a": {
+   "file": "oak_a.glb",
+   "category": "tree",
+   "description": "broad old oak, thick gnarled trunk, big spreading limbs",
+   "bytes": 185816,
+   "lods": {
+    "LOD0": {
+     "mesh": "oak_a_LOD0",
+     "tris": 2895,
+     "verts": 3391,
+     "tris_by_material": {
+      "M_bark_oak": 2107,
+      "M_leaves": 788
+     }
+    },
+    "LOD1": {
+     "mesh": "oak_a_LOD1",
+     "tris": 516,
+     "verts": 628,
+     "tris_by_material": {
+      "M_bark_oak": 392,
+      "M_leaves": 124
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak",
+    "M_leaves"
+   ],
+   "size": [
+    11.317,
+    11.984,
+    8.818
+   ],
+   "bounds_min": [
+    -4.923,
+    -0.446,
+    -5.06
+   ],
+   "bounds_max": [
+    6.394,
+    11.538,
+    3.758
+   ],
+   "height_above_ground": 11.538,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.465
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     0,
+     0
+    ],
+    "px": [
+     6,
+     6,
+     506,
+     506
+    ],
+    "uv": [
+     0.00293,
+     0.505859,
+     0.24707,
+     0.994141
+    ],
+    "width": 12.58,
+    "height": 11.377
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 302,
+    "LOD1": 62
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "oak_b": {
+   "file": "oak_b.glb",
+   "category": "tree",
+   "description": "very old squat oak, wide crown, heavy low limbs",
+   "bytes": 208456,
+   "lods": {
+    "LOD0": {
+     "mesh": "oak_b_LOD0",
+     "tris": 3316,
+     "verts": 3836,
+     "tris_by_material": {
+      "M_bark_oak": 2426,
+      "M_leaves": 890
+     }
+    },
+    "LOD1": {
+     "mesh": "oak_b_LOD1",
+     "tris": 556,
+     "verts": 680,
+     "tris_by_material": {
+      "M_bark_oak": 428,
+      "M_leaves": 128
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak",
+    "M_leaves"
+   ],
+   "size": [
+    10.907,
+    11.009,
+    9.214
+   ],
+   "bounds_min": [
+    -5.478,
+    -0.523,
+    -4.178
+   ],
+   "bounds_max": [
+    5.429,
+    10.486,
+    5.036
+   ],
+   "height_above_ground": 10.486,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.545
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     1,
+     0
+    ],
+    "px": [
+     518,
+     6,
+     1018,
+     506
+    ],
+    "uv": [
+     0.25293,
+     0.505859,
+     0.49707,
+     0.994141
+    ],
+    "width": 10.206,
+    "height": 10.372
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 332,
+    "LOD1": 64
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "pine_a": {
+   "file": "pine_a.glb",
+   "category": "tree",
+   "description": "tall full conifer, layered drooping branch tiers",
+   "bytes": 174356,
+   "lods": {
+    "LOD0": {
+     "mesh": "pine_a_LOD0",
+     "tris": 3132,
+     "verts": 3195,
+     "tris_by_material": {
+      "M_bark_pine": 2098,
+      "M_leaves": 1034
+     }
+    },
+    "LOD1": {
+     "mesh": "pine_a_LOD1",
+     "tris": 349,
+     "verts": 527,
+     "tris_by_material": {
+      "M_bark_pine": 55,
+      "M_leaves": 294
+     }
+    }
+   },
+   "materials": [
+    "M_bark_pine",
+    "M_leaves"
+   ],
+   "size": [
+    7.461,
+    18.044,
+    7.708
+   ],
+   "bounds_min": [
+    -3.564,
+    -0.324,
+    -3.599
+   ],
+   "bounds_max": [
+    3.897,
+    17.72,
+    4.109
+   ],
+   "height_above_ground": 17.72,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.324
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     2,
+     0
+    ],
+    "px": [
+     1030,
+     6,
+     1530,
+     506
+    ],
+    "uv": [
+     0.50293,
+     0.505859,
+     0.74707,
+     0.994141
+    ],
+    "width": 7.603,
+    "height": 17.822
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 217,
+    "LOD1": 96
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "pine_b": {
+   "file": "pine_b.glb",
+   "category": "tree",
+   "description": "old sparse conifer, long bare trunk with dead stubs, irregular crown",
+   "bytes": 111044,
+   "lods": {
+    "LOD0": {
+     "mesh": "pine_b_LOD0",
+     "tris": 1899,
+     "verts": 1972,
+     "tris_by_material": {
+      "M_bark_pine": 1259,
+      "M_leaves": 640
+     }
+    },
+    "LOD1": {
+     "mesh": "pine_b_LOD1",
+     "tris": 263,
+     "verts": 365,
+     "tris_by_material": {
+      "M_bark_pine": 109,
+      "M_leaves": 154
+     }
+    }
+   },
+   "materials": [
+    "M_bark_pine",
+    "M_leaves"
+   ],
+   "size": [
+    8.469,
+    16.229,
+    8.476
+   ],
+   "bounds_min": [
+    -3.974,
+    -0.32,
+    -4.163
+   ],
+   "bounds_max": [
+    4.495,
+    15.909,
+    4.313
+   ],
+   "height_above_ground": 15.909,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.375
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     3,
+     0
+    ],
+    "px": [
+     1542,
+     6,
+     2042,
+     506
+    ],
+    "uv": [
+     0.75293,
+     0.505859,
+     0.99707,
+     0.994141
+    ],
+    "width": 8.646,
+    "height": 16.001
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 145,
+    "LOD1": 52
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "birch_a": {
+   "file": "birch_a.glb",
+   "category": "tree",
+   "description": "slender birch, white bark, light airy crown with hanging twigs",
+   "bytes": 135000,
+   "lods": {
+    "LOD0": {
+     "mesh": "birch_a_LOD0",
+     "tris": 2126,
+     "verts": 2577,
+     "tris_by_material": {
+      "M_bark_birch": 1482,
+      "M_leaves": 644
+     }
+    },
+    "LOD1": {
+     "mesh": "birch_a_LOD1",
+     "tris": 233,
+     "verts": 329,
+     "tris_by_material": {
+      "M_bark_birch": 141,
+      "M_leaves": 92
+     }
+    }
+   },
+   "materials": [
+    "M_bark_birch",
+    "M_leaves"
+   ],
+   "size": [
+    7.137,
+    11.649,
+    6.543
+   ],
+   "bounds_min": [
+    -2.564,
+    -0.326,
+    -3.21
+   ],
+   "bounds_max": [
+    4.573,
+    11.323,
+    3.333
+   ],
+   "height_above_ground": 11.323,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.15
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     0,
+     1
+    ],
+    "px": [
+     6,
+     518,
+     506,
+     1018
+    ],
+    "uv": [
+     0.00293,
+     0.005859,
+     0.24707,
+     0.494141
+    ],
+    "width": 8.98,
+    "height": 11.241
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 221,
+    "LOD1": 46
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "willow_a": {
+   "file": "willow_a.glb",
+   "category": "tree",
+   "description": "swamp willow, leaning trunk, long drooping curtains",
+   "bytes": 141184,
+   "lods": {
+    "LOD0": {
+     "mesh": "willow_a_LOD0",
+     "tris": 2306,
+     "verts": 2496,
+     "tris_by_material": {
+      "M_bark_oak": 1146,
+      "M_leaves": 1160
+     }
+    },
+    "LOD1": {
+     "mesh": "willow_a_LOD1",
+     "tris": 427,
+     "verts": 509,
+     "tris_by_material": {
+      "M_bark_oak": 227,
+      "M_leaves": 200
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak",
+    "M_leaves"
+   ],
+   "size": [
+    8.585,
+    9.098,
+    9.881
+   ],
+   "bounds_min": [
+    -2.899,
+    -0.542,
+    -4.949
+   ],
+   "bounds_max": [
+    5.686,
+    8.556,
+    4.932
+   ],
+   "height_above_ground": 8.556,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.418
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     1,
+     1
+    ],
+    "px": [
+     518,
+     518,
+     1018,
+     1018
+    ],
+    "uv": [
+     0.25293,
+     0.005859,
+     0.49707,
+     0.494141
+    ],
+    "width": 11.336,
+    "height": 8.477
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 210,
+    "LOD1": 50
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "dead_a": {
+   "file": "dead_a.glb",
+   "category": "tree",
+   "description": "dead twisted tree, bare claw-like branches (swamp)",
+   "bytes": 135072,
+   "lods": {
+    "LOD0": {
+     "mesh": "dead_a_LOD0",
+     "tris": 2367,
+     "verts": 2286,
+     "tris_by_material": {
+      "M_bark_oak": 2367
+     }
+    },
+    "LOD1": {
+     "mesh": "dead_a_LOD1",
+     "tris": 528,
+     "verts": 592,
+     "tris_by_material": {
+      "M_bark_oak": 528
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak"
+   ],
+   "size": [
+    4.756,
+    7.899,
+    5.234
+   ],
+   "bounds_min": [
+    -2.805,
+    -0.382,
+    -2.59
+   ],
+   "bounds_max": [
+    1.951,
+    7.517,
+    2.644
+   ],
+   "height_above_ground": 7.517,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.271
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     2,
+     1
+    ],
+    "px": [
+     1030,
+     518,
+     1530,
+     1018
+    ],
+    "uv": [
+     0.50293,
+     0.005859,
+     0.74707,
+     0.494141
+    ],
+    "width": 5.578,
+    "height": 7.536
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 0,
+    "LOD1": 0
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "dead_b": {
+   "file": "dead_b.glb",
+   "category": "tree",
+   "description": "burnt snag, snapped top and broken limbs (ash lands)",
+   "bytes": 66412,
+   "lods": {
+    "LOD0": {
+     "mesh": "dead_b_LOD0",
+     "tris": 1169,
+     "verts": 1024,
+     "tris_by_material": {
+      "M_bark_pine": 1169
+     }
+    },
+    "LOD1": {
+     "mesh": "dead_b_LOD1",
+     "tris": 349,
+     "verts": 344,
+     "tris_by_material": {
+      "M_bark_pine": 349
+     }
+    }
+   },
+   "materials": [
+    "M_bark_pine"
+   ],
+   "size": [
+    3.822,
+    7.79,
+    3.057
+   ],
+   "bounds_min": [
+    -1.869,
+    -0.357,
+    -1.865
+   ],
+   "bounds_max": [
+    1.953,
+    7.433,
+    1.192
+   ],
+   "height_above_ground": 7.433,
+   "collider": {
+    "type": "cylinder",
+    "radius": 0.362
+   },
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "impostor": {
+    "cell": [
+     3,
+     1
+    ],
+    "px": [
+     1542,
+     518,
+     2042,
+     1018
+    ],
+    "uv": [
+     0.75293,
+     0.005859,
+     0.99707,
+     0.494141
+    ],
+    "width": 3.878,
+    "height": 7.416
+   },
+   "lod1_distance": 70,
+   "cards": {
+    "LOD0": 0,
+    "LOD1": 0
+   },
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "bush_a": {
+   "file": "bush_a.glb",
+   "category": "plant",
+   "description": "round dense broad-leaf bush",
+   "bytes": 11892,
+   "lods": {
+    "LOD0": {
+     "mesh": "bush_a_LOD0",
+     "tris": 120,
+     "verts": 240,
+     "tris_by_material": {
+      "M_leaves": 120
+     }
+    }
+   },
+   "materials": [
+    "M_leaves"
+   ],
+   "size": [
+    1.754,
+    1.631,
+    1.766
+   ],
+   "bounds_min": [
+    -0.832,
+    -0.287,
+    -0.861
+   ],
+   "bounds_max": [
+    0.922,
+    1.344,
+    0.905
+   ],
+   "height_above_ground": 1.344,
+   "collider": null,
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "bush_b": {
+   "file": "bush_b.glb",
+   "category": "plant",
+   "description": "taller thorny bush with red berries, visible woody stems",
+   "bytes": 18516,
+   "lods": {
+    "LOD0": {
+     "mesh": "bush_b_LOD0",
+     "tris": 226,
+     "verts": 362,
+     "tris_by_material": {
+      "M_bark_oak": 90,
+      "M_leaves": 136
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak",
+    "M_leaves"
+   ],
+   "size": [
+    2.168,
+    1.699,
+    2.078
+   ],
+   "bounds_min": [
+    -0.987,
+    -0.197,
+    -1.009
+   ],
+   "bounds_max": [
+    1.181,
+    1.502,
+    1.069
+   ],
+   "height_above_ground": 1.502,
+   "collider": null,
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "fern": {
+   "file": "fern.glb",
+   "category": "plant",
+   "description": "rosette of arching fern fronds",
+   "bytes": 5560,
+   "lods": {
+    "LOD0": {
+     "mesh": "fern_LOD0",
+     "tris": 66,
+     "verts": 90,
+     "tris_by_material": {
+      "M_leaves": 66
+     }
+    }
+   },
+   "materials": [
+    "M_leaves"
+   ],
+   "size": [
+    1.32,
+    0.521,
+    1.315
+   ],
+   "bounds_min": [
+    -0.739,
+    -0.0,
+    -0.674
+   ],
+   "bounds_max": [
+    0.581,
+    0.521,
+    0.641
+   ],
+   "height_above_ground": 0.521,
+   "collider": null,
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "reeds": {
+   "file": "reeds.glb",
+   "category": "plant",
+   "description": "swamp reed cluster with cattail heads",
+   "bytes": 5796,
+   "lods": {
+    "LOD0": {
+     "mesh": "reeds_LOD0",
+     "tris": 64,
+     "verts": 96,
+     "tris_by_material": {
+      "M_leaves": 64
+     }
+    }
+   },
+   "materials": [
+    "M_leaves"
+   ],
+   "size": [
+    1.582,
+    1.58,
+    1.626
+   ],
+   "bounds_min": [
+    -0.715,
+    -0.082,
+    -0.679
+   ],
+   "bounds_max": [
+    0.867,
+    1.498,
+    0.947
+   ],
+   "height_above_ground": 1.498,
+   "collider": null,
+   "vertex_color": "R=AO, G=wind weight, B=phase",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "flowers_a": {
+   "file": "flowers_a.glb",
+   "category": "plant",
+   "description": "wild flower clump (white, yellow, violet, blue, red, pink heads)",
+   "bytes": 4684,
+   "lods": {
+    "LOD0": {
+     "mesh": "flowers_a_LOD0",
+     "tris": 36,
+     "verts": 72,
+     "tris_by_material": {
+      "M_flowers": 36
+     }
+    }
+   },
+   "materials": [
+    "M_flowers"
+   ],
+   "size": [
+    0.858,
+    0.628,
+    0.858
+   ],
+   "bounds_min": [
+    -0.497,
+    -0.061,
+    -0.458
+   ],
+   "bounds_max": [
+    0.361,
+    0.567,
+    0.4
+   ],
+   "height_above_ground": 0.567,
+   "collider": null,
+   "vertex_color": "RGB = actual linear tint (multiply the atlas); no wind data: sway by height (uv/position y)",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "mushrooms": {
+   "file": "mushrooms.glb",
+   "category": "plant",
+   "description": "cluster of 5 brown-capped mushrooms, solid geometry",
+   "bytes": 8376,
+   "lods": {
+    "LOD0": {
+     "mesh": "mushrooms_LOD0",
+     "tris": 140,
+     "verts": 150,
+     "tris_by_material": {
+      "M_mushroom": 140
+     }
+    }
+   },
+   "materials": [
+    "M_mushroom"
+   ],
+   "size": [
+    0.389,
+    0.273,
+    0.403
+   ],
+   "bounds_min": [
+    -0.164,
+    -0.023,
+    -0.168
+   ],
+   "bounds_max": [
+    0.225,
+    0.25,
+    0.235
+   ],
+   "height_above_ground": 0.25,
+   "collider": null,
+   "vertex_color": "RGB = actual linear colour (AO baked in)",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "stump": {
+   "file": "stump.glb",
+   "category": "plant",
+   "description": "old broken tree stump with flaring roots",
+   "bytes": 9256,
+   "lods": {
+    "LOD0": {
+     "mesh": "stump_LOD0",
+     "tris": 190,
+     "verts": 162,
+     "tris_by_material": {
+      "M_bark_oak": 190
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak"
+   ],
+   "size": [
+    1.488,
+    0.966,
+    1.541
+   ],
+   "bounds_min": [
+    -0.731,
+    -0.28,
+    -0.779
+   ],
+   "bounds_max": [
+    0.757,
+    0.686,
+    0.762
+   ],
+   "height_above_ground": 0.686,
+   "collider": {
+    "type": "box",
+    "size": [
+     0.8,
+     0.6,
+     0.8
+    ],
+    "center": [
+     0.0,
+     0.3,
+     0.0
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "log": {
+   "file": "log.glb",
+   "category": "plant",
+   "description": "fallen 3 m log lying along X, one end broken, two branch stubs",
+   "bytes": 8768,
+   "lods": {
+    "LOD0": {
+     "mesh": "log_LOD0",
+     "tris": 194,
+     "verts": 149,
+     "tris_by_material": {
+      "M_bark_oak": 194
+     }
+    }
+   },
+   "materials": [
+    "M_bark_oak"
+   ],
+   "size": [
+    3.022,
+    0.964,
+    0.777
+   ],
+   "bounds_min": [
+    -1.5,
+    -0.062,
+    -0.327
+   ],
+   "bounds_max": [
+    1.522,
+    0.902,
+    0.45
+   ],
+   "height_above_ground": 0.902,
+   "collider": {
+    "type": "box",
+    "size": [
+     3.0,
+     0.5,
+     0.56
+    ],
+    "center": [
+     0.0,
+     0.22,
+     0.0
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "rock_a": {
+   "file": "rock_a.glb",
+   "category": "rock",
+   "description": "rounded weathered boulder",
+   "bytes": 20840,
+   "lods": {
+    "LOD0": {
+     "mesh": "rock_a_LOD0",
+     "tris": 340,
+     "verts": 290,
+     "tris_by_material": {
+      "M_rock": 340
+     }
+    },
+    "LOD1": {
+     "mesh": "rock_a_LOD1",
+     "tris": 96,
+     "verts": 101,
+     "tris_by_material": {
+      "M_rock": 96
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    1.464,
+    1.1,
+    1.418
+   ],
+   "bounds_min": [
+    -0.738,
+    -0.077,
+    -0.71
+   ],
+   "bounds_max": [
+    0.726,
+    1.023,
+    0.708
+   ],
+   "height_above_ground": 1.023,
+   "collider": {
+    "type": "sphere",
+    "radius": 0.648,
+    "center": [
+     -0.006,
+     0.454,
+     -0.001
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 0.13,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "rock_b": {
+   "file": "rock_b.glb",
+   "category": "rock",
+   "description": "angular fractured boulder",
+   "bytes": 22292,
+   "lods": {
+    "LOD0": {
+     "mesh": "rock_b_LOD0",
+     "tris": 340,
+     "verts": 307,
+     "tris_by_material": {
+      "M_rock": 340
+     }
+    },
+    "LOD1": {
+     "mesh": "rock_b_LOD1",
+     "tris": 96,
+     "verts": 120,
+     "tris_by_material": {
+      "M_rock": 96
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    1.778,
+    1.844,
+    1.72
+   ],
+   "bounds_min": [
+    -0.89,
+    -0.098,
+    -0.863
+   ],
+   "bounds_max": [
+    0.888,
+    1.746,
+    0.857
+   ],
+   "height_above_ground": 1.746,
+   "collider": {
+    "type": "box",
+    "size": [
+     1.529,
+     1.659,
+     1.479
+    ],
+    "center": [
+     -0.001,
+     0.786,
+     -0.003
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 0.1,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "rock_c": {
+   "file": "rock_c.glb",
+   "category": "rock",
+   "description": "flat layered slab",
+   "bytes": 20680,
+   "lods": {
+    "LOD0": {
+     "mesh": "rock_c_LOD0",
+     "tris": 340,
+     "verts": 296,
+     "tris_by_material": {
+      "M_rock": 340
+     }
+    },
+    "LOD1": {
+     "mesh": "rock_c_LOD1",
+     "tris": 96,
+     "verts": 91,
+     "tris_by_material": {
+      "M_rock": 96
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    2.554,
+    0.689,
+    2.374
+   ],
+   "bounds_min": [
+    -1.283,
+    -0.06,
+    -1.186
+   ],
+   "bounds_max": [
+    1.271,
+    0.629,
+    1.188
+   ],
+   "height_above_ground": 0.629,
+   "collider": {
+    "type": "box",
+    "size": [
+     2.196,
+     0.598,
+     2.042
+    ],
+    "center": [
+     -0.006,
+     0.283,
+     0.001
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 0.16,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "rock_d": {
+   "file": "rock_d.glb",
+   "category": "rock",
+   "description": "split boulder: two halves with an open crack",
+   "bytes": 23548,
+   "lods": {
+    "LOD0": {
+     "mesh": "rock_d_LOD0",
+     "tris": 344,
+     "verts": 325,
+     "tris_by_material": {
+      "M_rock": 344
+     }
+    },
+    "LOD1": {
+     "mesh": "rock_d_LOD1",
+     "tris": 98,
+     "verts": 132,
+     "tris_by_material": {
+      "M_rock": 98
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    2.228,
+    1.472,
+    1.663
+   ],
+   "bounds_min": [
+    -1.115,
+    -0.095,
+    -0.832
+   ],
+   "bounds_max": [
+    1.113,
+    1.377,
+    0.831
+   ],
+   "height_above_ground": 1.377,
+   "collider": {
+    "type": "box",
+    "size": [
+     1.916,
+     1.308,
+     1.43
+    ],
+    "center": [
+     -0.001,
+     0.62,
+     -0.001
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 0.12,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "rock_e": {
+   "file": "rock_e.glb",
+   "category": "rock",
+   "description": "small lumpy stone",
+   "bytes": 17356,
+   "lods": {
+    "LOD0": {
+     "mesh": "rock_e_LOD0",
+     "tris": 300,
+     "verts": 224,
+     "tris_by_material": {
+      "M_rock": 300
+     }
+    },
+    "LOD1": {
+     "mesh": "rock_e_LOD1",
+     "tris": 90,
+     "verts": 87,
+     "tris_by_material": {
+      "M_rock": 90
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    0.574,
+    0.46,
+    0.618
+   ],
+   "bounds_min": [
+    -0.287,
+    -0.037,
+    -0.309
+   ],
+   "bounds_max": [
+    0.287,
+    0.423,
+    0.309
+   ],
+   "height_above_ground": 0.423,
+   "collider": {
+    "type": "sphere",
+    "radius": 0.268,
+    "center": [
+     0.0,
+     0.188,
+     -0.0
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 0.15,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "cliff_a": {
+   "file": "cliff_a.glb",
+   "category": "rock",
+   "description": "wide crag wall of stacked fractured blocks, tallest in the middle",
+   "bytes": 45572,
+   "lods": {
+    "LOD0": {
+     "mesh": "cliff_a_LOD0",
+     "tris": 890,
+     "verts": 964,
+     "tris_by_material": {
+      "M_rock": 890
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    12.104,
+    9.871,
+    6.32
+   ],
+   "bounds_min": [
+    -6.052,
+    -1.224,
+    -3.16
+   ],
+   "bounds_max": [
+    6.052,
+    8.647,
+    3.16
+   ],
+   "height_above_ground": 8.647,
+   "collider": {
+    "type": "box",
+    "size": [
+     9.683,
+     7.782,
+     5.056
+    ],
+    "center": [
+     0.0,
+     3.891,
+     -0.0
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 1.0,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "cliff_b": {
+   "file": "cliff_b.glb",
+   "category": "rock",
+   "description": "tall rock pinnacle with buttresses",
+   "bytes": 42580,
+   "lods": {
+    "LOD0": {
+     "mesh": "cliff_b_LOD0",
+     "tris": 890,
+     "verts": 890,
+     "tris_by_material": {
+      "M_rock": 890
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    5.65,
+    11.597,
+    5.644
+   ],
+   "bounds_min": [
+    -2.825,
+    -1.224,
+    -2.822
+   ],
+   "bounds_max": [
+    2.825,
+    10.373,
+    2.822
+   ],
+   "height_above_ground": 10.373,
+   "collider": {
+    "type": "box",
+    "size": [
+     4.52,
+     9.336,
+     4.515
+    ],
+    "center": [
+     0.0,
+     4.668,
+     -0.0
+    ]
+   },
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 1.0,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  },
+  "pebbles": {
+   "file": "pebbles.glb",
+   "category": "rock",
+   "description": "flat scatter of 6 small stones",
+   "bytes": 8096,
+   "lods": {
+    "LOD0": {
+     "mesh": "pebbles_LOD0",
+     "tris": 90,
+     "verts": 150,
+     "tris_by_material": {
+      "M_rock": 90
+     }
+    }
+   },
+   "materials": [
+    "M_rock"
+   ],
+   "size": [
+    1.172,
+    0.14,
+    0.956
+   ],
+   "bounds_min": [
+    -0.483,
+    -0.02,
+    -0.495
+   ],
+   "bounds_max": [
+    0.689,
+    0.12,
+    0.461
+   ],
+   "height_above_ground": 0.12,
+   "collider": null,
+   "vertex_color": "R=AO, G=0, B=0",
+   "buried_fraction": 0.02,
+   "scale_range": [
+    0.8,
+    1.25
+   ]
+  }
+ }
+}

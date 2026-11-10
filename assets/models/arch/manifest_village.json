@@ -1,0 +1,3859 @@
+{
+ "pack": "village (settlements kit)",
+ "generator": "tools/blender/arch_build.py (+ arch_kit / arch_houses / arch_hero / arch_hero2 / arch_props / arch_infra); rebuild one asset: blender -b --factory-startup -P tools/blender/arch_build.py -- <name>",
+ "units": "meters",
+ "coords": "All 'pos', 'size', 'bounds_*' and 'footprint*' values are in authoring space: X = right, Y = back, Z = up, fronts / doors face -Y, origin = centre of the footprint on the ground. three.js position = [x, z, -y] and is also given as 'pos_gltf'. Collider / walkable 'size' is the full box size [x, y, z] before 'rot_z' (radians around the vertical axis).",
+ "footprint": "'footprint' = [x, y] rectangle centred on the origin to keep clear / flatten (static mesh extent + ground anchors + 0.3 m margin). 'footprint_rect' = exact [min x, min y, max x, max y] of the static mesh.",
+ "node_types": {
+  "collider": "COL_* invisible box, blocks characters",
+  "walkable": "WALK_* invisible box, stand on its top",
+  "anchor": "ANCHOR_* gameplay anchor (door = 0.8 m in front of the door on the ground, npc, interact)",
+  "fire": "FIRE_* flame + flickering light",
+  "smoke": "SMOKE_* chimney smoke",
+  "glow": "GLOW_* soft light",
+  "rotating_mesh": "ROT_* separate mesh, origin = pivot"
+ },
+ "materials": "Only contract material names are used. Every mesh has COLOR_0 (tint x baked AO, ground dirt, moss on roofs, soot at chimneys) and world-scale TEXCOORD_0 (2 m tiles for the tiling materials, 1 m for bark, 0.5 m for detail materials). Thin cloth (awnings, tents, sails, banner) is modelled double sided, so FrontSide materials are fine.",
+ "tri_total": 37008,
+ "assets": {
+  "house_a": {
+   "file": "house_a.glb",
+   "description": "Small single-storey thatched cottage, half-timbered on a rubble plinth, gable chimney",
+   "size": [
+    7.0,
+    6.41,
+    7.01
+   ],
+   "bounds_min": [
+    -3.34,
+    -3.23,
+    0
+   ],
+   "bounds_max": [
+    3.65,
+    3.18,
+    7.01
+   ],
+   "tris": 1702,
+   "tri_budget": 2500,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_window_glow",
+    "M_plaster",
+    "M_thatch",
+    "M_bark_oak"
+   ],
+   "footprint": [
+    7.9,
+    7.2
+   ],
+   "footprint_rect": [
+    -3.34,
+    -3.23,
+    3.65,
+    3.18
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      -0.95,
+      -3.3,
+      0
+     ],
+     "pos_gltf": [
+      -0.95,
+      0,
+      3.3
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      2.9
+     ],
+     "size": [
+      6.24,
+      5.24,
+      5.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      2.9,
+      0
+     ]
+    },
+    {
+     "name": "COL_chimney",
+     "type": "collider",
+     "pos": [
+      3.34,
+      0.35,
+      3.45
+     ],
+     "size": [
+      0.68,
+      1.4,
+      6.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.34,
+      3.45,
+      -0.35
+     ]
+    },
+    {
+     "name": "SMOKE_chimney",
+     "type": "smoke",
+     "pos": [
+      3.285,
+      0.35,
+      7.06
+     ],
+     "pos_gltf": [
+      3.285,
+      7.06,
+      -0.35
+     ]
+    }
+   ],
+   "notes": "Rain barrel, firewood stack and bench are part of the mesh (inside the footprint, not in COL_body)."
+  },
+  "house_b": {
+   "file": "house_b.glb",
+   "description": "Two-storey half-timbered house with jettied upper floor, clay tile roof and stone chimney",
+   "size": [
+    7.79,
+    7.41,
+    10.58
+   ],
+   "bounds_min": [
+    -3.89,
+    -3.93,
+    0
+   ],
+   "bounds_max": [
+    3.89,
+    3.48,
+    10.58
+   ],
+   "tris": 2788,
+   "tri_budget": 3500,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_window_glow",
+    "M_plaster",
+    "M_roof_tiles"
+   ],
+   "footprint": [
+    8.4,
+    8.5
+   ],
+   "footprint_rect": [
+    -3.89,
+    -3.93,
+    3.89,
+    3.48
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      -1.2,
+      -3.8,
+      0
+     ],
+     "pos_gltf": [
+      -1.2,
+      0,
+      3.8
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.165,
+      4.581
+     ],
+     "size": [
+      7.24,
+      6.57,
+      9.162
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      4.581,
+      0.165
+     ]
+    },
+    {
+     "name": "SMOKE_chimney",
+     "type": "smoke",
+     "pos": [
+      1.55,
+      0.825,
+      10.622
+     ],
+     "pos_gltf": [
+      1.55,
+      10.622,
+      -0.825
+     ]
+    }
+   ]
+  },
+  "house_c": {
+   "file": "house_c.glb",
+   "description": "Long thatched farmhouse (hipped west end) with an open plank lean-to shed on the east gable",
+   "size": [
+    10.77,
+    6.52,
+    7.32
+   ],
+   "bounds_min": [
+    -5.46,
+    -3.3,
+    0
+   ],
+   "bounds_max": [
+    5.31,
+    3.22,
+    7.32
+   ],
+   "tris": 2121,
+   "tri_budget": 3500,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_window_glow",
+    "M_plaster",
+    "M_thatch",
+    "M_bark_oak"
+   ],
+   "footprint": [
+    11.5,
+    7.7
+   ],
+   "footprint_rect": [
+    -5.46,
+    -3.3,
+    5.31,
+    3.22
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      -0.3,
+      -3.55,
+      0
+     ],
+     "pos_gltf": [
+      -0.3,
+      0,
+      3.55
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      -1,
+      0,
+      2.802
+     ],
+     "size": [
+      8.24,
+      5.74,
+      5.604
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1,
+      2.802,
+      0
+     ]
+    },
+    {
+     "name": "COL_shed",
+     "type": "collider",
+     "pos": [
+      4.025,
+      2.625,
+      1.15
+     ],
+     "size": [
+      2.05,
+      0.35,
+      2.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.025,
+      1.15,
+      -2.625
+     ]
+    },
+    {
+     "name": "COL_shed_side",
+     "type": "collider",
+     "pos": [
+      4.925,
+      0.225,
+      0.6
+     ],
+     "size": [
+      0.25,
+      5.05,
+      1.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.925,
+      0.6,
+      -0.225
+     ]
+    },
+    {
+     "name": "SMOKE_chimney",
+     "type": "smoke",
+     "pos": [
+      0.9,
+      0,
+      7.364
+     ],
+     "pos_gltf": [
+      0.9,
+      7.364,
+      0
+     ]
+    }
+   ],
+   "notes": "Lean-to shed on +X is open towards -Y; COL_shed / COL_shed_side only cover its back and outer side."
+  },
+  "house_d": {
+   "file": "house_d.glb",
+   "description": "Narrow gable-fronted townhouse: jettied upper floor, shop window with counter and cloth awning",
+   "size": [
+    5.89,
+    9.06,
+    9.81
+   ],
+   "bounds_min": [
+    -2.94,
+    -4.81,
+    0
+   ],
+   "bounds_max": [
+    2.95,
+    4.25,
+    9.81
+   ],
+   "tris": 2638,
+   "tri_budget": 3000,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_window_glow",
+    "M_plaster",
+    "M_cloth",
+    "M_roof_tiles",
+    "M_rope"
+   ],
+   "footprint": [
+    6.5,
+    10.2
+   ],
+   "footprint_rect": [
+    -2.94,
+    -4.81,
+    2.95,
+    4.25
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      -1.58,
+      -4.3,
+      0
+     ],
+     "pos_gltf": [
+      -1.58,
+      0,
+      4.3
+     ]
+    },
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      0.85,
+      -4.5,
+      0
+     ],
+     "pos_gltf": [
+      0.85,
+      0,
+      4.5
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      0,
+      0.01,
+      4.575
+     ],
+     "size": [
+      5.24,
+      7.22,
+      9.15
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      4.575,
+      -0.01
+     ]
+    },
+    {
+     "name": "SMOKE_chimney",
+     "type": "smoke",
+     "pos": [
+      1.4,
+      1.9,
+      9.86
+     ],
+     "pos_gltf": [
+      1.4,
+      9.86,
+      -1.9
+     ]
+    }
+   ],
+   "notes": "ANCHOR_npc = in front of the shop counter (shopkeeper or customer spot). Awning cloth is double sided geometry."
+  },
+  "tavern": {
+   "file": "tavern.glb",
+   "description": "Large two-storey inn: rubble-stone ground floor, half-timbered upper floor, tiled roof with dormers, front porch on posts, hanging star sign, side stable lean-to with stalls",
+   "size": [
+    13.09,
+    10.3,
+    10.96
+   ],
+   "bounds_min": [
+    -6.72,
+    -5.0,
+    0
+   ],
+   "bounds_max": [
+    6.36,
+    5.3,
+    10.96
+   ],
+   "tris": 5248,
+   "tri_budget": 6000,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_window_glow",
+    "M_plaster",
+    "M_roof_tiles",
+    "M_metal_gold",
+    "M_thatch"
+   ],
+   "footprint": [
+    14.0,
+    11.2
+   ],
+   "footprint_rect": [
+    -6.72,
+    -5.0,
+    6.36,
+    5.3
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      -1.5,
+      -5.3,
+      0
+     ],
+     "pos_gltf": [
+      -1.5,
+      0,
+      5.3
+     ]
+    },
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      0.2,
+      -3.55,
+      0.25
+     ],
+     "pos_gltf": [
+      0.2,
+      0.25,
+      3.55
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      -1.25,
+      1.025,
+      4.752
+     ],
+     "size": [
+      9.7,
+      7.15,
+      9.503
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.25,
+      4.752,
+      -1.025
+     ]
+    },
+    {
+     "name": "COL_chimney",
+     "type": "collider",
+     "pos": [
+      -6.375,
+      1,
+      5.352
+     ],
+     "size": [
+      0.75,
+      1.8,
+      10.703
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.375,
+      5.352,
+      -1
+     ]
+    },
+    {
+     "name": "COL_stable",
+     "type": "collider",
+     "pos": [
+      4.775,
+      2.5,
+      1.2
+     ],
+     "size": [
+      2.55,
+      4.1,
+      2.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.775,
+      1.2,
+      -2.5
+     ]
+    },
+    {
+     "name": "SMOKE_chimney",
+     "type": "smoke",
+     "pos": [
+      -6.325,
+      1,
+      11.013
+     ],
+     "pos_gltf": [
+      -6.325,
+      11.013,
+      -1
+     ]
+    },
+    {
+     "name": "SMOKE_kitchen",
+     "type": "smoke",
+     "pos": [
+      2,
+      2.7,
+      10.763
+     ],
+     "pos_gltf": [
+      2,
+      10.763,
+      -2.7
+     ]
+    },
+    {
+     "name": "WALK_porch",
+     "type": "walkable",
+     "pos": [
+      -1.25,
+      -3.5,
+      0.125
+     ],
+     "size": [
+      7.9,
+      2,
+      0.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.25,
+      0.125,
+      3.5
+     ]
+    },
+    {
+     "name": "WALK_step",
+     "type": "walkable",
+     "pos": [
+      -1.5,
+      -4.75,
+      0.065
+     ],
+     "size": [
+      2.3,
+      0.5,
+      0.13
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.5,
+      0.065,
+      4.75
+     ]
+    }
+   ],
+   "notes": "Porch deck is 0.25 m high: WALK_porch + WALK_step. ANCHOR_npc is ON the porch (z = 0.25). Stable lean-to (+X): front bay is passable, COL_stable covers the stalls. SMOKE_chimney = hall chimney (-X gable), SMOKE_kitchen = rear stack. Lantern by the door uses M_window_glow (no FIRE_ node)."
+  },
+  "forge": {
+   "file": "forge.glb",
+   "description": "Blacksmith workshop: open-front timber shed on stone walls, stone hearth with hood and chimney, bellows, anvil on a stump, quench tub, tool rack, workbench, grindstone",
+   "size": [
+    7.81,
+    7.49,
+    6.49
+   ],
+   "bounds_min": [
+    -3.9,
+    -3.72,
+    -0.01
+   ],
+   "bounds_max": [
+    3.91,
+    3.77,
+    6.48
+   ],
+   "tris": 2783,
+   "tri_budget": 4000,
+   "materials": [
+    "M_cobble",
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_roof_tiles",
+    "M_ember",
+    "M_metal_iron",
+    "M_leather",
+    "M_rope",
+    "M_bark_oak",
+    "M_metal_steel",
+    "M_rock",
+    "M_cloth",
+    "M_window_glow"
+   ],
+   "footprint": [
+    8.4,
+    8.2
+   ],
+   "footprint_rect": [
+    -3.9,
+    -3.72,
+    3.91,
+    3.77
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      0.9,
+      -3.8,
+      0
+     ],
+     "pos_gltf": [
+      0.9,
+      0,
+      3.8
+     ]
+    },
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      -0.7,
+      -1.8,
+      0
+     ],
+     "pos_gltf": [
+      -0.7,
+      0,
+      1.8
+     ]
+    },
+    {
+     "name": "COL_anvil",
+     "type": "collider",
+     "pos": [
+      -0.55,
+      -0.95,
+      0.45
+     ],
+     "size": [
+      0.8,
+      0.7,
+      0.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.55,
+      0.45,
+      0.95
+     ]
+    },
+    {
+     "name": "COL_back",
+     "type": "collider",
+     "pos": [
+      0,
+      2.81,
+      1.375
+     ],
+     "size": [
+      7,
+      0.38,
+      2.75
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.375,
+      -2.81
+     ]
+    },
+    {
+     "name": "COL_hearth",
+     "type": "collider",
+     "pos": [
+      1.26,
+      1.96,
+      1
+     ],
+     "size": [
+      3.72,
+      1.32,
+      2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.26,
+      1,
+      -1.96
+     ]
+    },
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -3.3,
+      0.41,
+      1.375
+     ],
+     "size": [
+      0.4,
+      4.42,
+      2.75
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.3,
+      1.375,
+      -0.41
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      3.3,
+      0.41,
+      1.375
+     ],
+     "size": [
+      0.4,
+      4.42,
+      2.75
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.3,
+      1.375,
+      -0.41
+     ]
+    },
+    {
+     "name": "FIRE_forge",
+     "type": "fire",
+     "pos": [
+      2.21,
+      2.06,
+      1.03
+     ],
+     "pos_gltf": [
+      2.21,
+      1.03,
+      -2.06
+     ]
+    },
+    {
+     "name": "SMOKE_chimney",
+     "type": "smoke",
+     "pos": [
+      2.35,
+      2.12,
+      6.527
+     ],
+     "pos_gltf": [
+      2.35,
+      6.527,
+      -2.12
+     ]
+    }
+   ],
+   "notes": "Open front (-Y). FIRE_forge sits on the coal bed of the hearth, SMOKE_chimney on the stack. ANCHOR_npc = smith standing at the anvil. The water in the quench tub is a dark M_wood_planks disc (no water material in the contract)."
+  },
+  "chapel": {
+   "file": "chapel.glb",
+   "description": "Stone chapel: buttressed nave with lancet windows and slate roof, west bell tower with pointed-arch door, rose window, louvred belfry and slate spire",
+   "size": [
+    8.56,
+    13.79,
+    13.75
+   ],
+   "bounds_min": [
+    -4.28,
+    -7.0,
+    0
+   ],
+   "bounds_max": [
+    4.28,
+    6.78,
+    13.75
+   ],
+   "tris": 3636,
+   "tri_budget": 5000,
+   "materials": [
+    "M_stone_wall",
+    "M_window_glow",
+    "M_metal_iron",
+    "M_roof_tiles",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    9.2,
+    14.6
+   ],
+   "footprint_rect": [
+    -4.28,
+    -7.0,
+    4.28,
+    6.78
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      0,
+      -6.9,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      6.9
+     ]
+    },
+    {
+     "name": "COL_nave",
+     "type": "collider",
+     "pos": [
+      0,
+      1.875,
+      4.74
+     ],
+     "size": [
+      7.3,
+      8.55,
+      9.48
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      4.74,
+      -1.875
+     ]
+    },
+    {
+     "name": "COL_tower",
+     "type": "collider",
+     "pos": [
+      0,
+      -4.125,
+      6.3
+     ],
+     "size": [
+      4.1,
+      4.05,
+      12.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      6.3,
+      4.125
+     ]
+    },
+    {
+     "name": "GLOW_window",
+     "type": "glow",
+     "pos": [
+      0,
+      -6.6,
+      5.8
+     ],
+     "pos_gltf": [
+      0,
+      5.8,
+      6.6
+     ]
+    }
+   ],
+   "notes": "Slate roofs use M_roof_tiles with a blue-grey vertex colour that greys the clay texture. GLOW_window is 0.6 m in front of the rose window of the tower. The tower walls are 9.6 m, the spire tip 13 m, iron cross to 13.75 m."
+  },
+  "barn": {
+   "file": "barn.glb",
+   "description": "Timber barn on a stone plinth: board-and-batten walls, big double doors, hay-loft opening with hoist beam, thatched roof",
+   "size": [
+    10.03,
+    8.79,
+    8.69
+   ],
+   "bounds_min": [
+    -5.01,
+    -4.49,
+    0
+   ],
+   "bounds_max": [
+    5.02,
+    4.3,
+    8.69
+   ],
+   "tris": 1554,
+   "tri_budget": 2500,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_thatch",
+    "M_rope"
+   ],
+   "footprint": [
+    10.6,
+    9.6
+   ],
+   "footprint_rect": [
+    -5.01,
+    -4.49,
+    5.02,
+    4.3
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      0,
+      -4.3,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      4.3
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      4.03
+     ],
+     "size": [
+      9.24,
+      7.24,
+      8.06
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      4.03,
+      0
+     ]
+    }
+   ],
+   "notes": "Doors are closed (not enterable). Hay-loft opening is a dark recessed panel with hay and a hoist beam."
+  },
+  "windmill": {
+   "file": "windmill.glb",
+   "description": "Smock windmill: round rubble-stone base, eight-sided boarded timber tower with gallery, boarded cap with tail pole; four lattice sails with canvas as separate ROT_blades",
+   "size": [
+    9.88,
+    9.31,
+    14.41
+   ],
+   "bounds_min": [
+    -4.84,
+    -3.95,
+    -0.01
+   ],
+   "bounds_max": [
+    5.04,
+    5.36,
+    14.39
+   ],
+   "tris": 2330,
+   "tri_budget": 4000,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_cloth",
+    "M_stone_wall",
+    "M_window_glow"
+   ],
+   "footprint": [
+    10.7,
+    11.3
+   ],
+   "footprint_rect": [
+    -3.96,
+    -3.95,
+    5.04,
+    5.36
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      0,
+      -4,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      4
+     ]
+    },
+    {
+     "name": "COL_tower_a",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      5.45
+     ],
+     "size": [
+      5.5,
+      5.5,
+      10.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      5.45,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_b",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      5.45
+     ],
+     "size": [
+      5.5,
+      5.5,
+      10.9
+     ],
+     "rot_z": 0.7854,
+     "pos_gltf": [
+      0,
+      5.45,
+      0
+     ]
+    },
+    {
+     "name": "ROT_blades",
+     "type": "rotating_mesh",
+     "pos": [
+      0,
+      -2.72,
+      9.55
+     ],
+     "pos_gltf": [
+      0,
+      9.55,
+      2.72
+     ],
+     "axis": "local Y in Blender = local Z in three.js"
+    }
+   ],
+   "notes": "ROT_blades is a separate mesh (origin at the hub). Its node has NO rotation: spin it around its local Blender Y axis = local Z axis in three.js (node.rotation.z += w * dt); Y points to the back, the sign only sets the direction. Sail sweep radius is 5.05 m around the hub (0, -2.72, 9.55), so keep 5.2 m clear left/right of the tower above 4.4 m. COL_tower_a + COL_tower_b (rotated 45 deg) approximate the round base."
+  },
+  "watchtower": {
+   "file": "watchtower.glb",
+   "description": "Wooden lookout tower on four splayed log legs with cross-bracing, ladder, boarded platform under a thatched pyramid roof, signal brazier",
+   "size": [
+    4.41,
+    5.0,
+    9.95
+   ],
+   "bounds_min": [
+    -2.2,
+    -2.21,
+    -0.01
+   ],
+   "bounds_max": [
+    2.21,
+    2.79,
+    9.94
+   ],
+   "tris": 1133,
+   "tri_budget": 2000,
+   "materials": [
+    "M_bark_pine",
+    "M_wood_planks",
+    "M_thatch",
+    "M_metal_iron",
+    "M_ember"
+   ],
+   "footprint": [
+    5.0,
+    6.2
+   ],
+   "footprint_rect": [
+    -2.2,
+    -2.21,
+    2.21,
+    2.79
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      -0.3,
+      -0.6,
+      6.06
+     ],
+     "pos_gltf": [
+      -0.3,
+      6.06,
+      0.6
+     ]
+    },
+    {
+     "name": "COL_ladder",
+     "type": "collider",
+     "pos": [
+      0.1,
+      2.275,
+      1.5
+     ],
+     "size": [
+      1,
+      1.05,
+      3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.1,
+      1.5,
+      -2.275
+     ]
+    },
+    {
+     "name": "COL_legs",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      4.705
+     ],
+     "size": [
+      3.2,
+      3.2,
+      9.41
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      4.705,
+      0
+     ]
+    },
+    {
+     "name": "FIRE_brazier",
+     "type": "fire",
+     "pos": [
+      0.95,
+      -0.95,
+      6.96
+     ],
+     "pos_gltf": [
+      0.95,
+      6.96,
+      0.95
+     ]
+    }
+   ],
+   "notes": "ANCHOR_npc = lookout on the platform (z = 6.06). FIRE_brazier on the platform. The ladder is decorative (no WALK boxes)."
+  },
+  "well": {
+   "file": "well.glb",
+   "description": "Roofed stone well with windlass, crank, rope and bucket",
+   "size": [
+    2.92,
+    2.09,
+    2.99
+   ],
+   "bounds_min": [
+    -1.4,
+    -1.04,
+    0
+   ],
+   "bounds_max": [
+    1.52,
+    1.05,
+    2.99
+   ],
+   "tris": 463,
+   "tri_budget": 700,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_rope",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    3.6,
+    4.0
+   ],
+   "footprint_rect": [
+    -1.4,
+    -1.04,
+    1.52,
+    1.05
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_interact",
+     "type": "anchor",
+     "pos": [
+      0,
+      -1.7,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      1.7
+     ]
+    },
+    {
+     "name": "COL_ring",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.45
+     ],
+     "size": [
+      2,
+      2,
+      0.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.45,
+      0
+     ]
+    }
+   ],
+   "notes": "ANCHOR_interact in front (-Y)."
+  },
+  "market_stall_a": {
+   "file": "market_stall_a.glb",
+   "description": "Market stall: timber frame, plank counter, red/white striped awning; cabbages, carrots, apples, bread, sacks and a barrel",
+   "size": [
+    4.1,
+    1.94,
+    2.5
+   ],
+   "bounds_min": [
+    -2.08,
+    -1.15,
+    0
+   ],
+   "bounds_max": [
+    2.02,
+    0.78,
+    2.5
+   ],
+   "tris": 946,
+   "tri_budget": 1200,
+   "materials": [
+    "M_wood_planks",
+    "M_cloth",
+    "M_metal_iron",
+    "M_rope"
+   ],
+   "footprint": [
+    4.8,
+    2.9
+   ],
+   "footprint_rect": [
+    -2.08,
+    -1.15,
+    2.02,
+    0.78
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      0,
+      0.25,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      -0.25
+     ]
+    },
+    {
+     "name": "COL_counter",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.47,
+      0.45
+     ],
+     "size": [
+      2.88,
+      0.7,
+      0.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.45,
+      0.47
+     ]
+    }
+   ],
+   "notes": "ANCHOR_npc = seller behind the counter (faces -Y). Cloth is double sided geometry."
+  },
+  "market_stall_b": {
+   "file": "market_stall_b.glb",
+   "description": "Fishmonger's stall: trestle table under a blue/yellow ridge awning, fish on a slanted board, baskets, tub and crates",
+   "size": [
+    4.25,
+    2.23,
+    2.64
+   ],
+   "bounds_min": [
+    -2.09,
+    -1.28,
+    -0.01
+   ],
+   "bounds_max": [
+    2.16,
+    0.95,
+    2.63
+   ],
+   "tris": 879,
+   "tri_budget": 1200,
+   "materials": [
+    "M_wood_planks",
+    "M_rope",
+    "M_cloth",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    4.9,
+    3.2
+   ],
+   "footprint_rect": [
+    -2.09,
+    -1.28,
+    2.16,
+    0.95
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      0,
+      0.3,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      -0.3
+     ]
+    },
+    {
+     "name": "COL_table",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.475,
+      0.43
+     ],
+     "size": [
+      2.4,
+      0.75,
+      0.86
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.43,
+      0.475
+     ]
+    }
+   ],
+   "notes": "ANCHOR_npc = seller behind the table (faces -Y). Cloth is double sided geometry."
+  },
+  "notice_board": {
+   "file": "notice_board.glb",
+   "description": "Quest notice board: two posts, plank panel under a small shingle hood, pinned papers",
+   "size": [
+    1.96,
+    0.54,
+    2.36
+   ],
+   "bounds_min": [
+    -0.98,
+    -0.31,
+    -0.03
+   ],
+   "bounds_max": [
+    0.98,
+    0.23,
+    2.33
+   ],
+   "tris": 175,
+   "tri_budget": 250,
+   "materials": [
+    "M_wood_planks",
+    "M_rock",
+    "M_cloth",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    2.6,
+    2.2
+   ],
+   "footprint_rect": [
+    -0.98,
+    -0.31,
+    0.98,
+    0.23
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_interact",
+     "type": "anchor",
+     "pos": [
+      0,
+      -0.8,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      0.8
+     ]
+    },
+    {
+     "name": "COL_board",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.15
+     ],
+     "size": [
+      1.72,
+      0.2,
+      2.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.15,
+      0
+     ]
+    }
+   ],
+   "notes": "ANCHOR_interact 0.8 m in front of the board (-Y)."
+  },
+  "signpost": {
+   "file": "signpost.glb",
+   "description": "Wooden signpost with two arrow boards on a stone-packed base",
+   "size": [
+    1.79,
+    0.53,
+    2.78
+   ],
+   "bounds_min": [
+    -0.82,
+    -0.24,
+    -0.03
+   ],
+   "bounds_max": [
+    0.97,
+    0.29,
+    2.75
+   ],
+   "tris": 124,
+   "tri_budget": 200,
+   "materials": [
+    "M_wood_planks",
+    "M_rock",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    2.5,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.82,
+    -0.24,
+    0.97,
+    0.29
+   ],
+   "nodes": [
+    {
+     "name": "COL_post",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.35
+     ],
+     "size": [
+      0.24,
+      0.24,
+      2.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.35,
+      0
+     ]
+    }
+   ]
+  },
+  "fence_wood": {
+   "file": "fence_wood.glb",
+   "description": "3 m post-and-rail fence segment (centred, runs along X, tiles end to end)",
+   "size": [
+    3.0,
+    0.19,
+    1.16
+   ],
+   "bounds_min": [
+    -1.5,
+    -0.09,
+    0
+   ],
+   "bounds_max": [
+    1.5,
+    0.09,
+    1.16
+   ],
+   "tris": 92,
+   "tri_budget": 120,
+   "materials": [
+    "M_wood_planks"
+   ],
+   "footprint": [
+    3.6,
+    0.8
+   ],
+   "footprint_rect": [
+    -1.5,
+    -0.09,
+    1.5,
+    0.09
+   ],
+   "nodes": [
+    {
+     "name": "COL_fence",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.55
+     ],
+     "size": [
+      3,
+      0.2,
+      1.1
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.55,
+      0
+     ]
+    }
+   ],
+   "notes": "Runs along X, exactly 3.0 m, tiles end to end."
+  },
+  "fence_wattle": {
+   "file": "fence_wattle.glb",
+   "description": "3 m woven wattle fence segment (centred, runs along X, tiles end to end)",
+   "size": [
+    3.0,
+    0.09,
+    1.19
+   ],
+   "bounds_min": [
+    -1.5,
+    -0.05,
+    -0.0
+   ],
+   "bounds_max": [
+    1.5,
+    0.05,
+    1.19
+   ],
+   "tris": 260,
+   "tri_budget": 300,
+   "materials": [
+    "M_wood_planks",
+    "M_rope"
+   ],
+   "footprint": [
+    3.6,
+    0.7
+   ],
+   "footprint_rect": [
+    -1.5,
+    -0.05,
+    1.5,
+    0.05
+   ],
+   "nodes": [
+    {
+     "name": "COL_fence",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.525
+     ],
+     "size": [
+      3,
+      0.16,
+      1.05
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.525,
+      0
+     ]
+    }
+   ],
+   "notes": "Runs along X, exactly 3.0 m, tiles end to end. Weave uses M_rope (wicker)."
+  },
+  "stone_wall_low": {
+   "file": "stone_wall_low.glb",
+   "description": "4 m dry-stone field wall, 1 m high (centred, runs along X, tiles end to end)",
+   "size": [
+    4.07,
+    0.66,
+    1.04
+   ],
+   "bounds_min": [
+    -2.05,
+    -0.34,
+    0
+   ],
+   "bounds_max": [
+    2.02,
+    0.32,
+    1.04
+   ],
+   "tris": 228,
+   "tri_budget": 250,
+   "materials": [
+    "M_stone_wall"
+   ],
+   "footprint": [
+    4.7,
+    1.3
+   ],
+   "footprint_rect": [
+    -2.05,
+    -0.34,
+    2.02,
+    0.32
+   ],
+   "nodes": [
+    {
+     "name": "COL_wall",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.49
+     ],
+     "size": [
+      4,
+      0.6,
+      0.98
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.49,
+      0
+     ]
+    }
+   ],
+   "notes": "Runs along X, 4.0 m between end faces (cope stones overhang by a few cm), tiles end to end."
+  },
+  "palisade": {
+   "file": "palisade.glb",
+   "description": "4 m palisade segment of sharpened logs, 3.2 m high (centred, runs along X, tiles end to end)",
+   "size": [
+    4.01,
+    0.41,
+    3.34
+   ],
+   "bounds_min": [
+    -2.0,
+    -0.17,
+    -0.0
+   ],
+   "bounds_max": [
+    2.0,
+    0.24,
+    3.34
+   ],
+   "tris": 318,
+   "tri_budget": 500,
+   "materials": [
+    "M_bark_pine",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    4.6,
+    1.1
+   ],
+   "footprint_rect": [
+    -2.0,
+    -0.17,
+    2.0,
+    0.24
+   ],
+   "nodes": [
+    {
+     "name": "COL_wall",
+     "type": "collider",
+     "pos": [
+      0,
+      0.04,
+      1.6
+     ],
+     "size": [
+      4,
+      0.42,
+      3.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.6,
+      -0.04
+     ]
+    }
+   ],
+   "notes": "Runs along X, exactly 4.0 m, tiles end to end. Logs use M_bark_pine, sharpened tips M_wood_planks."
+  },
+  "palisade_gate": {
+   "file": "palisade_gate.glb",
+   "description": "6 m palisade gate: log flanks, big posts and lintel, plank doors swung open inwards (3 m clear opening), fighting platform above with ladder",
+   "size": [
+    6.23,
+    2.99,
+    4.83
+   ],
+   "bounds_min": [
+    -3.12,
+    -0.21,
+    -0.01
+   ],
+   "bounds_max": [
+    3.11,
+    2.79,
+    4.82
+   ],
+   "tris": 990,
+   "tri_budget": 1200,
+   "materials": [
+    "M_bark_pine",
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    6.8,
+    6.2
+   ],
+   "footprint_rect": [
+    -3.12,
+    -0.21,
+    3.11,
+    2.79
+   ],
+   "nodes": [
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      0,
+      0.75,
+      3.64
+     ],
+     "pos_gltf": [
+      0,
+      3.64,
+      -0.75
+     ]
+    },
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -2.25,
+      0.775,
+      2.35
+     ],
+     "size": [
+      1.5,
+      2.05,
+      4.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.25,
+      2.35,
+      -0.775
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      2.25,
+      0.775,
+      2.35
+     ],
+     "size": [
+      1.5,
+      2.05,
+      4.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.25,
+      2.35,
+      -0.775
+     ]
+    },
+    {
+     "name": "WALK_walkway",
+     "type": "walkable",
+     "pos": [
+      0,
+      0.795,
+      3.54
+     ],
+     "size": [
+      6,
+      1.35,
+      0.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      3.54,
+      -0.795
+     ]
+    }
+   ],
+   "notes": "Runs along X, 6.0 m wide, same line as `palisade` (outside = -Y). 3.0 m clear opening between x = -1.5 and 1.5, 3.3 m headroom. Flank logs are 4.7 m high. WALK_walkway (top z = 3.64) and ANCHOR_npc are on the fighting platform; the ladder is decorative."
+  },
+  "cart": {
+   "file": "cart.glb",
+   "description": "Two-wheeled farm cart resting on its shafts, loaded with sacks, a crate and hay",
+   "size": [
+    1.72,
+    3.89,
+    1.44
+   ],
+   "bounds_min": [
+    -0.86,
+    -2.78,
+    -0.0
+   ],
+   "bounds_max": [
+    0.86,
+    1.11,
+    1.44
+   ],
+   "tris": 672,
+   "tri_budget": 900,
+   "materials": [
+    "M_wood_planks",
+    "M_cloth",
+    "M_thatch"
+   ],
+   "footprint": [
+    2.3,
+    6.2
+   ],
+   "footprint_rect": [
+    -0.86,
+    -2.78,
+    0.86,
+    1.11
+   ],
+   "nodes": [
+    {
+     "name": "COL_cart",
+     "type": "collider",
+     "pos": [
+      0,
+      0.1,
+      0.625
+     ],
+     "size": [
+      1.6,
+      2.4,
+      1.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.625,
+      -0.1
+     ]
+    }
+   ],
+   "notes": "Shafts point to -Y and rest on the ground."
+  },
+  "barrel": {
+   "file": "barrel.glb",
+   "description": "Oak barrel with iron hoops",
+   "size": [
+    0.68,
+    0.65,
+    0.95
+   ],
+   "bounds_min": [
+    -0.34,
+    -0.32,
+    0
+   ],
+   "bounds_max": [
+    0.34,
+    0.32,
+    0.95
+   ],
+   "tris": 170,
+   "tri_budget": 200,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    1.3,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.34,
+    -0.32,
+    0.34,
+    0.32
+   ],
+   "nodes": [
+    {
+     "name": "COL_barrel",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.475
+     ],
+     "size": [
+      0.6,
+      0.6,
+      0.95
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.475,
+      0
+     ]
+    }
+   ]
+  },
+  "crate": {
+   "file": "crate.glb",
+   "description": "Wooden crate with corner battens",
+   "size": [
+    0.74,
+    0.74,
+    0.6
+   ],
+   "bounds_min": [
+    -0.37,
+    -0.37,
+    0
+   ],
+   "bounds_max": [
+    0.37,
+    0.37,
+    0.6
+   ],
+   "tris": 58,
+   "tri_budget": 60,
+   "materials": [
+    "M_wood_planks"
+   ],
+   "footprint": [
+    1.3,
+    1.3
+   ],
+   "footprint_rect": [
+    -0.37,
+    -0.37,
+    0.37,
+    0.37
+   ],
+   "nodes": [
+    {
+     "name": "COL_crate",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.301
+     ],
+     "size": [
+      0.7,
+      0.7,
+      0.602
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.301,
+      0
+     ]
+    }
+   ]
+  },
+  "sacks": {
+   "file": "sacks.glb",
+   "description": "Pile of four grain sacks",
+   "size": [
+    1.09,
+    1.04,
+    0.81
+   ],
+   "bounds_min": [
+    -0.54,
+    -0.64,
+    0
+   ],
+   "bounds_max": [
+    0.54,
+    0.4,
+    0.81
+   ],
+   "tris": 224,
+   "tri_budget": 250,
+   "materials": [
+    "M_cloth"
+   ],
+   "footprint": [
+    1.7,
+    1.9
+   ],
+   "footprint_rect": [
+    -0.54,
+    -0.64,
+    0.54,
+    0.4
+   ],
+   "nodes": [
+    {
+     "name": "COL_sacks",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.075,
+      0.375
+     ],
+     "size": [
+      1.2,
+      1.05,
+      0.75
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.375,
+      0.075
+     ]
+    }
+   ]
+  },
+  "haystack": {
+   "file": "haystack.glb",
+   "description": "Conical haystack around a pole",
+   "size": [
+    3.82,
+    3.53,
+    3.25
+   ],
+   "bounds_min": [
+    -1.97,
+    -1.96,
+    0
+   ],
+   "bounds_max": [
+    1.84,
+    1.57,
+    3.25
+   ],
+   "tris": 177,
+   "tri_budget": 250,
+   "materials": [
+    "M_thatch",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    4.5,
+    4.5
+   ],
+   "footprint_rect": [
+    -1.97,
+    -1.96,
+    1.84,
+    1.57
+   ],
+   "nodes": [
+    {
+     "name": "COL_hay",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.1
+     ],
+     "size": [
+      2.6,
+      2.6,
+      2.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.1,
+      0
+     ]
+    }
+   ]
+  },
+  "woodpile": {
+   "file": "woodpile.glb",
+   "description": "Stacked split firewood between four stakes, chopping block with axe",
+   "size": [
+    2.64,
+    0.71,
+    0.91
+   ],
+   "bounds_min": [
+    -0.93,
+    -0.34,
+    -0.01
+   ],
+   "bounds_max": [
+    1.71,
+    0.37,
+    0.9
+   ],
+   "tris": 285,
+   "tri_budget": 300,
+   "materials": [
+    "M_bark_oak",
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    4.0,
+    1.3
+   ],
+   "footprint_rect": [
+    -0.93,
+    -0.34,
+    1.71,
+    0.37
+   ],
+   "nodes": [
+    {
+     "name": "COL_pile",
+     "type": "collider",
+     "pos": [
+      -0.025,
+      0,
+      0.325
+     ],
+     "size": [
+      1.85,
+      0.7,
+      0.65
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.025,
+      0.325,
+      0
+     ]
+    }
+   ]
+  },
+  "bench": {
+   "file": "bench.glb",
+   "description": "Rough plank bench on four splayed legs",
+   "size": [
+    1.7,
+    0.5,
+    0.47
+   ],
+   "bounds_min": [
+    -0.85,
+    -0.25,
+    -0.01
+   ],
+   "bounds_max": [
+    0.85,
+    0.25,
+    0.46
+   ],
+   "tris": 80,
+   "tri_budget": 120,
+   "materials": [
+    "M_wood_planks"
+   ],
+   "footprint": [
+    2.3,
+    1.1
+   ],
+   "footprint_rect": [
+    -0.85,
+    -0.25,
+    0.85,
+    0.25
+   ],
+   "nodes": [
+    {
+     "name": "COL_bench",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.23
+     ],
+     "size": [
+      1.7,
+      0.32,
+      0.46
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.23,
+      0
+     ]
+    }
+   ]
+  },
+  "table": {
+   "file": "table.glb",
+   "description": "Trestle table with three tankards, a loaf on a board and a candle",
+   "size": [
+    1.89,
+    0.82,
+    0.94
+   ],
+   "bounds_min": [
+    -0.94,
+    -0.41,
+    -0.01
+   ],
+   "bounds_max": [
+    0.95,
+    0.41,
+    0.93
+   ],
+   "tris": 250,
+   "tri_budget": 250,
+   "materials": [
+    "M_wood_planks",
+    "M_cloth"
+   ],
+   "footprint": [
+    2.5,
+    1.4
+   ],
+   "footprint_rect": [
+    -0.94,
+    -0.41,
+    0.95,
+    0.41
+   ],
+   "nodes": [
+    {
+     "name": "COL_table",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.39
+     ],
+     "size": [
+      1.9,
+      0.8,
+      0.78
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.39,
+      0
+     ]
+    }
+   ]
+  },
+  "trough": {
+   "file": "trough.glb",
+   "description": "Plank water trough on two sleepers",
+   "size": [
+    1.7,
+    0.72,
+    0.52
+   ],
+   "bounds_min": [
+    -0.85,
+    -0.36,
+    0
+   ],
+   "bounds_max": [
+    0.85,
+    0.36,
+    0.52
+   ],
+   "tris": 60,
+   "tri_budget": 120,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    2.3,
+    1.3
+   ],
+   "footprint_rect": [
+    -0.85,
+    -0.36,
+    0.85,
+    0.36
+   ],
+   "nodes": [
+    {
+     "name": "COL_trough",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.26
+     ],
+     "size": [
+      1.7,
+      0.6,
+      0.52
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.26,
+      0
+     ]
+    }
+   ]
+  },
+  "ladder": {
+   "file": "ladder.glb",
+   "description": "Wooden ladder, 3.6 m, leaning 14 degrees towards +Y (rotate it for other uses)",
+   "size": [
+    0.53,
+    0.94,
+    3.51
+   ],
+   "bounds_min": [
+    -0.27,
+    -0.04,
+    -0.01
+   ],
+   "bounds_max": [
+    0.27,
+    0.91,
+    3.5
+   ],
+   "tris": 96,
+   "tri_budget": 100,
+   "materials": [
+    "M_wood_planks"
+   ],
+   "footprint": [
+    1.1,
+    2.4
+   ],
+   "footprint_rect": [
+    -0.27,
+    -0.04,
+    0.27,
+    0.91
+   ],
+   "nodes": [
+    {
+     "name": "COL_ladder",
+     "type": "collider",
+     "pos": [
+      0,
+      0.45,
+      1.75
+     ],
+     "size": [
+      0.6,
+      0.9,
+      3.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.75,
+      -0.45
+     ]
+    }
+   ],
+   "notes": "Leans 14 degrees towards +Y (place it in front of a wall that is at y = +0.9)."
+  },
+  "lamp_post": {
+   "file": "lamp_post.glb",
+   "description": "Timber lamp post with a bracket and a hanging iron lantern",
+   "size": [
+    0.54,
+    0.94,
+    3.13
+   ],
+   "bounds_min": [
+    -0.25,
+    -0.72,
+    -0.03
+   ],
+   "bounds_max": [
+    0.29,
+    0.22,
+    3.1
+   ],
+   "tris": 166,
+   "tri_budget": 300,
+   "materials": [
+    "M_wood_planks",
+    "M_rock",
+    "M_metal_iron",
+    "M_window_glow"
+   ],
+   "footprint": [
+    1.2,
+    2.0
+   ],
+   "footprint_rect": [
+    -0.25,
+    -0.72,
+    0.29,
+    0.22
+   ],
+   "nodes": [
+    {
+     "name": "COL_post",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.5
+     ],
+     "size": [
+      0.2,
+      0.2,
+      3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.5,
+      0
+     ]
+    },
+    {
+     "name": "FIRE_lamp",
+     "type": "fire",
+     "pos": [
+      0,
+      -0.6,
+      2.52
+     ],
+     "pos_gltf": [
+      0,
+      2.52,
+      0.6
+     ]
+    }
+   ],
+   "notes": "FIRE_lamp is at the lantern (use a small flame / warm light). Lantern panes use M_window_glow."
+  },
+  "brazier": {
+   "file": "brazier.glb",
+   "description": "Wrought-iron tripod brazier with a bowl of glowing coals",
+   "size": [
+    0.78,
+    0.79,
+    1.05
+   ],
+   "bounds_min": [
+    -0.38,
+    -0.44,
+    -0.01
+   ],
+   "bounds_max": [
+    0.39,
+    0.35,
+    1.05
+   ],
+   "tris": 262,
+   "tri_budget": 300,
+   "materials": [
+    "M_metal_iron",
+    "M_ember",
+    "M_rock"
+   ],
+   "footprint": [
+    1.4,
+    1.5
+   ],
+   "footprint_rect": [
+    -0.38,
+    -0.44,
+    0.39,
+    0.35
+   ],
+   "nodes": [
+    {
+     "name": "COL_brazier",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.525
+     ],
+     "size": [
+      0.6,
+      0.6,
+      1.05
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.525,
+      0
+     ]
+    },
+    {
+     "name": "FIRE_brazier",
+     "type": "fire",
+     "pos": [
+      0,
+      0,
+      1.1
+     ],
+     "pos_gltf": [
+      0,
+      1.1,
+      0
+     ]
+    }
+   ]
+  },
+  "campfire": {
+   "file": "campfire.glb",
+   "description": "Camp fire: ring of stones, charred logs, glowing embers",
+   "size": [
+    1.34,
+    1.37,
+    0.41
+   ],
+   "bounds_min": [
+    -0.69,
+    -0.7,
+    -0.01
+   ],
+   "bounds_max": [
+    0.65,
+    0.67,
+    0.4
+   ],
+   "tris": 214,
+   "tri_budget": 250,
+   "materials": [
+    "M_rock",
+    "M_ember",
+    "M_bark_oak",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    2.0,
+    2.0
+   ],
+   "footprint_rect": [
+    -0.69,
+    -0.7,
+    0.65,
+    0.67
+   ],
+   "nodes": [
+    {
+     "name": "COL_fire",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.175
+     ],
+     "size": [
+      1.1,
+      1.1,
+      0.35
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.175,
+      0
+     ]
+    },
+    {
+     "name": "FIRE_main",
+     "type": "fire",
+     "pos": [
+      0,
+      0,
+      0.25
+     ],
+     "pos_gltf": [
+      0,
+      0.25,
+      0
+     ]
+    }
+   ]
+  },
+  "tent_a": {
+   "file": "tent_a.glb",
+   "description": "Small A-frame canvas tent with ridge pole, open front flaps, guy ropes and pegs",
+   "size": [
+    3.58,
+    4.88,
+    2.01
+   ],
+   "bounds_min": [
+    -1.79,
+    -2.44,
+    -0.02
+   ],
+   "bounds_max": [
+    1.79,
+    2.44,
+    1.99
+   ],
+   "tris": 254,
+   "tri_budget": 400,
+   "materials": [
+    "M_wood_planks",
+    "M_cloth",
+    "M_rope"
+   ],
+   "footprint": [
+    4.2,
+    5.5
+   ],
+   "footprint_rect": [
+    -1.79,
+    -2.44,
+    1.79,
+    2.44
+   ],
+   "nodes": [
+    {
+     "name": "COL_tent",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.6
+     ],
+     "size": [
+      2,
+      3,
+      1.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.6,
+      0
+     ]
+    }
+   ],
+   "notes": "Entrance faces -Y. Canvas is double sided geometry."
+  },
+  "tent_b": {
+   "file": "tent_b.glb",
+   "description": "Round striped pavilion: central pole with pennant, conical roof with valance, cloth walls, open front, guy ropes",
+   "size": [
+    6.95,
+    6.95,
+    4.6
+   ],
+   "bounds_min": [
+    -3.48,
+    -3.48,
+    -0.02
+   ],
+   "bounds_max": [
+    3.48,
+    3.48,
+    4.58
+   ],
+   "tris": 642,
+   "tri_budget": 900,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_gold",
+    "M_cloth",
+    "M_rope"
+   ],
+   "footprint": [
+    7.5,
+    7.5
+   ],
+   "footprint_rect": [
+    -3.48,
+    -3.48,
+    3.48,
+    3.48
+   ],
+   "nodes": [
+    {
+     "name": "COL_tent",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.05
+     ],
+     "size": [
+      3.5,
+      3.5,
+      2.1
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.05,
+      0
+     ]
+    }
+   ],
+   "notes": "Entrance faces -Y. Canvas is double sided geometry; guy ropes reach 3.5 m from the centre."
+  },
+  "bedroll": {
+   "file": "bedroll.glb",
+   "description": "Bedroll: straw mat, blanket and rolled pillow",
+   "size": [
+    0.8,
+    1.92,
+    0.23
+   ],
+   "bounds_min": [
+    -0.4,
+    -0.97,
+    0
+   ],
+   "bounds_max": [
+    0.4,
+    0.95,
+    0.23
+   ],
+   "tris": 40,
+   "tri_budget": 80,
+   "materials": [
+    "M_thatch",
+    "M_cloth"
+   ],
+   "footprint": [
+    1.4,
+    2.5
+   ],
+   "footprint_rect": [
+    -0.4,
+    -0.97,
+    0.4,
+    0.95
+   ],
+   "nodes": []
+  },
+  "banner": {
+   "file": "banner.glb",
+   "description": "Banner pole (4 m) with cross-bar and hanging swallow-tailed cloth; cloth vertex colour is white so the engine can tint it",
+   "size": [
+    1.0,
+    0.5,
+    4.31
+   ],
+   "bounds_min": [
+    -0.5,
+    -0.28,
+    -0.03
+   ],
+   "bounds_max": [
+    0.5,
+    0.22,
+    4.28
+   ],
+   "tris": 170,
+   "tri_budget": 200,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_rock",
+    "M_rope",
+    "M_cloth"
+   ],
+   "footprint": [
+    1.6,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.5,
+    -0.28,
+    0.5,
+    0.22
+   ],
+   "nodes": [
+    {
+     "name": "COL_pole",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      2
+     ],
+     "size": [
+      0.2,
+      0.2,
+      4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      2,
+      0
+     ]
+    }
+   ],
+   "notes": "Cloth vertex colour is pure white (no baked AO) so the engine can tint M_cloth per instance; cloth is double sided geometry."
+  },
+  "scarecrow": {
+   "file": "scarecrow.glb",
+   "description": "Scarecrow: pole cross, patched tunic, sack head with straw hat, straw hands, a crow",
+   "size": [
+    1.98,
+    0.72,
+    2.2
+   ],
+   "bounds_min": [
+    -0.99,
+    -0.36,
+    -0.0
+   ],
+   "bounds_max": [
+    0.99,
+    0.36,
+    2.2
+   ],
+   "tris": 336,
+   "tri_budget": 500,
+   "materials": [
+    "M_wood_planks",
+    "M_cloth",
+    "M_thatch",
+    "M_rope",
+    "M_bone"
+   ],
+   "footprint": [
+    2.6,
+    1.3
+   ],
+   "footprint_rect": [
+    -0.99,
+    -0.36,
+    0.99,
+    0.36
+   ],
+   "nodes": [
+    {
+     "name": "COL_pole",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1
+     ],
+     "size": [
+      0.4,
+      0.3,
+      2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1,
+      0
+     ]
+    }
+   ]
+  },
+  "dock": {
+   "file": "dock.glb",
+   "description": "6 x 2.4 m pier segment on four piles (runs along X, tiles end to end), deck top at z = 0.9, piles reach 1.8 m below the origin",
+   "size": [
+    6,
+    2.5,
+    3.2
+   ],
+   "bounds_min": [
+    -3,
+    -1.25,
+    -1.8
+   ],
+   "bounds_max": [
+    3,
+    1.25,
+    1.4
+   ],
+   "tris": 376,
+   "tri_budget": 500,
+   "materials": [
+    "M_wood_planks",
+    "M_bark_pine",
+    "M_rope"
+   ],
+   "footprint": [
+    6.6,
+    3.1
+   ],
+   "footprint_rect": [
+    -3,
+    -1.25,
+    3,
+    1.25
+   ],
+   "nodes": [
+    {
+     "name": "WALK_deck",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      0.7
+     ],
+     "size": [
+      6,
+      2.4,
+      0.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.7,
+      0
+     ]
+    }
+   ],
+   "notes": "Runs along X, 6.0 m, tiles end to end. Deck top z = 0.9 (WALK_deck). Piles go down to z = -1.8."
+  },
+  "rowboat": {
+   "file": "rowboat.glb",
+   "description": "Clinker-style rowing boat with three thwarts and a pair of oars (keel at z = 0, waterline ~0.22)",
+   "size": [
+    1.36,
+    3.81,
+    0.86
+   ],
+   "bounds_min": [
+    -0.68,
+    -2.06,
+    0
+   ],
+   "bounds_max": [
+    0.68,
+    1.75,
+    0.86
+   ],
+   "tris": 306,
+   "tri_budget": 500,
+   "materials": [
+    "M_wood_planks"
+   ],
+   "footprint": [
+    2.0,
+    4.7
+   ],
+   "footprint_rect": [
+    -0.68,
+    -2.06,
+    0.68,
+    1.75
+   ],
+   "nodes": [
+    {
+     "name": "COL_boat",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.1,
+      0.3
+     ],
+     "size": [
+      1.36,
+      3.7,
+      0.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.3,
+      0.1
+     ]
+    }
+   ],
+   "notes": "Bow points to -Y. Keel bottom at z = 0, waterline about z = 0.22."
+  },
+  "bridge_wood": {
+   "file": "bridge_wood.glb",
+   "description": "Plank bridge: 10 m deck (3 m wide, top at z = 1.0) on three pile bents with railings, plus 2.5 m ramps down to z = 0 at both ends (total length 15 m); walk direction = X",
+   "size": [
+    15.08,
+    3.2,
+    4.22
+   ],
+   "bounds_min": [
+    -7.54,
+    -1.6,
+    -2.2
+   ],
+   "bounds_max": [
+    7.54,
+    1.6,
+    2.02
+   ],
+   "tris": 750,
+   "tri_budget": 900,
+   "materials": [
+    "M_wood_planks",
+    "M_bark_pine"
+   ],
+   "footprint": [
+    15.7,
+    3.8
+   ],
+   "footprint_rect": [
+    -7.54,
+    -1.6,
+    7.54,
+    1.6
+   ],
+   "nodes": [
+    {
+     "name": "COL_rail_n",
+     "type": "collider",
+     "pos": [
+      0,
+      1.42,
+      1
+     ],
+     "size": [
+      14.8,
+      0.14,
+      2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1,
+      -1.42
+     ]
+    },
+    {
+     "name": "COL_rail_s",
+     "type": "collider",
+     "pos": [
+      0,
+      -1.42,
+      1
+     ],
+     "size": [
+      14.8,
+      0.14,
+      2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1,
+      1.42
+     ]
+    },
+    {
+     "name": "WALK_deck",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      0.75
+     ],
+     "size": [
+      10,
+      3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.75,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_e0",
+     "type": "walkable",
+     "pos": [
+      5.312,
+      0,
+      0.287
+     ],
+     "size": [
+      0.625,
+      3,
+      1.175
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      5.312,
+      0.287,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_e1",
+     "type": "walkable",
+     "pos": [
+      5.938,
+      0,
+      0.162
+     ],
+     "size": [
+      0.625,
+      3,
+      0.925
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      5.938,
+      0.162,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_e2",
+     "type": "walkable",
+     "pos": [
+      6.562,
+      0,
+      0.038
+     ],
+     "size": [
+      0.625,
+      3,
+      0.675
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      6.562,
+      0.038,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_e3",
+     "type": "walkable",
+     "pos": [
+      7.188,
+      0,
+      -0.087
+     ],
+     "size": [
+      0.625,
+      3,
+      0.425
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      7.188,
+      -0.087,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_w0",
+     "type": "walkable",
+     "pos": [
+      -5.312,
+      0,
+      0.287
+     ],
+     "size": [
+      0.625,
+      3,
+      1.175
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -5.312,
+      0.287,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_w1",
+     "type": "walkable",
+     "pos": [
+      -5.938,
+      0,
+      0.162
+     ],
+     "size": [
+      0.625,
+      3,
+      0.925
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -5.938,
+      0.162,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_w2",
+     "type": "walkable",
+     "pos": [
+      -6.562,
+      0,
+      0.038
+     ],
+     "size": [
+      0.625,
+      3,
+      0.675
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.562,
+      0.038,
+      0
+     ]
+    },
+    {
+     "name": "WALK_ramp_w3",
+     "type": "walkable",
+     "pos": [
+      -7.188,
+      0,
+      -0.087
+     ],
+     "size": [
+      0.625,
+      3,
+      0.425
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -7.188,
+      -0.087,
+      0
+     ]
+    }
+   ],
+   "notes": "Walk direction = X. Flat deck x = -5..5 (top z = 1.0), ramps to z = 0 at x = +-7.5 (total 15 m). WALK_deck + 4 WALK_ramp_* steps per side (0.25 m each). Piles go down to z = -2.2. COL_rail_* keep the player on the bridge."
+  },
+  "bridge_stone": {
+   "file": "bridge_stone.glb",
+   "description": "Single-arch humpback stone bridge, 14 m long, 4 m wide, deck peak 2.2 m, cobbled deck between 0.85 m parapets; arch springs 0.6 m below the origin; walk direction = X",
+   "size": [
+    14.66,
+    4.32,
+    3.65
+   ],
+   "bounds_min": [
+    -7.33,
+    -2.16,
+    -0.6
+   ],
+   "bounds_max": [
+    7.33,
+    2.16,
+    3.05
+   ],
+   "tris": 1012,
+   "tri_budget": 1500,
+   "materials": [
+    "M_stone_wall",
+    "M_cobble"
+   ],
+   "footprint": [
+    15.3,
+    4.9
+   ],
+   "footprint_rect": [
+    -7.33,
+    -2.16,
+    7.33,
+    2.16
+   ],
+   "nodes": [
+    {
+     "name": "COL_parapet_n",
+     "type": "collider",
+     "pos": [
+      0,
+      1.825,
+      1.25
+     ],
+     "size": [
+      14,
+      0.35,
+      3.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.25,
+      -1.825
+     ]
+    },
+    {
+     "name": "COL_parapet_s",
+     "type": "collider",
+     "pos": [
+      0,
+      -1.825,
+      1.25
+     ],
+     "size": [
+      14,
+      0.35,
+      3.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.25,
+      1.825
+     ]
+    },
+    {
+     "name": "WALK_deck_0",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      0.745
+     ],
+     "size": [
+      2.868,
+      3.3,
+      2.69
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.745,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e1",
+     "type": "walkable",
+     "pos": [
+      1.75,
+      0,
+      0.635
+     ],
+     "size": [
+      0.632,
+      3.3,
+      2.47
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.75,
+      0.635,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e2",
+     "type": "walkable",
+     "pos": [
+      2.325,
+      0,
+      0.525
+     ],
+     "size": [
+      0.517,
+      3.3,
+      2.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.325,
+      0.525,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e3",
+     "type": "walkable",
+     "pos": [
+      2.817,
+      0,
+      0.415
+     ],
+     "size": [
+      0.468,
+      3.3,
+      2.03
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.817,
+      0.415,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e4",
+     "type": "walkable",
+     "pos": [
+      3.276,
+      0,
+      0.305
+     ],
+     "size": [
+      0.449,
+      3.3,
+      1.81
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.276,
+      0.305,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e5",
+     "type": "walkable",
+     "pos": [
+      3.724,
+      0,
+      0.195
+     ],
+     "size": [
+      0.449,
+      3.3,
+      1.59
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.724,
+      0.195,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e6",
+     "type": "walkable",
+     "pos": [
+      4.183,
+      0,
+      0.085
+     ],
+     "size": [
+      0.468,
+      3.3,
+      1.37
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.183,
+      0.085,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e7",
+     "type": "walkable",
+     "pos": [
+      4.675,
+      0,
+      -0.025
+     ],
+     "size": [
+      0.517,
+      3.3,
+      1.15
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.675,
+      -0.025,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e8",
+     "type": "walkable",
+     "pos": [
+      5.25,
+      0,
+      -0.135
+     ],
+     "size": [
+      0.632,
+      3.3,
+      0.93
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      5.25,
+      -0.135,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_e9",
+     "type": "walkable",
+     "pos": [
+      6.283,
+      0,
+      -0.245
+     ],
+     "size": [
+      1.434,
+      3.3,
+      0.71
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      6.283,
+      -0.245,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w1",
+     "type": "walkable",
+     "pos": [
+      -1.75,
+      0,
+      0.635
+     ],
+     "size": [
+      0.632,
+      3.3,
+      2.47
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.75,
+      0.635,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w2",
+     "type": "walkable",
+     "pos": [
+      -2.325,
+      0,
+      0.525
+     ],
+     "size": [
+      0.517,
+      3.3,
+      2.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.325,
+      0.525,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w3",
+     "type": "walkable",
+     "pos": [
+      -2.817,
+      0,
+      0.415
+     ],
+     "size": [
+      0.468,
+      3.3,
+      2.03
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.817,
+      0.415,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w4",
+     "type": "walkable",
+     "pos": [
+      -3.276,
+      0,
+      0.305
+     ],
+     "size": [
+      0.449,
+      3.3,
+      1.81
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.276,
+      0.305,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w5",
+     "type": "walkable",
+     "pos": [
+      -3.724,
+      0,
+      0.195
+     ],
+     "size": [
+      0.449,
+      3.3,
+      1.59
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.724,
+      0.195,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w6",
+     "type": "walkable",
+     "pos": [
+      -4.183,
+      0,
+      0.085
+     ],
+     "size": [
+      0.468,
+      3.3,
+      1.37
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -4.183,
+      0.085,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w7",
+     "type": "walkable",
+     "pos": [
+      -4.675,
+      0,
+      -0.025
+     ],
+     "size": [
+      0.517,
+      3.3,
+      1.15
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -4.675,
+      -0.025,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w8",
+     "type": "walkable",
+     "pos": [
+      -5.25,
+      0,
+      -0.135
+     ],
+     "size": [
+      0.632,
+      3.3,
+      0.93
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -5.25,
+      -0.135,
+      0
+     ]
+    },
+    {
+     "name": "WALK_deck_w9",
+     "type": "walkable",
+     "pos": [
+      -6.283,
+      0,
+      -0.245
+     ],
+     "size": [
+      1.434,
+      3.3,
+      0.71
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.283,
+      -0.245,
+      0
+     ]
+    }
+   ],
+   "notes": "Walk direction = X. Deck z = 2.2 * cos^2(pi * x / 14) between the parapets (|y| < 1.65). 19 WALK_deck_* boxes in 0.22 m steps. Arch (6.4 m span, crown z = 1.6) springs at z = -0.6: put the water / river bed below. COL_parapet_* cover the parapets."
+  }
+ }
+}

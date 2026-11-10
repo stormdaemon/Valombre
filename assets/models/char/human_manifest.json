@@ -1,0 +1,1005 @@
+{
+ "asset": "human",
+ "file": "human.glb",
+ "description": "Base human body (male base, T-pose, 1.80 m) skinned to the shared 40 bone humanoid rig, split in 6 hideable regions, with eyes, brows, mouth interior and 50 morph targets.",
+ "size_m": {
+  "width": 1.832,
+  "depth": 0.337,
+  "height": 1.8
+ },
+ "triangles": {
+  "total": 12880,
+  "body": 12284
+ },
+ "skin": {
+  "joints": 40,
+  "max_influences": 4,
+  "armature": "Armature (tools/blender/humanoid_rig.py)"
+ },
+ "regions": [
+  "body_head",
+  "body_torso",
+  "body_arms",
+  "body_hands",
+  "body_legs",
+  "body_feet"
+ ],
+ "region_notes": {
+  "body_head": "head, ears, neck down to the collar line",
+  "body_torso": "collar to hip line (z = 1.00 m), shoulders to mid deltoid (|x| = 0.205 m)",
+  "body_arms": "mid deltoid to wrist (|x| = 0.727 m)",
+  "body_hands": "wrist to finger tips",
+  "body_legs": "hip line to ankle (z = 0.105 m), includes hips and crotch",
+  "body_feet": "below the ankle",
+  "borders": "border vertices are duplicated in both regions with identical position, normal, weights, colour and morph deltas (normals and morph normals are recomputed on the welded body)."
+ },
+ "meshes": [
+  {
+   "name": "body_arms",
+   "triangles": 1440,
+   "vertices": 802,
+   "materials": [
+    "M_skin"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "body_feet",
+   "triangles": 1200,
+   "vertices": 694,
+   "materials": [
+    "M_skin"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "body_hands",
+   "triangles": 1724,
+   "vertices": 1118,
+   "materials": [
+    "M_skin"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "body_head",
+   "triangles": 4528,
+   "vertices": 2436,
+   "materials": [
+    "M_skin"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "TEXCOORD_1",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "body_legs",
+   "triangles": 2064,
+   "vertices": 1175,
+   "materials": [
+    "M_skin"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "body_torso",
+   "triangles": 1328,
+   "vertices": 775,
+   "materials": [
+    "M_skin"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "brows",
+   "triangles": 120,
+   "vertices": 120,
+   "materials": [
+    "M_hair"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "eye_L",
+   "triangles": 168,
+   "vertices": 86,
+   "materials": [
+    "M_eye"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "eye_R",
+   "triangles": 168,
+   "vertices": 86,
+   "materials": [
+    "M_eye"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  },
+  {
+   "name": "mouth",
+   "triangles": 140,
+   "vertices": 103,
+   "materials": [
+    "M_mouth"
+   ],
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "morph_targets": 50
+  }
+ ],
+ "morphs": [
+  {
+   "name": "feminine",
+   "category": "body",
+   "label": "Morphologie féminine",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "muscular",
+   "category": "body",
+   "label": "Musculature",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "heavy",
+   "category": "body",
+   "label": "Corpulence",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "thin",
+   "category": "body",
+   "label": "Maigreur",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "shoulder_width",
+   "category": "body",
+   "label": "Largeur des épaules",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "chest_size",
+   "category": "body",
+   "label": "Tour de poitrine",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "breast_size",
+   "category": "body",
+   "label": "Taille des seins",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "waist_size",
+   "category": "body",
+   "label": "Tour de taille",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "hip_size",
+   "category": "body",
+   "label": "Largeur des hanches",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "belly",
+   "category": "body",
+   "label": "Ventre",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "glutes",
+   "category": "body",
+   "label": "Fessiers",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "arm_size",
+   "category": "body",
+   "label": "Épaisseur des bras",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "leg_size",
+   "category": "body",
+   "label": "Épaisseur des jambes",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "neck_size",
+   "category": "body",
+   "label": "Épaisseur du cou",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "head_size",
+   "category": "head",
+   "label": "Taille de la tête",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "head_width",
+   "category": "head",
+   "label": "Largeur de la tête",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "head_depth",
+   "category": "head",
+   "label": "Profondeur du crâne",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "forehead_height",
+   "category": "head",
+   "label": "Hauteur du front",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "forehead_slope",
+   "category": "head",
+   "label": "Inclinaison du front",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "brow_ridge",
+   "category": "head",
+   "label": "Arcade sourcilière",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "brow_height",
+   "category": "head",
+   "label": "Hauteur des sourcils",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "eye_size",
+   "category": "eyes",
+   "label": "Taille des yeux",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "eye_spacing",
+   "category": "eyes",
+   "label": "Écartement des yeux",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "eye_height",
+   "category": "eyes",
+   "label": "Hauteur des yeux",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "eye_depth",
+   "category": "eyes",
+   "label": "Enfoncement des yeux",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "eye_tilt",
+   "category": "eyes",
+   "label": "Inclinaison des yeux",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "nose_length",
+   "category": "nose",
+   "label": "Longueur du nez",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "nose_width",
+   "category": "nose",
+   "label": "Largeur du nez",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "nose_bridge",
+   "category": "nose",
+   "label": "Arête du nez",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "nose_tip",
+   "category": "nose",
+   "label": "Pointe du nez",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "nostril_width",
+   "category": "nose",
+   "label": "Largeur des narines",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "cheekbone_height",
+   "category": "head",
+   "label": "Hauteur des pommettes",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "cheekbone_width",
+   "category": "head",
+   "label": "Largeur des pommettes",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "cheek_fullness",
+   "category": "head",
+   "label": "Rondeur des joues",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "jaw_width",
+   "category": "jaw",
+   "label": "Largeur de la mâchoire",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "jaw_height",
+   "category": "jaw",
+   "label": "Hauteur de la mâchoire",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "chin_length",
+   "category": "jaw",
+   "label": "Longueur du menton",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "chin_width",
+   "category": "jaw",
+   "label": "Largeur du menton",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "chin_forward",
+   "category": "jaw",
+   "label": "Avancée du menton",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "mouth_width",
+   "category": "mouth",
+   "label": "Largeur de la bouche",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "mouth_height",
+   "category": "mouth",
+   "label": "Hauteur de la bouche",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "lip_upper",
+   "category": "mouth",
+   "label": "Lèvre supérieure",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "lip_lower",
+   "category": "mouth",
+   "label": "Lèvre inférieure",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "ear_size",
+   "category": "ears",
+   "label": "Taille des oreilles",
+   "min": -1,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "ear_point",
+   "category": "ears",
+   "label": "Oreilles pointues",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "age",
+   "category": "head",
+   "label": "Âge",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "blink",
+   "category": "expression",
+   "label": "Clignement des yeux",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "mouth_open",
+   "category": "expression",
+   "label": "Bouche ouverte",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "smile",
+   "category": "expression",
+   "label": "Sourire",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  },
+  {
+   "name": "angry",
+   "category": "expression",
+   "label": "Colère",
+   "min": 0,
+   "max": 1,
+   "default": 0
+  }
+ ],
+ "morph_notes": {
+  "order": "every mesh carries the same 50 targets in this order (zero deltas where unaffected)",
+  "negative": "weights down to min are valid: negative = linear opposite",
+  "eyes": "eye_L / eye_R follow every morph except the expressions (blink, mouth_open, smile, angry)",
+  "feminine": "female body type on the same skeleton; suggested extra root scale 0.94 for an average woman",
+  "fields": "tools/blender/human_morphs.py exposes MORPHS[name](points Nx3) -> deltas, the same analytic fields can be evaluated on hair / outfits / props",
+  "jaw_open_deg": 17.0
+ },
+ "vertex_colors": {
+  "attribute": "COLOR_0 (linear)",
+  "R": "blush mask (cheeks 0.35, nose tip, ears, knuckles, elbows, knees 0.25)",
+  "G": "ambient occlusion / cavity (1 = open); the upper eyelid margin is darkened on purpose (lash line)",
+  "B": "lips mask",
+  "A": "1",
+  "note": "only meaningful on M_skin. eyes and brows are white; M_mouth uses COLOR_0 as albedo"
+ },
+ "uv": {
+  "TEXCOORD_0": "skin: cylindrical / planar projections, about 0.5 m per UV unit (tiling pore detail, seams between body parts). eyes: planar from the front, pupil at (0.5, 0.5), the eyeball silhouette fills 0..1",
+  "TEXCOORD_1": "body_head only: planar projection from the front for decals (war paint, scars). u = 0.5 + x / 0.1870 (u=0 at the character RIGHT ear, u=1 at the LEFT ear, i.e. the image is the face as seen from the front), v = (z - 1.5725) / 0.1875 (0 = under the chin, 1 = top of the forehead). Blender convention (v up); the back of the head mirrors the front, mask decals with the normal."
+ },
+ "materials": {
+  "M_skin": "contract material (engine skin shader: skin tone uniform + COLOR_0 masks)",
+  "M_eye": "contract material (engine eye shader), mesh eye_L / eye_R",
+  "M_hair": "contract material, mesh brows = eyebrows + upper eyelashes (thin double sided strips that follow blink; the feminine morph lengthens them), vertex colour white, UV u along / v across",
+  "M_mouth": "NEW: mouth interior and teeth. Opaque, single sided, albedo = COLOR_0 (dark red cavity, pink tongue area, ivory teeth), roughness about 0.45, no texture. Only visible when mouth_open > 0."
+ },
+ "landmarks": {
+  "coordinates": "Blender rest pose (T-pose): X = character left, -Y = front, Z = up, meters. glTF/three.js = (x, z, -y)",
+  "eye_center_L": [
+   0.032,
+   -0.07,
+   1.687
+  ],
+  "eye_center_R": [
+   -0.032,
+   -0.07,
+   1.687
+  ],
+  "eye_radius": 0.013,
+  "pupil_L": [
+   0.032,
+   -0.083,
+   1.687
+  ],
+  "pupil_R": [
+   -0.032,
+   -0.083,
+   1.687
+  ],
+  "mouth_center": [
+   0.0,
+   -0.0945,
+   1.6195
+  ],
+  "mouth_corner_L": [
+   0.0245,
+   -0.084,
+   1.6192
+  ],
+  "chin": [
+   0.0,
+   -0.0925,
+   1.586
+  ],
+  "chin_bottom": [
+   0.0,
+   -0.08,
+   1.5725
+  ],
+  "nose_tip": [
+   0.0,
+   -0.1179,
+   1.6548
+  ],
+  "brow_L": [
+   0.034,
+   -0.0895,
+   1.7065
+  ],
+  "top_of_head": [
+   0.0,
+   0.012,
+   1.8
+  ],
+  "crown_ring": [
+   [
+    0.0,
+    -0.0896,
+    1.745
+   ],
+   [
+    0.0254,
+    -0.0848,
+    1.7443
+   ],
+   [
+    0.047,
+    -0.0714,
+    1.7423
+   ],
+   [
+    0.0621,
+    -0.0521,
+    1.7391
+   ],
+   [
+    0.0706,
+    -0.0307,
+    1.735
+   ],
+   [
+    0.0742,
+    -0.0099,
+    1.7302
+   ],
+   [
+    0.0752,
+    0.01,
+    1.725
+   ],
+   [
+    0.0744,
+    0.0299,
+    1.7198
+   ],
+   [
+    0.0697,
+    0.0502,
+    1.715
+   ],
+   [
+    0.0603,
+    0.0703,
+    1.7109
+   ],
+   [
+    0.0452,
+    0.0883,
+    1.7077
+   ],
+   [
+    0.0245,
+    0.1015,
+    1.7057
+   ],
+   [
+    0.0,
+    0.1065,
+    1.705
+   ],
+   [
+    -0.0245,
+    0.1015,
+    1.7057
+   ],
+   [
+    -0.0452,
+    0.0883,
+    1.7077
+   ],
+   [
+    -0.0603,
+    0.0703,
+    1.7109
+   ],
+   [
+    -0.0697,
+    0.0502,
+    1.715
+   ],
+   [
+    -0.0744,
+    0.0299,
+    1.7198
+   ],
+   [
+    -0.0752,
+    0.01,
+    1.725
+   ],
+   [
+    -0.0742,
+    -0.0099,
+    1.7302
+   ],
+   [
+    -0.0706,
+    -0.0307,
+    1.735
+   ],
+   [
+    -0.0621,
+    -0.0521,
+    1.7391
+   ],
+   [
+    -0.047,
+    -0.0714,
+    1.7423
+   ],
+   [
+    -0.0254,
+    -0.0848,
+    1.7443
+   ]
+  ],
+  "crown_ring_length": 0.5592,
+  "crown_ring_note": "24 points every 15 degrees starting at the front (forehead above the brows) going to the character left; tilted hat line, use it to fit hair caps, crowns, helmets",
+  "ear_L": [
+   0.076,
+   0.013,
+   1.6775
+  ],
+  "ear_R": [
+   -0.076,
+   0.013,
+   1.6775
+  ],
+  "ear_top_L": [
+   0.088,
+   0.024,
+   1.706
+  ],
+  "neck_base": [
+   0.0,
+   0.012,
+   1.49
+  ],
+  "head_pivot": [
+   0.0,
+   0.0,
+   1.59
+  ],
+  "jaw_hinge_L": [
+   0.06,
+   0.0,
+   1.667
+  ],
+  "hand_grip_L": [
+   0.775,
+   0.0,
+   1.44
+  ],
+  "hand_grip_R": [
+   -0.775,
+   0.0,
+   1.44
+  ],
+  "shoulder_L": [
+   0.185,
+   0.0,
+   1.47
+  ],
+  "shoulder_R": [
+   -0.185,
+   0.0,
+   1.47
+  ],
+  "elbow_L": [
+   0.47,
+   0.0,
+   1.47
+  ],
+  "elbow_R": [
+   -0.47,
+   0.0,
+   1.47
+  ],
+  "wrist_L": [
+   0.73,
+   0.0,
+   1.47
+  ],
+  "wrist_R": [
+   -0.73,
+   0.0,
+   1.47
+  ],
+  "hip_L": [
+   0.095,
+   0.0,
+   0.93
+  ],
+  "hip_R": [
+   -0.095,
+   0.0,
+   0.93
+  ],
+  "knee_L": [
+   0.1,
+   -0.005,
+   0.5
+  ],
+  "knee_R": [
+   -0.1,
+   -0.005,
+   0.5
+  ],
+  "ankle_L": [
+   0.1,
+   0.015,
+   0.09
+  ],
+  "ankle_R": [
+   -0.1,
+   0.015,
+   0.09
+  ]
+ },
+ "previews": [
+  "tools/previews/hum_body.png",
+  "tools/previews/hum_head.png",
+  "tools/previews/hum_presets.png",
+  "tools/previews/hum_expressions.png",
+  "tools/previews/hum_poses.png"
+ ],
+ "presets_shown_in_previews": {
+  "male base": {},
+  "female base": {
+   "feminine": 1.0
+  },
+  "old heavy man": {
+   "heavy": 0.9,
+   "age": 1.0,
+   "belly": 0.5,
+   "nose_width": 0.5,
+   "jaw_width": 0.4,
+   "brow_height": -0.3,
+   "neck_size": 0.3,
+   "ear_size": 0.4
+  },
+  "athletic woman": {
+   "feminine": 1.0,
+   "muscular": 0.55,
+   "shoulder_width": 0.3,
+   "breast_size": -0.3,
+   "jaw_width": 0.25,
+   "cheekbone_width": 0.4,
+   "eye_tilt": 0.35,
+   "lip_lower": 0.2
+  },
+  "gaunt elf-eared": {
+   "thin": 0.9,
+   "ear_point": 1.0,
+   "cheekbone_height": 0.6,
+   "cheekbone_width": 0.4,
+   "jaw_width": -0.6,
+   "chin_length": 0.4,
+   "chin_width": -0.5,
+   "eye_tilt": 0.8,
+   "eye_size": 0.3,
+   "nose_width": -0.5,
+   "nose_bridge": 0.3,
+   "head_width": -0.3,
+   "brow_height": 0.3
+  },
+  "brute": {
+   "muscular": 1.0,
+   "heavy": 0.3,
+   "shoulder_width": 0.8,
+   "jaw_width": 1.0,
+   "brow_ridge": 1.0,
+   "neck_size": 0.8,
+   "chin_width": 0.8,
+   "nose_width": 0.8,
+   "eye_depth": 0.7,
+   "forehead_slope": 0.8,
+   "eye_size": -0.4,
+   "lip_upper": -0.5
+  },
+  "young woman": {
+   "feminine": 1.0,
+   "thin": 0.3,
+   "eye_size": 0.5,
+   "lip_upper": 0.4,
+   "lip_lower": 0.4,
+   "nose_length": -0.4,
+   "nose_tip": 0.5,
+   "cheek_fullness": 0.4,
+   "chin_length": -0.3,
+   "breast_size": 0.2,
+   "hip_size": 0.3
+  },
+  "old woman": {
+   "feminine": 1.0,
+   "age": 1.0,
+   "heavy": 0.45,
+   "belly": 0.3,
+   "breast_size": 0.3,
+   "nose_length": 0.3,
+   "chin_forward": 0.3,
+   "eye_size": -0.2
+  }
+ }
+}

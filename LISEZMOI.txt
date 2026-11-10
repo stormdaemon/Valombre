@@ -1,0 +1,41 @@
+VALOMBRE — Les Éclats de l'Aube
+================================
+Action-RPG médiéval à la troisième personne, dans le navigateur.
+
+LANCER LE JEU
+  Double-cliquez sur « Jouer.bat ». Une fenêtre noire s'ouvre (le petit serveur local,
+  à laisser ouverte) et le jeu se lance dans votre navigateur.
+  Conseil : passez le navigateur en plein écran (F11). Chrome ou Edge recommandés.
+  Au premier lancement, le jeu mesure votre machine quelques secondes et choisit
+  la qualité graphique (préréglage « Automatique », modifiable dans Options).
+
+COMMANDES (modifiables dans Options > Commandes)
+  Z Q S D ............ se déplacer            Souris ............. caméra
+  Maj ................ courir                 Espace ............. esquive / roulade
+  Clic gauche ........ attaque légère         F .................. attaque lourde
+  Clic droit ......... garde (au bon moment : parade)
+  Clic molette / A ... verrouiller une cible  C .................. sauter
+  R .................. boire une fiole        E .................. interagir
+  1 2 3 .............. pouvoirs d'Éclat       X .................. rengainer
+  I ou Tab ........... inventaire             M .................. carte
+  J .................. journal                P .................. personnage
+  Échap .............. menu                   F10 ................ masquer l'interface
+  Une manette est aussi reconnue.
+
+CONSEILS
+  - Reposez-vous aux Autels de Braise : vie et fioles rendues, partie sauvegardée,
+    montée de niveau, voyage rapide. Mais les ennemis abattus se relèvent.
+  - Ne videz jamais votre souffle : gardez de quoi rouler.
+  - Les cercles rouges au sol annoncent une frappe de zone : sortez-en.
+  - Options > Graphismes > « Tester ma machine » règle la qualité automatiquement.
+  - Options > Jeu > « Afficher le casque » cache le casque sans retirer sa protection.
+
+CONTENU DU DOSSIER
+  index.html, src/ ........ le jeu (JavaScript, three.js)
+  assets/ ................. modèles 3D, textures et monde générés avec Blender
+  tools/blender/ .......... les scripts Blender qui ont produit tous les assets
+  vendor/three/ ........... three.js (licence MIT)
+  server.mjs .............. serveur local sans dépendance
+
+Tout a été créé pour ce projet : aucun asset téléchargé, aucun service payant.
+Les sauvegardes sont stockées dans le navigateur (4 emplacements).

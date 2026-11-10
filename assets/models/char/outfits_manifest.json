@@ -1,0 +1,927 @@
+{
+ "pieces": {
+  "peasant_head": {
+   "hides": [
+    "hair"
+   ],
+   "triangles": 280,
+   "materials": [
+    "M_cloth"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "shoulder_width",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "linen coif with loose ties; covers the scalp and ears"
+  },
+  "peasant_chest": {
+   "hides": [
+    "body_torso"
+   ],
+   "triangles": 1388,
+   "materials": [
+    "M_cloth",
+    "M_leather",
+    "M_metal_iron"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "belted wool tunic, sleeves rolled above the elbow: body_arms and body_hands stay visible"
+  },
+  "peasant_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1880,
+   "materials": [
+    "M_cloth",
+    "M_leather"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "patched trousers, leg wraps, turn shoes"
+  },
+  "leather_head": {
+   "hides": [
+    "hair"
+   ],
+   "triangles": 268,
+   "materials": [
+    "M_leather"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "leather arming cap with ear and neck flaps"
+  },
+  "leather_chest": {
+   "hides": [
+    "body_torso",
+    "body_arms"
+   ],
+   "triangles": 1710,
+   "materials": [
+    "M_cloth",
+    "M_leather",
+    "M_metal_iron"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "boiled leather jerkin over a padded gambeson, shoulder caps, bracers, belt; bare hands"
+  },
+  "leather_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1624,
+   "materials": [
+    "M_leather"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "leather trousers, tall cuffed boots"
+  },
+  "bandit_head": {
+   "hides": [
+    "hair",
+    "beard"
+   ],
+   "triangles": 410,
+   "materials": [
+    "M_cloth"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "nose_length",
+    "nose_width",
+    "nose_tip",
+    "nose_bridge",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "ragged hood with a face scarf over nose and mouth"
+  },
+  "bandit_chest": {
+   "hides": [
+    "body_torso",
+    "body_arms"
+   ],
+   "triangles": 2238,
+   "materials": [
+    "M_cloth",
+    "M_leather",
+    "M_fur"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "fur trimmed hide vest over a dirty shirt, one boiled leather pauldron (left), wrist wraps, belt; bare hands"
+  },
+  "bandit_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1816,
+   "materials": [
+    "M_cloth",
+    "M_leather",
+    "M_fur"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "mismatched patched hose, fur wrapped boots"
+  },
+  "chain_head": {
+   "hides": [
+    "hair",
+    "beard"
+   ],
+   "triangles": 358,
+   "materials": [
+    "M_metal_iron"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "mail coif with an open face and a mantle over the shoulders"
+  },
+  "chain_chest": {
+   "hides": [
+    "body_torso",
+    "body_arms",
+    "body_hands"
+   ],
+   "triangles": 2340,
+   "materials": [
+    "M_metal_iron",
+    "M_cloth",
+    "M_leather"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "mail hauberk under a belted surcoat, leather mitten gloves"
+  },
+  "chain_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1528,
+   "materials": [
+    "M_metal_iron",
+    "M_leather",
+    "M_metal_steel"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "mail chausses, steel knee cops, leather boots"
+  },
+  "robe_head": {
+   "hides": [
+    "hair"
+   ],
+   "triangles": 548,
+   "materials": [
+    "M_cloth"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "deep cowl with a shoulder mantle, dark lining"
+  },
+  "robe_chest": {
+   "hides": [
+    "body_torso",
+    "body_arms"
+   ],
+   "triangles": 1944,
+   "materials": [
+    "M_cloth",
+    "M_rope"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "monk robe to mid shin with wide sleeves (tight under sleeves at the wrists) and a rope belt; bare hands"
+  },
+  "robe_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1384,
+   "materials": [
+    "M_cloth",
+    "M_leather"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "under trousers and soft ankle boots"
+  },
+  "plate_head": {
+   "hides": [
+    "hair",
+    "beard"
+   ],
+   "triangles": 472,
+   "materials": [
+    "M_metal_steel",
+    "M_metal_iron"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "nose_length",
+    "nose_width",
+    "nose_tip",
+    "nose_bridge",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "closed great helm with eye slits and a mail collar"
+  },
+  "plate_chest": {
+   "hides": [
+    "body_torso",
+    "body_arms",
+    "body_hands"
+   ],
+   "triangles": 2544,
+   "materials": [
+    "M_metal_steel",
+    "M_metal_iron",
+    "M_cloth"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "cuirass, laminated pauldrons, couters, vambraces, mitten gauntlets, fauld over a mail skirt, ember sash"
+  },
+  "plate_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1880,
+   "materials": [
+    "M_metal_iron",
+    "M_metal_steel"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "cuisses, poleyns, greaves, sabatons over mail"
+  },
+  "royal_head": {
+   "hides": [
+    "hair",
+    "beard"
+   ],
+   "triangles": 568,
+   "materials": [
+    "M_metal_steel",
+    "M_metal_iron",
+    "M_metal_gold"
+   ],
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "muscular",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "nose_length",
+    "nose_width",
+    "nose_tip",
+    "nose_bridge",
+    "mouth_open",
+    "ear_point"
+   ],
+   "note": "bascinet fused with a tarnished gold crown, mail aventail"
+  },
+  "royal_chest": {
+   "hides": [
+    "body_torso",
+    "body_arms",
+    "body_hands"
+   ],
+   "triangles": 2800,
+   "materials": [
+    "M_metal_gold",
+    "M_metal_iron",
+    "M_cloth"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "shoulder_width",
+    "chest_size",
+    "breast_size",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "arm_size",
+    "leg_size",
+    "neck_size"
+   ],
+   "note": "gilded cuirass with a high gorget, large pauldrons, torn cape to the calves"
+  },
+  "royal_legs": {
+   "hides": [
+    "body_legs",
+    "body_feet"
+   ],
+   "triangles": 1880,
+   "materials": [
+    "M_metal_iron",
+    "M_metal_steel"
+   ],
+   "morphs": [
+    "feminine",
+    "muscular",
+    "heavy",
+    "thin",
+    "waist_size",
+    "hip_size",
+    "belly",
+    "glutes",
+    "leg_size"
+   ],
+   "note": "dark steel leg harness with gilded poleyns"
+  }
+ },
+ "hair": {
+  "hair_crop": {
+   "triangles": 692,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "ear_point"
+   ]
+  },
+  "hair_short": {
+   "triangles": 1442,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "ear_point"
+   ]
+  },
+  "hair_medium": {
+   "triangles": 1192,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "ear_point"
+   ]
+  },
+  "hair_long": {
+   "triangles": 1688,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "cheekbone_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "shoulder_width",
+    "ear_point"
+   ]
+  },
+  "hair_ponytail": {
+   "triangles": 1432,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "ear_point"
+   ]
+  },
+  "hair_braid": {
+   "triangles": 1322,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "ear_point"
+   ]
+  },
+  "hair_topknot": {
+   "triangles": 872,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "ear_size",
+    "jaw_width",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "muscular",
+    "ear_point"
+   ]
+  },
+  "hair_mohawk": {
+   "triangles": 452,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "forehead_height",
+    "forehead_slope",
+    "neck_size",
+    "feminine",
+    "heavy",
+    "thin",
+    "muscular"
+   ]
+  },
+  "beard_stubble": {
+   "triangles": 228,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "mouth_open",
+    "smile",
+    "mouth_width",
+    "mouth_height",
+    "lip_upper",
+    "lip_lower"
+   ]
+  },
+  "beard_short": {
+   "triangles": 228,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "mouth_open",
+    "smile",
+    "mouth_width",
+    "mouth_height",
+    "lip_upper",
+    "lip_lower"
+   ]
+  },
+  "beard_goatee": {
+   "triangles": 128,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "mouth_open",
+    "smile",
+    "mouth_width",
+    "mouth_height",
+    "lip_upper",
+    "lip_lower"
+   ]
+  },
+  "beard_full": {
+   "triangles": 288,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "mouth_open",
+    "smile",
+    "mouth_width",
+    "mouth_height",
+    "lip_upper",
+    "lip_lower"
+   ]
+  },
+  "beard_long": {
+   "triangles": 408,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "ear_size",
+    "jaw_width",
+    "jaw_height",
+    "chin_length",
+    "chin_width",
+    "chin_forward",
+    "cheek_fullness",
+    "cheekbone_width",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "mouth_open",
+    "smile",
+    "mouth_width",
+    "mouth_height",
+    "lip_upper",
+    "lip_lower"
+   ]
+  },
+  "mustache": {
+   "triangles": 40,
+   "morphs": [
+    "head_size",
+    "head_width",
+    "head_depth",
+    "jaw_width",
+    "jaw_height",
+    "cheek_fullness",
+    "feminine",
+    "heavy",
+    "age",
+    "thin",
+    "mouth_open",
+    "smile",
+    "mouth_width",
+    "mouth_height",
+    "lip_upper"
+   ]
+  }
+ },
+ "notes": {}
+}

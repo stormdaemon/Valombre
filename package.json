@@ -1,0 +1,16 @@
+{
+  "name": "valombre",
+  "version": "1.0.0",
+  "description": "Valombre — Les Éclats de l'Aube : action-RPG médiéval à la troisième personne (three.js + assets Blender)",
+  "scripts": {
+    "start": "node server.mjs --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "private": true
+}

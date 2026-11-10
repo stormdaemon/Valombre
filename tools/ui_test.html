@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valombre — banc d'essai de l'interface</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #07080a; overflow: hidden; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
+  #ui { position: fixed; inset: 0; pointer-events: none; }
+  #mockbar { position: fixed; left: 0; right: 0; top: 0; z-index: 99; display: none; flex-wrap: wrap; gap: 3px; padding: 4px 6px; background: rgba(0, 0, 0, .82);
+             font: 11px/1.2 system-ui, 'Segoe UI', sans-serif; }
+  #mockbar button { font: inherit; color: #dcd6c8; background: #2a2e35; border: 1px solid #454b56; border-radius: 3px; padding: 2px 7px; cursor: pointer; }
+  #mockbar button:hover { background: #3a404a; }
+  #mocklog { flex-basis: 100%; margin: 2px 0 0; color: #8fd18f; font: 10px/1.25 Consolas, monospace; white-space: pre-wrap; max-height: 52px; overflow: hidden; }
+  /* ?still=1 : no animation / transition (screenshots of a background tab, whose animation clock is frozen) */
+  .still *, .still *::before, .still *::after { animation: none !important; transition: none !important; }
+  .still .v-dmg.on span { opacity: 1 !important; }
+</style>
+<script>
+  if (new URLSearchParams(location.search).has('still')) {
+    document.documentElement.classList.add('still');
+    // Web Animations would stay frozen on their first keyframe too
+    Element.prototype.animate = function () { return { cancel() {}, finish() {} }; };
+  }
+</script>
+<script type="importmap">
+{ "imports": { "three": "../vendor/three/three.module.js", "three/addons/": "../vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<canvas id="game" tabindex="0"></canvas>
+<div id="ui"></div>
+<div id="mockbar"></div>
+<script type="module" src="./ui_mock.js"></script>
+</body>
+</html>

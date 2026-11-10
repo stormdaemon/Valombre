@@ -1,0 +1,768 @@
+{
+ "units": "meters",
+ "conventions": {
+  "axes": "Coordinates below are BLENDER authoring axes (x, y, z up). In the .glb (+Y up) a point (x, y, z) is (x, z, -y).",
+  "weapon": "grip centre (right fist) at the origin, tip toward Blender +Z (glTF +Y), main cutting edge toward +X, flat in the XZ plane. Attach the glTF scene to the bone `weapon_R` with an identity local transform.",
+  "twoHanded": "right hand at the origin, left hand at z = offhandGrip (handle is long enough for 0.17 .. 0.30 m below).",
+  "blade": "[z_base, z_tip] of the damaging part along the weapon axis (glTF +Y), for weapon trails / hit sweeps.",
+  "shield": "upright, facing Blender -Y (glTF +Z), straps side at the origin: attach to the bone `shield_L` with an identity local transform. The forearm lies along X behind the board (elbow toward +X); the fist closes on the rolled grip at gripLocal. Bent shields have their centre slightly in FRONT of the origin plane so that the straight forearm bridges the hollow.",
+  "materials": "engine materials by NAME; vertex color COLOR_0 (linear) carries the albedo tint + wear on every primitive."
+ },
+ "weapons": {
+  "club": {
+   "file": "club.glb",
+   "description": "fire-hardened knotted oak branch",
+   "length": 0.752,
+   "triangles": 494,
+   "materials": [
+    "M_wood_planks",
+    "M_leather"
+   ],
+   "blade": [
+    0.2,
+    0.62
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.126,
+    0.089,
+    0.752
+   ],
+   "bboxMin": [
+    -0.0655,
+    -0.0427,
+    -0.1305
+   ],
+   "bboxMax": [
+    0.0608,
+    0.0464,
+    0.6216
+   ],
+   "bytes": 28500
+  },
+  "sword_rusty": {
+   "file": "sword_rusty.glb",
+   "description": "notched, pitted arming sword eaten by rust",
+   "length": 0.918,
+   "triangles": 494,
+   "materials": [
+    "M_metal_iron",
+    "M_wood_planks",
+    "M_leather"
+   ],
+   "blade": [
+    0.062,
+    0.82
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.173,
+    0.021,
+    0.918
+   ],
+   "bboxMin": [
+    -0.0866,
+    -0.0107,
+    -0.098
+   ],
+   "bboxMax": [
+    0.0866,
+    0.0107,
+    0.82
+   ],
+   "bytes": 24516
+  },
+  "sword_iron": {
+   "file": "sword_iron.glb",
+   "description": "plain militia arming sword, straight guard, wheel pommel",
+   "length": 0.949,
+   "triangles": 310,
+   "materials": [
+    "M_metal_steel",
+    "M_metal_iron",
+    "M_leather"
+   ],
+   "blade": [
+    0.064,
+    0.845
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.188,
+    0.022,
+    0.949
+   ],
+   "bboxMin": [
+    -0.094,
+    -0.0112,
+    -0.1039
+   ],
+   "bboxMax": [
+    0.094,
+    0.0112,
+    0.845
+   ],
+   "bytes": 18484
+  },
+  "sword_steel": {
+   "file": "sword_steel.glb",
+   "description": "fine arming sword, fullered blade, curved guard",
+   "length": 0.999,
+   "triangles": 494,
+   "materials": [
+    "M_metal_steel",
+    "M_leather"
+   ],
+   "blade": [
+    0.066,
+    0.892
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.221,
+    0.026,
+    0.999
+   ],
+   "bboxMin": [
+    -0.1105,
+    -0.0128,
+    -0.1074
+   ],
+   "bboxMax": [
+    0.1105,
+    0.0128,
+    0.892
+   ],
+   "bytes": 28600
+  },
+  "sword_watcher": {
+   "file": "sword_watcher.glb",
+   "description": "knightly sword of the Order of the Ember: engraved blade, flared guard, ember stone in the pommel",
+   "length": 1.019,
+   "triangles": 550,
+   "materials": [
+    "M_metal_steel",
+    "M_metal_gold",
+    "M_leather",
+    "M_ember"
+   ],
+   "blade": [
+    0.068,
+    0.905
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.224,
+    0.033,
+    1.019
+   ],
+   "bboxMin": [
+    -0.112,
+    -0.0164,
+    -0.1138
+   ],
+   "bboxMax": [
+    0.112,
+    0.0164,
+    0.905
+   ],
+   "bytes": 35956
+  },
+  "dagger": {
+   "file": "dagger.glb",
+   "description": "rondel dagger: disc guard and pommel, stiff diamond blade",
+   "length": 0.38,
+   "triangles": 272,
+   "materials": [
+    "M_metal_steel",
+    "M_metal_iron",
+    "M_wood_planks"
+   ],
+   "blade": [
+    0.056,
+    0.322
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.049,
+    0.047,
+    0.38
+   ],
+   "bboxMin": [
+    -0.0245,
+    -0.0233,
+    -0.058
+   ],
+   "bboxMax": [
+    0.0245,
+    0.0233,
+    0.322
+   ],
+   "bytes": 19480
+  },
+  "hatchet": {
+   "file": "hatchet.glb",
+   "description": "small bearded hand axe",
+   "length": 0.595,
+   "triangles": 340,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "blade": [
+    0.29,
+    0.455
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.158,
+    0.034,
+    0.595
+   ],
+   "bboxMin": [
+    -0.034,
+    -0.0172,
+    -0.1403
+   ],
+   "bboxMax": [
+    0.124,
+    0.0172,
+    0.455
+   ],
+   "bytes": 21084
+  },
+  "axe_war": {
+   "file": "axe_war.glb",
+   "description": "one-handed broad war axe with a back spike",
+   "length": 0.797,
+   "triangles": 416,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron",
+    "M_metal_steel"
+   ],
+   "blade": [
+    0.42,
+    0.655
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.265,
+    0.037,
+    0.797
+   ],
+   "bboxMin": [
+    -0.098,
+    -0.0185,
+    -0.142
+   ],
+   "bboxMax": [
+    0.1668,
+    0.0185,
+    0.655
+   ],
+   "bytes": 29876
+  },
+  "mace": {
+   "file": "mace.glb",
+   "description": "flanged mace, iron shaft, leather grip",
+   "length": 0.703,
+   "triangles": 511,
+   "materials": [
+    "M_metal_iron",
+    "M_leather",
+    "M_metal_steel"
+   ],
+   "blade": [
+    0.43,
+    0.585
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.109,
+    0.107,
+    0.703
+   ],
+   "bboxMin": [
+    -0.0544,
+    -0.056,
+    -0.118
+   ],
+   "bboxMax": [
+    0.0548,
+    0.0508,
+    0.585
+   ],
+   "bytes": 34208
+  },
+  "morningstar": {
+   "file": "morningstar.glb",
+   "description": "spiked iron ball on an iron-bound haft",
+   "length": 0.78,
+   "triangles": 454,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron"
+   ],
+   "blade": [
+    0.47,
+    0.64
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.149,
+    0.172,
+    0.78
+   ],
+   "bboxMin": [
+    -0.0745,
+    -0.086,
+    -0.14
+   ],
+   "bboxMax": [
+    0.0745,
+    0.086,
+    0.64
+   ],
+   "bytes": 36804
+  },
+  "axe_woodcutter": {
+   "file": "axe_woodcutter.glb",
+   "description": "long two-handed felling axe",
+   "length": 1.25,
+   "triangles": 356,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "blade": [
+    0.71,
+    0.87
+   ],
+   "twoHanded": true,
+   "offhandGrip": -0.25,
+   "size": [
+    0.229,
+    0.041,
+    1.25
+   ],
+   "bboxMin": [
+    -0.0502,
+    -0.0205,
+    -0.3801
+   ],
+   "bboxMax": [
+    0.1788,
+    0.0205,
+    0.87
+   ],
+   "bytes": 21284
+  },
+  "claymore": {
+   "file": "claymore.glb",
+   "description": "two-handed greatsword, long ricasso, down-swept guard",
+   "length": 1.499,
+   "triangles": 530,
+   "materials": [
+    "M_metal_steel",
+    "M_leather"
+   ],
+   "blade": [
+    0.3,
+    1.165
+   ],
+   "twoHanded": true,
+   "offhandGrip": -0.22,
+   "size": [
+    0.395,
+    0.025,
+    1.499
+   ],
+   "bboxMin": [
+    -0.1975,
+    -0.0125,
+    -0.3338
+   ],
+   "bboxMax": [
+    0.1975,
+    0.0125,
+    1.165
+   ],
+   "bytes": 32948
+  },
+  "axe_great": {
+   "file": "axe_great.glb",
+   "description": "great double-bladed bearded battle axe",
+   "length": 1.45,
+   "triangles": 558,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron",
+    "M_metal_steel"
+   ],
+   "blade": [
+    0.66,
+    1.05
+   ],
+   "twoHanded": true,
+   "offhandGrip": -0.25,
+   "size": [
+    0.465,
+    0.045,
+    1.45
+   ],
+   "bboxMin": [
+    -0.2326,
+    -0.0223,
+    -0.4
+   ],
+   "bboxMax": [
+    0.2326,
+    0.0223,
+    1.05
+   ],
+   "bytes": 36008
+  },
+  "hammer_war": {
+   "file": "hammer_war.glb",
+   "description": "two-handed war hammer, square head and back spike",
+   "length": 1.345,
+   "triangles": 510,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron",
+    "M_metal_steel"
+   ],
+   "blade": [
+    0.8,
+    0.965
+   ],
+   "twoHanded": true,
+   "offhandGrip": -0.25,
+   "size": [
+    0.319,
+    0.07,
+    1.345
+   ],
+   "bboxMin": [
+    -0.1846,
+    -0.0351,
+    -0.38
+   ],
+   "bboxMax": [
+    0.1339,
+    0.0351,
+    0.9655
+   ],
+   "bytes": 39340
+  },
+  "sword_fang": {
+   "file": "sword_fang.glb",
+   "description": "curved blade carved from a giant wolf fang, leather-wrapped grip",
+   "length": 0.916,
+   "triangles": 453,
+   "materials": [
+    "M_bone",
+    "M_leather"
+   ],
+   "blade": [
+    0.085,
+    0.789
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.164,
+    0.035,
+    0.916
+   ],
+   "bboxMin": [
+    -0.1036,
+    -0.0173,
+    -0.127
+   ],
+   "bboxMax": [
+    0.0601,
+    0.0173,
+    0.7894
+   ],
+   "bytes": 26368
+  },
+  "greatsword_drowned": {
+   "file": "greatsword_drowned.glb",
+   "description": "huge corroded greatsword from the drowned crypts: barnacles, verdigris, teal crystal shard in the guard",
+   "length": 1.75,
+   "triangles": 592,
+   "materials": [
+    "M_metal_iron",
+    "M_metal_bronze",
+    "M_leather",
+    "M_crystal",
+    "M_bone"
+   ],
+   "blade": [
+    0.135,
+    1.35
+   ],
+   "twoHanded": true,
+   "offhandGrip": -0.24,
+   "size": [
+    0.332,
+    0.092,
+    1.75
+   ],
+   "bboxMin": [
+    -0.1661,
+    -0.046,
+    -0.4
+   ],
+   "bboxMax": [
+    0.1661,
+    0.046,
+    1.35
+   ],
+   "bytes": 40392
+  },
+  "hammer_colossus": {
+   "file": "hammer_colossus.glb",
+   "description": "great hammer of the Colossus: a jagged block of ice bound in iron",
+   "length": 1.496,
+   "triangles": 598,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron",
+    "M_ice"
+   ],
+   "blade": [
+    0.77,
+    1.1
+   ],
+   "twoHanded": true,
+   "offhandGrip": -0.26,
+   "size": [
+    0.491,
+    0.214,
+    1.496
+   ],
+   "bboxMin": [
+    -0.2417,
+    -0.1095,
+    -0.4
+   ],
+   "bboxMax": [
+    0.2495,
+    0.1043,
+    1.0963
+   ],
+   "bytes": 48048
+  },
+  "sword_dawn": {
+   "file": "sword_dawn.glb",
+   "description": "royal sword \"Aubeclat\": long elegant blade, gold sun-ray guard, crystal shard pommel, crystal vein in the fuller",
+   "length": 1.1,
+   "triangles": 556,
+   "materials": [
+    "M_metal_steel",
+    "M_crystal",
+    "M_metal_gold",
+    "M_leather"
+   ],
+   "blade": [
+    0.074,
+    0.975
+   ],
+   "twoHanded": false,
+   "offhandGrip": null,
+   "size": [
+    0.241,
+    0.033,
+    1.1
+   ],
+   "bboxMin": [
+    -0.1207,
+    -0.0164,
+    -0.125
+   ],
+   "bboxMax": [
+    0.1207,
+    0.0164,
+    0.975
+   ],
+   "bytes": 40732
+  }
+ },
+ "shields": {
+  "shield_wood": {
+   "file": "shield_wood.glb",
+   "description": "round planked targe, iron boss, rawhide rim (0.62 m)",
+   "triangles": 673,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron"
+   ],
+   "size": [
+    0.646,
+    0.164,
+    0.646
+   ],
+   "bboxMin": [
+    -0.3232,
+    -0.066,
+    -0.3232
+   ],
+   "bboxMax": [
+    0.3232,
+    0.098,
+    0.3232
+   ],
+   "center": [
+    0.0,
+    0.016,
+    0.0
+   ],
+   "gripLocal": [
+    -0.175,
+    0.075,
+    0.0
+   ],
+   "shape": "round",
+   "diameter": 0.62,
+   "bytes": 45532
+  },
+  "shield_iron": {
+   "file": "shield_iron.glb",
+   "description": "heater shield, iron rim and bars, scraped-off heraldry (0.55 x 0.75 m)",
+   "triangles": 694,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_leather"
+   ],
+   "size": [
+    0.586,
+    0.14,
+    0.787
+   ],
+   "bboxMin": [
+    -0.2931,
+    -0.0421,
+    -0.3689
+   ],
+   "bboxMax": [
+    0.2931,
+    0.0979,
+    0.4178
+   ],
+   "center": [
+    0.0,
+    0.028,
+    0.024
+   ],
+   "gripLocal": [
+    -0.175,
+    0.075,
+    0.0
+   ],
+   "shape": "heater",
+   "width": 0.55,
+   "height": 0.75,
+   "bytes": 44636
+  },
+  "shield_watcher": {
+   "file": "shield_watcher.glb",
+   "description": "large steel-faced heater of the Order of the Ember, embossed flame emblem (0.6 x 0.9 m)",
+   "triangles": 584,
+   "materials": [
+    "M_metal_steel",
+    "M_wood_planks",
+    "M_metal_gold",
+    "M_leather",
+    "M_metal_iron"
+   ],
+   "size": [
+    0.641,
+    0.152,
+    0.943
+   ],
+   "bboxMin": [
+    -0.3205,
+    -0.054,
+    -0.5029
+   ],
+   "bboxMax": [
+    0.3205,
+    0.098,
+    0.4398
+   ],
+   "center": [
+    0.0,
+    0.022,
+    -0.032
+   ],
+   "gripLocal": [
+    -0.175,
+    0.075,
+    0.0
+   ],
+   "shape": "heater",
+   "width": 0.6,
+   "height": 0.9,
+   "bytes": 43280
+  },
+  "shield_kite": {
+   "file": "shield_kite.glb",
+   "description": "kite shield, leather-bound planks, faded sun emblem (0.55 x 1.05 m)",
+   "triangles": 669,
+   "materials": [
+    "M_wood_planks",
+    "M_leather",
+    "M_metal_iron"
+   ],
+   "size": [
+    0.579,
+    0.175,
+    1.093
+   ],
+   "bboxMin": [
+    -0.2894,
+    -0.0773,
+    -0.6967
+   ],
+   "bboxMax": [
+    0.2894,
+    0.0978,
+    0.3967
+   ],
+   "center": [
+    0.0,
+    0.01,
+    -0.15
+   ],
+   "gripLocal": [
+    -0.175,
+    0.075,
+    0.0
+   ],
+   "shape": "kite",
+   "width": 0.55,
+   "height": 1.05,
+   "bytes": 42684
+  }
+ }
+}

@@ -1,0 +1,5772 @@
+{
+ "pack": "world (citadel of Aubeclair, ruins, sacred sites, biome set dressing)",
+ "generator": "tools/blender/world_build.py (+ world_kit / world_castle / world_castle2 / world_castle3 / world_sacred / world_wild / world_wild2, built on arch_kit); rebuild one asset: blender -b --factory-startup -P tools/blender/world_build.py -- <name>",
+ "units": "meters",
+ "coords": "All 'pos', 'size', 'bounds_*' and 'footprint*' values are in authoring space: X = right, Y = back, Z = up, fronts / doors face -Y, origin = centre of the footprint on the ground. three.js position = [x, z, -y] and is also given as 'pos_gltf'. Collider / walkable 'size' is the full box size [x, y, z] before 'rot_z' (radians around the vertical axis).",
+ "footprint": "'footprint' = [x, y] rectangle centred on the origin to keep clear / flatten (static mesh extent + ground anchors + 0.3 m margin). 'footprint_rect' = exact [min x, min y, max x, max y] of the static mesh. 'below_ground' = how far the mesh goes below z = 0 (pieces made to sink into uneven terrain).",
+ "node_types": {
+  "collider": "COL_* invisible box, blocks characters",
+  "walkable": "WALK_* invisible box, stand on its top",
+  "anchor": "ANCHOR_* gameplay anchor (rest, boss, gate, loot, interact, door, npc, seat)",
+  "fire": "FIRE_* flame + flickering light",
+  "smoke": "SMOKE_* smoke",
+  "glow": "GLOW_* soft point light (cold cyan for crystals, warm for GLOW_ember, violet for GLOW_veins)",
+  "rotating_mesh": "ROT_* separate mesh, origin = pivot"
+ },
+ "materials": "Only contract material names are used (no new material). Every mesh has COLOR_0 (tint x baked AO, ground dirt, damp base, moss on tops and near the ground, soot) and world-scale TEXCOORD_0 (2 m tiles for M_stone_brick / M_stone_wall / M_cobble / M_wood_planks / M_roof_tiles / M_thatch, 4 m for M_rock, 1 m for bark, 0.5 m for detail materials). Cloth (banners, rags, webs, sails) is modelled double sided, so FrontSide materials are fine. Emissive materials: COLOR_0 is the intended tint and is NOT darkened by AO - M_rune_glow: ember orange (#ffb057) on the shrine / brazier_stone / cult_altar, pale cyan (#9fe9ff) on standing stones / dolmen / lore_stele, violet (#b76bff) on bramble_arch; M_crystal: cyan at the base to white at the tips; M_ember: orange / yellow; M_ice and M_obsidian: near white (the material gives the colour). Rune glyphs, arrow slits, cracks and blood are thin quads 1 - 2.5 cm proud of the surface (no z-fighting at gameplay distances).",
+ "groups": {
+  "citadel": [
+   "castle_wall",
+   "castle_wall_ruin_a",
+   "castle_wall_ruin_b",
+   "castle_tower",
+   "castle_tower_ruin",
+   "castle_gate",
+   "castle_keep",
+   "castle_stairs",
+   "floor_slab",
+   "pillar",
+   "pillar_broken",
+   "arch_ruin",
+   "throne",
+   "statue_knight",
+   "statue_broken",
+   "brazier_stone"
+  ],
+  "sacred": [
+   "shrine",
+   "standing_stone_a",
+   "standing_stone_b",
+   "standing_stone_c",
+   "dolmen",
+   "lore_stele",
+   "gravestone_a",
+   "gravestone_b",
+   "gravestone_c",
+   "grave_cross",
+   "sarcophagus",
+   "chest",
+   "chest_ornate",
+   "crystal_small",
+   "crystal_cluster",
+   "crystal_giant"
+  ],
+  "bandits": [
+   "barricade",
+   "cage_hanging",
+   "skull_pike",
+   "bone_pile",
+   "ruin_house",
+   "ruin_wall_a",
+   "ruin_wall_b",
+   "ruin_tower"
+  ],
+  "forest": [
+   "spider_cocoon",
+   "egg_sacs",
+   "bramble_arch",
+   "cave_mouth"
+  ],
+  "swamp": [
+   "swamp_hut",
+   "sunken_boat",
+   "drowned_chapel"
+  ],
+  "mountain": [
+   "ice_spikes_a",
+   "ice_spikes_b",
+   "frost_cairn"
+  ],
+  "ash": [
+   "obsidian_spire_a",
+   "obsidian_spire_b",
+   "cult_altar",
+   "cult_banner"
+  ],
+  "coast": [
+   "lighthouse",
+   "shipwreck"
+  ]
+ },
+ "missing": [],
+ "tri_total": 39024,
+ "assets": {
+  "castle_wall": {
+   "file": "castle_wall.glb",
+   "group": "citadel",
+   "description": "Curtain wall segment, 8 m long (along X, tiles end to end), 2 m thick, wall-walk at 5.3 m, crenellated parapet on corbels to 7 m, battered base, outside = -Y",
+   "size": [
+    8,
+    2.4,
+    7.8
+   ],
+   "bounds_min": [
+    -4,
+    -1.35,
+    -0.8
+   ],
+   "bounds_max": [
+    4,
+    1.05,
+    7
+   ],
+   "tris": 544,
+   "tri_budget": 900,
+   "materials": [
+    "M_stone_brick"
+   ],
+   "footprint": [
+    8.6,
+    3.3
+   ],
+   "footprint_rect": [
+    -4,
+    -1.35,
+    4,
+    1.05
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_parapet_back",
+     "type": "collider",
+     "pos": [
+      0,
+      0.825,
+      5.7
+     ],
+     "size": [
+      8,
+      0.35,
+      0.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      5.7,
+      -0.825
+     ]
+    },
+    {
+     "name": "COL_parapet_front",
+     "type": "collider",
+     "pos": [
+      0,
+      -1,
+      6.15
+     ],
+     "size": [
+      8,
+      0.5,
+      1.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      6.15,
+      1
+     ]
+    },
+    {
+     "name": "COL_wall",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.1,
+      2.25
+     ],
+     "size": [
+      8,
+      2.2,
+      6.1
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      2.25,
+      0.1
+     ]
+    },
+    {
+     "name": "WALK_walk",
+     "type": "walkable",
+     "pos": [
+      0,
+      -0.05,
+      5.15
+     ],
+     "size": [
+      8,
+      1.4,
+      0.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      5.15,
+      0.05
+     ]
+    }
+   ],
+   "notes": "Runs along X, exactly 8.0 m, tiles end to end; outside (battered face, corbelled parapet) = -Y. Wall-walk top z = 5.3 (WALK_walk, 1.15 m wide between the parapets), merlon tops z = 7.0. Goes 0.8 m below ground. COL_wall stops at the wall-walk; COL_parapet_front / _back keep the player on it. Same wall line as castle_gate (its side faces are 5.7 m deep, centre the wall on y = 0 of the gate) and castle_tower (overlap the tower by ~1 m)."
+  },
+  "castle_wall_ruin_a": {
+   "file": "castle_wall_ruin_a.glb",
+   "group": "citadel",
+   "description": "Ruined curtain wall, 8 m (along X): full height with parapet at the -X end, broken down in steps to 2 m at the +X end, rubble at its foot. Tiles with castle_wall (-X) and castle_wall_ruin_b (+X)",
+   "size": [
+    8.14,
+    6.95,
+    7.8
+   ],
+   "bounds_min": [
+    -4,
+    -3.86,
+    -0.8
+   ],
+   "bounds_max": [
+    4.14,
+    3.09,
+    7
+   ],
+   "tris": 686,
+   "tri_budget": 1200,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall"
+   ],
+   "footprint": [
+    8.9,
+    8.3
+   ],
+   "footprint_rect": [
+    -4,
+    -3.86,
+    4.14,
+    3.09
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_wall",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.1,
+      1.2
+     ],
+     "size": [
+      8,
+      2.2,
+      4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.2,
+      0.1
+     ]
+    },
+    {
+     "name": "COL_wall_high",
+     "type": "collider",
+     "pos": [
+      -2.7,
+      -0.125,
+      5.1
+     ],
+     "size": [
+      2.6,
+      2.25,
+      3.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.7,
+      5.1,
+      0.125
+     ]
+    }
+   ],
+   "notes": "Same line / length as castle_wall. Full section at x = -4 (tiles with castle_wall), 2.0 m stump at x = +4 (tiles with the -X end of castle_wall_ruin_b; mirror it by rotating 180 deg if you need the other handedness, the outside then faces +Y). Not climbable."
+  },
+  "castle_wall_ruin_b": {
+   "file": "castle_wall_ruin_b.glb",
+   "group": "citadel",
+   "description": "Ruined curtain wall, 8 m (along X): 2 m stump at the -X end, walkable breach (x = -1.7 .. 0.6) over a rubble ramp, rising back to full height with parapet at the +X end",
+   "size": [
+    8,
+    6.04,
+    7.8
+   ],
+   "bounds_min": [
+    -4,
+    -3.07,
+    -0.8
+   ],
+   "bounds_max": [
+    4,
+    2.96,
+    7
+   ],
+   "tris": 654,
+   "tri_budget": 1200,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall"
+   ],
+   "footprint": [
+    8.6,
+    6.7
+   ],
+   "footprint_rect": [
+    -4,
+    -3.07,
+    4,
+    2.96
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -2.875,
+      -0.1,
+      0.85
+     ],
+     "size": [
+      2.25,
+      2.2,
+      3.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.875,
+      0.85,
+      0.1
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      2.325,
+      -0.1,
+      1.6
+     ],
+     "size": [
+      3.35,
+      2.2,
+      4.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.325,
+      1.6,
+      0.1
+     ]
+    },
+    {
+     "name": "COL_right_high",
+     "type": "collider",
+     "pos": [
+      3,
+      -0.125,
+      5.5
+     ],
+     "size": [
+      2,
+      2.25,
+      3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3,
+      5.5,
+      0.125
+     ]
+    },
+    {
+     "name": "WALK_breach_a",
+     "type": "walkable",
+     "pos": [
+      -0.55,
+      0,
+      -0.1
+     ],
+     "size": [
+      2.4,
+      5.2,
+      0.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.55,
+      -0.1,
+      0
+     ]
+    },
+    {
+     "name": "WALK_breach_b",
+     "type": "walkable",
+     "pos": [
+      -0.55,
+      0,
+      0.125
+     ],
+     "size": [
+      2.4,
+      2.6,
+      0.65
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.55,
+      0.125,
+      0
+     ]
+    }
+   ],
+   "notes": "Same line / length as castle_wall. 2.0 m stump at x = -4, full section at x = +4. The breach x = -1.75 .. 0.65 is passable: WALK_breach_a (top 0.2) + WALK_breach_b (top 0.45) over the rubble ramp, COL_left / COL_right on both sides."
+  },
+  "castle_tower": {
+   "file": "castle_tower.glb",
+   "group": "citadel",
+   "description": "Round tower, 6 m diameter, 14.3 m high: battered base, arrow slits, machicolated crenellated parapet on corbels, half-collapsed conical slate roof showing its rafters, door case on the courtyard side (+Y), tattered banner",
+   "size": [
+    8.22,
+    8.37,
+    15.8
+   ],
+   "bounds_min": [
+    -4.22,
+    -4.27,
+    -0.9
+   ],
+   "bounds_max": [
+    4.0,
+    4.1,
+    14.9
+   ],
+   "tris": 1425,
+   "tri_budget": 2500,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall",
+    "M_roof_tiles",
+    "M_wood_planks",
+    "M_metal_iron",
+    "M_cloth"
+   ],
+   "footprint": [
+    9.0,
+    9.1
+   ],
+   "footprint_rect": [
+    -4.22,
+    -4.27,
+    4.0,
+    4.1
+   ],
+   "below_ground": 0.9,
+   "nodes": [
+    {
+     "name": "COL_tower_1",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      5.65
+     ],
+     "size": [
+      6.4,
+      2.66,
+      11.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      5.65,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_2",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      5.65
+     ],
+     "size": [
+      6.4,
+      2.66,
+      11.3
+     ],
+     "rot_z": 0.7854,
+     "pos_gltf": [
+      0,
+      5.65,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_3",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      5.65
+     ],
+     "size": [
+      6.4,
+      2.66,
+      11.3
+     ],
+     "rot_z": 1.5708,
+     "pos_gltf": [
+      0,
+      5.65,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_4",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      5.65
+     ],
+     "size": [
+      6.4,
+      2.66,
+      11.3
+     ],
+     "rot_z": 2.3562,
+     "pos_gltf": [
+      0,
+      5.65,
+      0
+     ]
+    }
+   ],
+   "notes": "Outside = -Y (banner, main arrow slit), door case on +Y (courtyard). Shaft radius 3.0 m (3.34 at ground, battered), parapet radius 3.54, hoarding beam stubs reach 4.3 m. Roof apex 14.3 m, iron spike 14.9 m. Goes 0.9 m below ground. 4 COL_tower_* boxes (6.4 x 2.66, rotated 0/45/90/135 deg) form an octagon. Not enterable. Roof = M_roof_tiles with a blue-grey vertex colour (slate)."
+  },
+  "castle_tower_ruin": {
+   "file": "castle_tower_ruin.glb",
+   "group": "citadel",
+   "description": "The same round tower collapsed at half height: jagged hollow shell 4 - 8.3 m with an exposed rubble core, filled with debris and broken beams, big rubble spill on the front-left side",
+   "size": [
+    9.72,
+    9.92,
+    9.2
+   ],
+   "bounds_min": [
+    -6.18,
+    -5.82,
+    -0.9
+   ],
+   "bounds_max": [
+    3.54,
+    4.1,
+    8.3
+   ],
+   "tris": 1043,
+   "tri_budget": 2000,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    13.0,
+    12.2
+   ],
+   "footprint_rect": [
+    -6.18,
+    -5.82,
+    3.54,
+    4.1
+   ],
+   "below_ground": 0.9,
+   "nodes": [
+    {
+     "name": "COL_spill",
+     "type": "collider",
+     "pos": [
+      -3.7,
+      -2.9,
+      0.65
+     ],
+     "size": [
+      3,
+      3,
+      1.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.7,
+      0.65,
+      2.9
+     ]
+    },
+    {
+     "name": "COL_tower_1",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      3
+     ],
+     "size": [
+      6.4,
+      2.66,
+      6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      3,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_2",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      3
+     ],
+     "size": [
+      6.4,
+      2.66,
+      6
+     ],
+     "rot_z": 0.7854,
+     "pos_gltf": [
+      0,
+      3,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_3",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      3
+     ],
+     "size": [
+      6.4,
+      2.66,
+      6
+     ],
+     "rot_z": 1.5708,
+     "pos_gltf": [
+      0,
+      3,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_4",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      3
+     ],
+     "size": [
+      6.4,
+      2.66,
+      6
+     ],
+     "rot_z": 2.3562,
+     "pos_gltf": [
+      0,
+      3,
+      0
+     ]
+    }
+   ],
+   "notes": "Same footprint / base as castle_tower. Hollow shell (inner faces + debris floor at ~3.4 m, not enterable). Rubble spill towards -X/-Y (COL_spill)."
+  },
+  "castle_gate": {
+   "file": "castle_gate.glb",
+   "group": "citadel",
+   "description": "Gatehouse of the citadel, 10 m wide, 9 m high, 5.7 m deep: pointed archway 3.6 m wide x 4.5 m high (open, passable), raised iron portcullis, twin buttress-turrets, machicolated lintel, crenellated top, shattered sun emblem, banners",
+   "size": [
+    12.13,
+    8.6,
+    9.8
+   ],
+   "bounds_min": [
+    -6.85,
+    -4.35,
+    -0.8
+   ],
+   "bounds_max": [
+    5.28,
+    4.25,
+    9
+   ],
+   "tris": 1744,
+   "tri_budget": 3000,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall",
+    "M_metal_iron",
+    "M_wood_planks",
+    "M_metal_gold",
+    "M_cloth"
+   ],
+   "footprint": [
+    14.3,
+    9.3
+   ],
+   "footprint_rect": [
+    -6.85,
+    -4.35,
+    5.28,
+    4.25
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "ANCHOR_gate",
+     "type": "anchor",
+     "pos": [
+      0,
+      0,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -3.4,
+      -0.35,
+      4.1
+     ],
+     "size": [
+      3.2,
+      5.7,
+      9.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.4,
+      4.1,
+      0.35
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      3.4,
+      -0.35,
+      4.1
+     ],
+     "size": [
+      3.2,
+      5.7,
+      9.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.4,
+      4.1,
+      0.35
+     ]
+    }
+   ],
+   "notes": "Front = -Y. Passage along Y through x = -1.8 .. 1.8, clear height 2.7 m at the jambs, 4.5 m at the apex; the raised portcullis hangs above z = 2.98 at y = -1.75 (M_metal_iron). ANCHOR_gate = centre of the passage on the ground. COL_left / COL_right only (nothing over the passage). Roof terrace z = 7.3 is not walkable (no WALK). Goes 0.8 m below ground. Banners: M_cloth, double sided."
+  },
+  "castle_keep": {
+   "file": "castle_keep.glb",
+   "group": "citadel",
+   "description": "Ruined great keep of Aubeclair, 16 x 14 m, walls 14 m (parapet 15.7 m), square corner turrets up to 18 m; the front-right corner and its turret have collapsed into a rubble mound, hollow shell with tall empty lancet windows, big pointed doorway (front, -Y) sealed with rubble",
+   "size": [
+    20.27,
+    17.89,
+    19.05
+   ],
+   "bounds_min": [
+    -8.4,
+    -10.49,
+    -0.9
+   ],
+   "bounds_max": [
+    11.87,
+    7.4,
+    18.15
+   ],
+   "tris": 5162,
+   "tri_budget": 6000,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall",
+    "M_metal_gold",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    24.3,
+    21.6
+   ],
+   "footprint_rect": [
+    -8.4,
+    -10.49,
+    11.87,
+    7.4
+   ],
+   "below_ground": 0.9,
+   "nodes": [
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      7.85
+     ],
+     "size": [
+      14,
+      12,
+      15.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      7.85,
+      0
+     ]
+    },
+    {
+     "name": "COL_collapse",
+     "type": "collider",
+     "pos": [
+      7,
+      -6.1,
+      1.6
+     ],
+     "size": [
+      5.2,
+      5,
+      3.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      7,
+      1.6,
+      6.1
+     ]
+    },
+    {
+     "name": "COL_steps",
+     "type": "collider",
+     "pos": [
+      0,
+      -6.75,
+      0.45
+     ],
+     "size": [
+      4.8,
+      1.5,
+      0.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.45,
+      6.75
+     ]
+    },
+    {
+     "name": "COL_turret_bl",
+     "type": "collider",
+     "pos": [
+      -6.5,
+      5.5,
+      9
+     ],
+     "size": [
+      3,
+      3,
+      18
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.5,
+      9,
+      -5.5
+     ]
+    },
+    {
+     "name": "COL_turret_br",
+     "type": "collider",
+     "pos": [
+      6.5,
+      5.5,
+      9
+     ],
+     "size": [
+      3,
+      3,
+      18
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      6.5,
+      9,
+      -5.5
+     ]
+    },
+    {
+     "name": "COL_turret_fl",
+     "type": "collider",
+     "pos": [
+      -6.5,
+      -5.5,
+      8.8
+     ],
+     "size": [
+      3,
+      3,
+      17.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.5,
+      8.8,
+      5.5
+     ]
+    }
+   ],
+   "notes": "Backdrop building, not enterable: COL_body (14 x 12) + 3 COL_turret_* + COL_collapse (rubble mound over the missing front-right corner) + COL_steps. Front (sealed doorway) = -Y. Interior is modelled as a hollow shell (inner faces, debris, charred beams) because it is visible through the windows and the breach. Goes 0.9 m below ground. Highest point 18 m (back-left turret)."
+  },
+  "castle_stairs": {
+   "file": "castle_stairs.glb",
+   "group": "citadel",
+   "description": "Stone stairs, 4 m wide (Y), rising 3 m over 6 m along +X (12 steps of 0.25 m), low side walls with sloped copings",
+   "size": [
+    6.54,
+    4.1,
+    4.8
+   ],
+   "bounds_min": [
+    -3.54,
+    -2.05,
+    -0.8
+   ],
+   "bounds_max": [
+    3,
+    2.05,
+    4
+   ],
+   "tris": 206,
+   "tri_budget": 700,
+   "materials": [
+    "M_stone_brick"
+   ],
+   "footprint": [
+    7.7,
+    4.7
+   ],
+   "footprint_rect": [
+    -3.54,
+    -2.05,
+    3,
+    2.05
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_side_l1",
+     "type": "collider",
+     "pos": [
+      -2,
+      -1.825,
+      0.6
+     ],
+     "size": [
+      2,
+      0.35,
+      2.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2,
+      0.6,
+      1.825
+     ]
+    },
+    {
+     "name": "COL_side_l2",
+     "type": "collider",
+     "pos": [
+      0,
+      -1.825,
+      1.1
+     ],
+     "size": [
+      2,
+      0.35,
+      3.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.1,
+      1.825
+     ]
+    },
+    {
+     "name": "COL_side_l3",
+     "type": "collider",
+     "pos": [
+      2,
+      -1.825,
+      1.6
+     ],
+     "size": [
+      2,
+      0.35,
+      4.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2,
+      1.6,
+      1.825
+     ]
+    },
+    {
+     "name": "COL_side_r1",
+     "type": "collider",
+     "pos": [
+      -2,
+      1.825,
+      0.6
+     ],
+     "size": [
+      2,
+      0.35,
+      2.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2,
+      0.6,
+      -1.825
+     ]
+    },
+    {
+     "name": "COL_side_r2",
+     "type": "collider",
+     "pos": [
+      0,
+      1.825,
+      1.1
+     ],
+     "size": [
+      2,
+      0.35,
+      3.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.1,
+      -1.825
+     ]
+    },
+    {
+     "name": "COL_side_r3",
+     "type": "collider",
+     "pos": [
+      2,
+      1.825,
+      1.6
+     ],
+     "size": [
+      2,
+      0.35,
+      4.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2,
+      1.6,
+      -1.825
+     ]
+    },
+    {
+     "name": "WALK_step_01",
+     "type": "walkable",
+     "pos": [
+      -2.75,
+      0,
+      0
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.75,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_02",
+     "type": "walkable",
+     "pos": [
+      -2.25,
+      0,
+      0.25
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.25,
+      0.25,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_03",
+     "type": "walkable",
+     "pos": [
+      -1.75,
+      0,
+      0.5
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.75,
+      0.5,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_04",
+     "type": "walkable",
+     "pos": [
+      -1.25,
+      0,
+      0.75
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.25,
+      0.75,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_05",
+     "type": "walkable",
+     "pos": [
+      -0.75,
+      0,
+      1
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.75,
+      1,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_06",
+     "type": "walkable",
+     "pos": [
+      -0.25,
+      0,
+      1.25
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.25,
+      1.25,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_07",
+     "type": "walkable",
+     "pos": [
+      0.25,
+      0,
+      1.5
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.25,
+      1.5,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_08",
+     "type": "walkable",
+     "pos": [
+      0.75,
+      0,
+      1.75
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.75,
+      1.75,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_09",
+     "type": "walkable",
+     "pos": [
+      1.25,
+      0,
+      2
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.25,
+      2,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_10",
+     "type": "walkable",
+     "pos": [
+      1.75,
+      0,
+      2.25
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.75,
+      2.25,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_11",
+     "type": "walkable",
+     "pos": [
+      2.25,
+      0,
+      2.5
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.25,
+      2.5,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_12",
+     "type": "walkable",
+     "pos": [
+      2.75,
+      0,
+      2.75
+     ],
+     "size": [
+      0.5,
+      3.3,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.75,
+      2.75,
+      0
+     ]
+    }
+   ],
+   "notes": "Rise along +X: bottom edge x = -3 (z = 0), top edge x = +3 (z = 3.0). 12 WALK_step_NN boxes (0.5 m run, 0.25 m rise, 3.3 m wide between the side walls). 6 COL_side_* boxes (stepped) cover the string walls. The high end is a blank wall: butt it against floor_slab stacks / a terrace."
+  },
+  "floor_slab": {
+   "file": "floor_slab.glb",
+   "group": "citadel",
+   "description": "Paved platform 8 x 8 m, 0.3 m thick: cracked, uneven flagstones on a rubble bed (skirt goes down to z = -0.6)",
+   "size": [
+    8,
+    8,
+    0.99
+   ],
+   "bounds_min": [
+    -4,
+    -4,
+    -0.6
+   ],
+   "bounds_max": [
+    4,
+    4,
+    0.39
+   ],
+   "tris": 76,
+   "tri_budget": 300,
+   "materials": [
+    "M_stone_wall",
+    "M_cobble",
+    "M_stone_brick"
+   ],
+   "footprint": [
+    8.6,
+    8.6
+   ],
+   "footprint_rect": [
+    -4,
+    -4,
+    4,
+    4
+   ],
+   "below_ground": 0.6,
+   "nodes": [
+    {
+     "name": "WALK_top",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      0
+     ],
+     "size": [
+      8,
+      8,
+      0.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "notes": "Top z = 0.3 (WALK_top). Rubble skirt down to z = -0.6 so it can sit on uneven ground or be stacked as a terrace. One corner slab (+X, -Y) is missing on purpose. Top uses M_cobble, kerb M_stone_brick."
+  },
+  "pillar": {
+   "file": "pillar.glb",
+   "group": "citadel",
+   "description": "Gothic pier, 6 m: plinth, moulded base, octagonal shaft with four colonnettes, bell capital and abacus",
+   "size": [
+    1.12,
+    1.12,
+    6.3
+   ],
+   "bounds_min": [
+    -0.56,
+    -0.56,
+    -0.3
+   ],
+   "bounds_max": [
+    0.56,
+    0.56,
+    6
+   ],
+   "tris": 256,
+   "tri_budget": 300,
+   "materials": [
+    "M_stone_brick"
+   ],
+   "footprint": [
+    1.7,
+    1.7
+   ],
+   "footprint_rect": [
+    -0.56,
+    -0.56,
+    0.56,
+    0.56
+   ],
+   "below_ground": 0.3,
+   "nodes": [
+    {
+     "name": "COL_pillar",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      3
+     ],
+     "size": [
+      0.9,
+      0.9,
+      6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      3,
+      0
+     ]
+    }
+   ],
+   "notes": "COL_pillar 0.9 x 0.9. Abacus top z = 6.0: a vault / arch_ruin springing can sit on it."
+  },
+  "pillar_broken": {
+   "file": "pillar_broken.glb",
+   "group": "citadel",
+   "description": "Broken pier: 2.5 m stump with a jagged top, fallen drums and a capital fragment",
+   "size": [
+    3.33,
+    2.95,
+    2.82
+   ],
+   "bounds_min": [
+    -1.53,
+    -1.77,
+    -0.3
+   ],
+   "bounds_max": [
+    1.79,
+    1.18,
+    2.52
+   ],
+   "tris": 340,
+   "tri_budget": 350,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall"
+   ],
+   "footprint": [
+    4.2,
+    4.1
+   ],
+   "footprint_rect": [
+    -1.53,
+    -1.77,
+    1.79,
+    1.18
+   ],
+   "below_ground": 0.3,
+   "nodes": [
+    {
+     "name": "COL_pillar",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.25
+     ],
+     "size": [
+      0.9,
+      0.9,
+      2.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.25,
+      0
+     ]
+    }
+   ]
+  },
+  "arch_ruin": {
+   "file": "arch_ruin.glb",
+   "group": "citadel",
+   "description": "Free-standing pointed arch from a vanished hall, 5 m high, 4 m wide passable opening (3.9 m headroom at the axis), broken wall stubs, buttresses",
+   "size": [
+    7.16,
+    4.31,
+    5.7
+   ],
+   "bounds_min": [
+    -3.2,
+    -2.3,
+    -0.7
+   ],
+   "bounds_max": [
+    3.96,
+    2.01,
+    5
+   ],
+   "tris": 486,
+   "tri_budget": 500,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall"
+   ],
+   "footprint": [
+    8.5,
+    5.2
+   ],
+   "footprint_rect": [
+    -3.2,
+    -2.3,
+    3.96,
+    2.01
+   ],
+   "below_ground": 0.7,
+   "nodes": [
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -2.6,
+      0,
+      1.95
+     ],
+     "size": [
+      1.2,
+      1.9,
+      5.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.6,
+      1.95,
+      0
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      2.6,
+      0,
+      1.75
+     ],
+     "size": [
+      1.2,
+      1.9,
+      4.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.6,
+      1.75,
+      0
+     ]
+    }
+   ],
+   "notes": "Passage along Y between x = -2.0 and 2.0 (springing 2.45 m, apex 4.2 m). COL_left / COL_right."
+  },
+  "throne": {
+   "file": "throne.glb",
+   "group": "citadel",
+   "description": "Ruined royal throne of Aubeclair on a three-step dais 5 m wide: stone seat with armrests, 3.9 m carved back with pinnacles and a shattered golden sun, Astre crystal shards growing through seat, back and steps, the fallen crown on a step",
+   "size": [
+    5.19,
+    4.44,
+    4.2
+   ],
+   "bounds_min": [
+    -2.66,
+    -2.04,
+    -0.3
+   ],
+   "bounds_max": [
+    2.53,
+    2.39,
+    3.9
+   ],
+   "tris": 971,
+   "tri_budget": 1800,
+   "materials": [
+    "M_stone_brick",
+    "M_cloth",
+    "M_stone_wall",
+    "M_metal_gold",
+    "M_crystal",
+    "M_metal_iron",
+    "M_bone"
+   ],
+   "footprint": [
+    5.9,
+    7.2
+   ],
+   "footprint_rect": [
+    -2.66,
+    -2.04,
+    2.53,
+    2.39
+   ],
+   "below_ground": 0.3,
+   "nodes": [
+    {
+     "name": "ANCHOR_boss",
+     "type": "anchor",
+     "pos": [
+      0,
+      -3.3,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      3.3
+     ]
+    },
+    {
+     "name": "ANCHOR_seat",
+     "type": "anchor",
+     "pos": [
+      0,
+      0.5,
+      1.22
+     ],
+     "pos_gltf": [
+      0,
+      1.22,
+      -0.5
+     ]
+    },
+    {
+     "name": "COL_throne",
+     "type": "collider",
+     "pos": [
+      0.05,
+      0.775,
+      1.85
+     ],
+     "size": [
+      2.3,
+      1.35,
+      3.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      1.85,
+      -0.775
+     ]
+    },
+    {
+     "name": "GLOW_crystal",
+     "type": "glow",
+     "pos": [
+      0.85,
+      0.9,
+      2.3
+     ],
+     "pos_gltf": [
+      0.85,
+      2.3,
+      -0.9
+     ]
+    },
+    {
+     "name": "WALK_dais",
+     "type": "walkable",
+     "pos": [
+      0,
+      0.22,
+      0.4
+     ],
+     "size": [
+      3.32,
+      2.64,
+      0.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.4,
+      -0.22
+     ]
+    },
+    {
+     "name": "WALK_dais_1",
+     "type": "walkable",
+     "pos": [
+      0,
+      -0.15,
+      -0.05
+     ],
+     "size": [
+      5,
+      3.7,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      -0.05,
+      0.15
+     ]
+    },
+    {
+     "name": "WALK_dais_2",
+     "type": "walkable",
+     "pos": [
+      0,
+      0.035,
+      0.2
+     ],
+     "size": [
+      4.16,
+      3.17,
+      0.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.2,
+      -0.035
+     ]
+    }
+   ],
+   "notes": "Front = -Y. Dais steps 0.2 / 0.4 / 0.6 m: WALK_dais_1, WALK_dais_2, WALK_dais (top). ANCHOR_boss = on the floor 1.3 m in front of the first step (boss spawn / arena centre side); ANCHOR_seat = on the seat (z = 1.22) for a seated pose. GLOW_crystal at the big shard. Sun emblem + crown = M_metal_gold. COL_throne covers seat + back + the big crystals."
+  },
+  "statue_knight": {
+   "file": "statue_knight.glb",
+   "group": "citadel",
+   "description": "Stone statue of a knight of Aubeclair, 3.6 m with its plinth: great helm, pauldrons, cape, both gauntlets resting on the pommel of a sword planted between his feet",
+   "size": [
+    1.6,
+    1.6,
+    3.96
+   ],
+   "bounds_min": [
+    -0.8,
+    -0.8,
+    -0.35
+   ],
+   "bounds_max": [
+    0.8,
+    0.8,
+    3.61
+   ],
+   "tris": 1194,
+   "tri_budget": 2500,
+   "materials": [
+    "M_stone_brick",
+    "M_rock"
+   ],
+   "footprint": [
+    2.2,
+    2.2
+   ],
+   "footprint_rect": [
+    -0.8,
+    -0.8,
+    0.8,
+    0.8
+   ],
+   "below_ground": 0.35,
+   "nodes": [
+    {
+     "name": "COL_statue",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.8
+     ],
+     "size": [
+      1.4,
+      1.4,
+      3.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.8,
+      0
+     ]
+    }
+   ],
+   "notes": "Figure 2.76 m on a 0.85 m plinth (total 3.6 m), faces -Y. Statue = M_rock (plain stone), plinth = M_stone_brick."
+  },
+  "statue_broken": {
+   "file": "statue_broken.glb",
+   "group": "citadel",
+   "description": "The same knight statue broken at the waist: legs and half a sword still on the plinth, torso and helm lying face up in front, fragments",
+   "size": [
+    2.89,
+    3.59,
+    2.82
+   ],
+   "bounds_min": [
+    -1.21,
+    -2.41,
+    -0.36
+   ],
+   "bounds_max": [
+    1.68,
+    1.19,
+    2.46
+   ],
+   "tris": 1000,
+   "tri_budget": 1200,
+   "materials": [
+    "M_stone_brick",
+    "M_rock",
+    "M_stone_wall"
+   ],
+   "footprint": [
+    4.0,
+    5.4
+   ],
+   "footprint_rect": [
+    -1.21,
+    -2.41,
+    1.68,
+    1.19
+   ],
+   "below_ground": 0.36,
+   "nodes": [
+    {
+     "name": "COL_statue",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.2
+     ],
+     "size": [
+      1.4,
+      1.4,
+      2.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.2,
+      0
+     ]
+    },
+    {
+     "name": "COL_torso",
+     "type": "collider",
+     "pos": [
+      0.625,
+      -1.65,
+      0.3
+     ],
+     "size": [
+      1.25,
+      1.4,
+      0.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.625,
+      0.3,
+      1.65
+     ]
+    }
+   ],
+   "notes": "Same plinth. COL_statue (plinth + legs) and COL_torso (fallen torso in front)."
+  },
+  "brazier_stone": {
+   "file": "brazier_stone.glb",
+   "group": "citadel",
+   "description": "Ceremonial stone brazier, 1.6 m: octagonal stepped foot, stem, wide carved bowl with glowing coals",
+   "size": [
+    1.37,
+    1.37,
+    1.58
+   ],
+   "bounds_min": [
+    -0.68,
+    -0.68,
+    0
+   ],
+   "bounds_max": [
+    0.68,
+    0.68,
+    1.58
+   ],
+   "tris": 368,
+   "tri_budget": 400,
+   "materials": [
+    "M_stone_brick",
+    "M_rune_glow",
+    "M_ember",
+    "M_rock"
+   ],
+   "footprint": [
+    2.0,
+    2.0
+   ],
+   "footprint_rect": [
+    -0.68,
+    -0.68,
+    0.68,
+    0.68
+   ],
+   "below_ground": -0.0,
+   "nodes": [
+    {
+     "name": "COL_brazier",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.8
+     ],
+     "size": [
+      1.1,
+      1.1,
+      1.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "name": "FIRE_main",
+     "type": "fire",
+     "pos": [
+      0,
+      0,
+      1.62
+     ],
+     "pos_gltf": [
+      0,
+      1.62,
+      0
+     ]
+    }
+   ],
+   "notes": "FIRE_main above the coal bed (z = 1.62). Rune band uses M_rune_glow with an ember-orange vertex colour."
+  },
+  "shrine": {
+   "file": "shrine.glb",
+   "group": "sacred",
+   "description": "Autel de Braise (checkpoint): round two-tier stone dais 3.2 m across with an ember rune ring, carved altar holding an iron bowl of embers, three tall leaning rune stones (ember glyphs inside and outside), an old sword planted in front of the altar, candles and offerings",
+   "size": [
+    5.16,
+    4.65,
+    5.17
+   ],
+   "bounds_min": [
+    -2.44,
+    -1.96,
+    -0.8
+   ],
+   "bounds_max": [
+    2.73,
+    2.69,
+    4.37
+   ],
+   "tris": 1499,
+   "tri_budget": 2500,
+   "materials": [
+    "M_stone_brick",
+    "M_rune_glow",
+    "M_metal_iron",
+    "M_ember",
+    "M_rock",
+    "M_metal_steel",
+    "M_leather",
+    "M_cloth",
+    "M_bone",
+    "M_wood_planks",
+    "M_metal_gold"
+   ],
+   "footprint": [
+    6.1,
+    6.0
+   ],
+   "footprint_rect": [
+    -2.44,
+    -1.96,
+    2.73,
+    2.69
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "ANCHOR_rest",
+     "type": "anchor",
+     "pos": [
+      0,
+      -1.23,
+      0.3
+     ],
+     "pos_gltf": [
+      0,
+      0.3,
+      1.23
+     ]
+    },
+    {
+     "name": "COL_altar",
+     "type": "collider",
+     "pos": [
+      0,
+      0.45,
+      0.725
+     ],
+     "size": [
+      1.14,
+      0.76,
+      1.45
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.725,
+      -0.45
+     ]
+    },
+    {
+     "name": "COL_stone_1",
+     "type": "collider",
+     "pos": [
+      0,
+      2.27,
+      2.175
+     ],
+     "size": [
+      1.05,
+      0.82,
+      4.35
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      2.175,
+      -2.27
+     ]
+    },
+    {
+     "name": "COL_stone_2",
+     "type": "collider",
+     "pos": [
+      -1.967,
+      -1.279,
+      1.85
+     ],
+     "size": [
+      0.98,
+      0.76,
+      3.7
+     ],
+     "rot_z": 2.1293,
+     "pos_gltf": [
+      -1.967,
+      1.85,
+      1.279
+     ]
+    },
+    {
+     "name": "COL_stone_3",
+     "type": "collider",
+     "pos": [
+      2.029,
+      -1.175,
+      1.975
+     ],
+     "size": [
+      0.92,
+      0.8,
+      3.95
+     ],
+     "rot_z": -2.0769,
+     "pos_gltf": [
+      2.029,
+      1.975,
+      1.175
+     ]
+    },
+    {
+     "name": "FIRE_main",
+     "type": "fire",
+     "pos": [
+      0,
+      0.45,
+      1.48
+     ],
+     "pos_gltf": [
+      0,
+      1.48,
+      -0.45
+     ]
+    },
+    {
+     "name": "WALK_dais",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      -0.05
+     ],
+     "size": [
+      2.3,
+      2.3,
+      0.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      -0.05,
+      0
+     ]
+    },
+    {
+     "name": "WALK_dais_b",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      -0.05
+     ],
+     "size": [
+      2.3,
+      2.3,
+      0.7
+     ],
+     "rot_z": 0.7854,
+     "pos_gltf": [
+      0,
+      -0.05,
+      0
+     ]
+    }
+   ],
+   "notes": "Autel de Braise. Front (approach) = -Y. FIRE_main = ember bowl on the altar (z = 1.48). ANCHOR_rest = kneeling spot ON the dais (z = 0.3), 1.3 m in front of the altar face, facing +Y. WALK_dais + WALK_dais_b (same box rotated 45 deg) approximate the round dais top (z = 0.3). Rune stones are 3.7 - 4.35 m high, lean towards the fire and carry M_rune_glow glyphs on both the inner and the outer face (vertex colour = ember orange #ffb057: multiply your rune emissive by COLOR_0). A rune ring is inlaid in the dais. COL_altar + 3 COL_stone_* (rotated boxes)."
+  },
+  "standing_stone_a": {
+   "file": "standing_stone_a.glb",
+   "group": "sacred",
+   "description": "Menhir, 3.2 m, slender and leaning, column of three glowing runes on the front, one on the back",
+   "size": [
+    1.57,
+    0.82,
+    4.02
+   ],
+   "bounds_min": [
+    -0.71,
+    -0.4,
+    -0.8
+   ],
+   "bounds_max": [
+    0.86,
+    0.42,
+    3.22
+   ],
+   "tris": 186,
+   "tri_budget": 300,
+   "materials": [
+    "M_rock",
+    "M_rune_glow"
+   ],
+   "footprint": [
+    2.3,
+    1.4
+   ],
+   "footprint_rect": [
+    -0.71,
+    -0.4,
+    0.86,
+    0.42
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_stone",
+     "type": "collider",
+     "pos": [
+      0.05,
+      -0.025,
+      1.6
+     ],
+     "size": [
+      1.1,
+      0.65,
+      3.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      1.6,
+      0.025
+     ]
+    }
+   ],
+   "notes": "M_rune_glow vertex colour = pale cyan #9fe9ff (old Aubeclair / Astre runes). Goes 0.8 m below ground."
+  },
+  "standing_stone_b": {
+   "file": "standing_stone_b.glb",
+   "group": "sacred",
+   "description": "Menhir, 2.5 m, broad and squat, big eye rune flanked by two small ones",
+   "size": [
+    2.26,
+    1.03,
+    3.3
+   ],
+   "bounds_min": [
+    -1.09,
+    -0.43,
+    -0.8
+   ],
+   "bounds_max": [
+    1.17,
+    0.6,
+    2.5
+   ],
+   "tris": 220,
+   "tri_budget": 300,
+   "materials": [
+    "M_rock",
+    "M_rune_glow"
+   ],
+   "footprint": [
+    2.9,
+    1.8
+   ],
+   "footprint_rect": [
+    -1.09,
+    -0.43,
+    1.17,
+    0.6
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_stone",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      1.25
+     ],
+     "size": [
+      1.6,
+      0.7,
+      2.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.25,
+      0
+     ]
+    }
+   ],
+   "notes": "See standing_stone_a."
+  },
+  "standing_stone_c": {
+   "file": "standing_stone_c.glb",
+   "group": "sacred",
+   "description": "Menhir, 4 m, tall, split by a glowing crack, column of four runes",
+   "size": [
+    1.67,
+    0.96,
+    4.92
+   ],
+   "bounds_min": [
+    -0.86,
+    -0.48,
+    -0.9
+   ],
+   "bounds_max": [
+    0.81,
+    0.48,
+    4.02
+   ],
+   "tris": 228,
+   "tri_budget": 300,
+   "materials": [
+    "M_rock",
+    "M_rune_glow"
+   ],
+   "footprint": [
+    2.3,
+    1.6
+   ],
+   "footprint_rect": [
+    -0.86,
+    -0.48,
+    0.81,
+    0.48
+   ],
+   "below_ground": 0.9,
+   "nodes": [
+    {
+     "name": "COL_stone",
+     "type": "collider",
+     "pos": [
+      -0.05,
+      0.075,
+      2
+     ],
+     "size": [
+      1,
+      0.75,
+      4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.05,
+      2,
+      -0.075
+     ]
+    }
+   ],
+   "notes": "See standing_stone_a; the crack on the +X side and the back is M_rune_glow too."
+  },
+  "dolmen": {
+   "file": "dolmen.glb",
+   "group": "sacred",
+   "description": "Dolmen: three leaning uprights carrying a 3.6 m capstone, chamber open towards -Y (1.75 m clear), rune on the back upright",
+   "size": [
+    3.86,
+    2.98,
+    3.18
+   ],
+   "bounds_min": [
+    -1.94,
+    -1.35,
+    -0.7
+   ],
+   "bounds_max": [
+    1.92,
+    1.62,
+    2.48
+   ],
+   "tris": 372,
+   "tri_budget": 400,
+   "materials": [
+    "M_rock",
+    "M_rune_glow"
+   ],
+   "footprint": [
+    4.5,
+    3.8
+   ],
+   "footprint_rect": [
+    -1.94,
+    -1.35,
+    1.92,
+    1.62
+   ],
+   "below_ground": 0.7,
+   "nodes": [
+    {
+     "name": "COL_back",
+     "type": "collider",
+     "pos": [
+      0.05,
+      1.15,
+      0.95
+     ],
+     "size": [
+      1.7,
+      0.6,
+      1.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      0.95,
+      -1.15
+     ]
+    },
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -1.25,
+      0.1,
+      0.95
+     ],
+     "size": [
+      0.6,
+      1.6,
+      1.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.25,
+      0.95,
+      -0.1
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      1.25,
+      0,
+      0.95
+     ],
+     "size": [
+      0.6,
+      1.6,
+      1.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.25,
+      0.95,
+      0
+     ]
+    }
+   ],
+   "notes": "Chamber open towards -Y, 1.75 m clear under the capstone: characters can stand inside (3 COL boxes on the uprights only)."
+  },
+  "lore_stele": {
+   "file": "lore_stele.glb",
+   "group": "sacred",
+   "description": "Carved lore tablet, 1.7 m: arched slab on a plinth with a sun emblem and five lines of glowing inscription",
+   "size": [
+    1.56,
+    0.66,
+    2.0
+   ],
+   "bounds_min": [
+    -0.68,
+    -0.3,
+    -0.3
+   ],
+   "bounds_max": [
+    0.88,
+    0.36,
+    1.7
+   ],
+   "tris": 229,
+   "tri_budget": 300,
+   "materials": [
+    "M_stone_brick",
+    "M_rune_glow",
+    "M_rock"
+   ],
+   "footprint": [
+    2.4,
+    2.6
+   ],
+   "footprint_rect": [
+    -0.68,
+    -0.3,
+    0.88,
+    0.36
+   ],
+   "below_ground": 0.3,
+   "nodes": [
+    {
+     "name": "ANCHOR_interact",
+     "type": "anchor",
+     "pos": [
+      0,
+      -1,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      1
+     ]
+    },
+    {
+     "name": "COL_stele",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.85
+     ],
+     "size": [
+      1.2,
+      0.5,
+      1.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.85,
+      0
+     ]
+    }
+   ],
+   "notes": "ANCHOR_interact 1.0 m in front (-Y). Inscription = M_rune_glow (pale cyan vertex colour)."
+  },
+  "gravestone_a": {
+   "file": "gravestone_a.glb",
+   "group": "sacred",
+   "description": "Round-headed gravestone, 1 m, leaning back, carved sun",
+   "size": [
+    0.8,
+    0.26,
+    1.27
+   ],
+   "bounds_min": [
+    -0.31,
+    -0.19,
+    -0.27
+   ],
+   "bounds_max": [
+    0.49,
+    0.07,
+    1.0
+   ],
+   "tris": 48,
+   "tri_budget": 80,
+   "materials": [
+    "M_rock"
+   ],
+   "footprint": [
+    1.6,
+    1.0
+   ],
+   "footprint_rect": [
+    -0.31,
+    -0.19,
+    0.49,
+    0.07
+   ],
+   "below_ground": 0.27,
+   "nodes": [
+    {
+     "name": "COL_stone",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.5
+     ],
+     "size": [
+      0.64,
+      0.24,
+      1
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.5,
+      0
+     ]
+    }
+   ]
+  },
+  "gravestone_b": {
+   "file": "gravestone_b.glb",
+   "group": "sacred",
+   "description": "Pointed gothic gravestone with shoulders, 1.25 m, leaning sideways",
+   "size": [
+    0.84,
+    0.32,
+    1.53
+   ],
+   "bounds_min": [
+    -0.4,
+    -0.16,
+    -0.29
+   ],
+   "bounds_max": [
+    0.44,
+    0.16,
+    1.24
+   ],
+   "tris": 54,
+   "tri_budget": 80,
+   "materials": [
+    "M_rock"
+   ],
+   "footprint": [
+    1.5,
+    0.9
+   ],
+   "footprint_rect": [
+    -0.4,
+    -0.16,
+    0.44,
+    0.16
+   ],
+   "below_ground": 0.29,
+   "nodes": [
+    {
+     "name": "COL_stone",
+     "type": "collider",
+     "pos": [
+      0.06,
+      0,
+      0.6
+     ],
+     "size": [
+      0.72,
+      0.24,
+      1.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.06,
+      0.6,
+      0
+     ]
+    }
+   ]
+  },
+  "gravestone_c": {
+   "file": "gravestone_c.glb",
+   "group": "sacred",
+   "description": "Broken gravestone: jagged stump, the fallen head lying in front",
+   "size": [
+    0.78,
+    0.66,
+    0.95
+   ],
+   "bounds_min": [
+    -0.41,
+    -0.59,
+    -0.27
+   ],
+   "bounds_max": [
+    0.37,
+    0.07,
+    0.69
+   ],
+   "tris": 62,
+   "tri_budget": 80,
+   "materials": [
+    "M_rock"
+   ],
+   "footprint": [
+    1.4,
+    1.8
+   ],
+   "footprint_rect": [
+    -0.41,
+    -0.59,
+    0.37,
+    0.07
+   ],
+   "below_ground": 0.27,
+   "nodes": [
+    {
+     "name": "COL_stone",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.35
+     ],
+     "size": [
+      0.6,
+      0.2,
+      0.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.35,
+      0
+     ]
+    }
+   ],
+   "notes": "The fallen head lies in front (-Y) and has no collider."
+  },
+  "grave_cross": {
+   "file": "grave_cross.glb",
+   "group": "sacred",
+   "description": "Weathered stone wheel cross, 1.6 m, on a stepped base, leaning",
+   "size": [
+    0.82,
+    0.6,
+    1.82
+   ],
+   "bounds_min": [
+    -0.38,
+    -0.3,
+    -0.2
+   ],
+   "bounds_max": [
+    0.44,
+    0.3,
+    1.62
+   ],
+   "tris": 96,
+   "tri_budget": 120,
+   "materials": [
+    "M_rock"
+   ],
+   "footprint": [
+    1.5,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.38,
+    -0.3,
+    0.44,
+    0.3
+   ],
+   "below_ground": 0.2,
+   "nodes": [
+    {
+     "name": "COL_cross",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.8
+     ],
+     "size": [
+      0.6,
+      0.4,
+      1.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ]
+  },
+  "sarcophagus": {
+   "file": "sarcophagus.glb",
+   "group": "sacred",
+   "description": "Stone sarcophagus, 2.4 m: plinth, chest with blind arcades, skewed lid carved with the effigy of a knight (head on a cushion, hands joined, sword on the body)",
+   "size": [
+    2.6,
+    1.87,
+    1.53
+   ],
+   "bounds_min": [
+    -1.3,
+    -1.2,
+    -0.25
+   ],
+   "bounds_max": [
+    1.3,
+    0.66,
+    1.28
+   ],
+   "tris": 344,
+   "tri_budget": 600,
+   "materials": [
+    "M_stone_brick"
+   ],
+   "footprint": [
+    3.2,
+    3.0
+   ],
+   "footprint_rect": [
+    -1.3,
+    -1.2,
+    1.3,
+    0.66
+   ],
+   "below_ground": 0.25,
+   "nodes": [
+    {
+     "name": "COL_tomb",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.625
+     ],
+     "size": [
+      2.6,
+      1.24,
+      1.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.625,
+      0
+     ]
+    }
+   ],
+   "notes": "Long axis = X (head of the effigy at -X)."
+  },
+  "chest": {
+   "file": "chest.glb",
+   "group": "sacred",
+   "description": "Iron-bound wooden treasure chest, 0.9 m wide, barrel lid = separate object ROT_lid hinged at the back",
+   "size": [
+    1.02,
+    0.58,
+    0.58
+   ],
+   "bounds_min": [
+    -0.51,
+    -0.29,
+    0
+   ],
+   "bounds_max": [
+    0.51,
+    0.28,
+    0.58
+   ],
+   "tris": 220,
+   "tri_budget": 500,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_iron"
+   ],
+   "footprint": [
+    1.6,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.51,
+    -0.29,
+    0.51,
+    0.28
+   ],
+   "below_ground": -0.0,
+   "nodes": [
+    {
+     "name": "ANCHOR_loot",
+     "type": "anchor",
+     "pos": [
+      0,
+      0,
+      0.46
+     ],
+     "pos_gltf": [
+      0,
+      0.46,
+      0
+     ]
+    },
+    {
+     "name": "COL_chest",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.285
+     ],
+     "size": [
+      0.9,
+      0.55,
+      0.57
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.285,
+      0
+     ]
+    },
+    {
+     "name": "ROT_lid",
+     "type": "rotating_mesh",
+     "pos": [
+      0,
+      0.275,
+      0.36
+     ],
+     "pos_gltf": [
+      0,
+      0.36,
+      -0.275
+     ],
+     "axis": "local X (same axis in Blender and three.js); closed = 0, open = negative angle (about -1.9 rad)"
+    }
+   ],
+   "notes": "ROT_lid = separate mesh, origin on the back hinge line (y = +0.275, z = 0.36), closed at rotation 0. To open rotate it around its local X by a NEGATIVE angle (three.js: lid.rotation.x = -1.9 for fully open; X is the same axis in Blender and three.js). ANCHOR_loot = above the opening. The inside of the box is modelled (dark wood)."
+  },
+  "chest_ornate": {
+   "file": "chest_ornate.glb",
+   "group": "sacred",
+   "description": "Gilded treasure chest, 1.0 m wide, on ball feet, gold bands and a crystal set in the hasp, barrel lid = separate object ROT_lid hinged at the back",
+   "size": [
+    1.12,
+    0.68,
+    0.76
+   ],
+   "bounds_min": [
+    -0.56,
+    -0.37,
+    0
+   ],
+   "bounds_max": [
+    0.56,
+    0.31,
+    0.76
+   ],
+   "tris": 370,
+   "tri_budget": 600,
+   "materials": [
+    "M_wood_planks",
+    "M_metal_gold",
+    "M_crystal"
+   ],
+   "footprint": [
+    1.7,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.56,
+    -0.32,
+    0.56,
+    0.31
+   ],
+   "below_ground": -0.0,
+   "nodes": [
+    {
+     "name": "ANCHOR_loot",
+     "type": "anchor",
+     "pos": [
+      0,
+      0,
+      0.55
+     ],
+     "pos_gltf": [
+      0,
+      0.55,
+      0
+     ]
+    },
+    {
+     "name": "COL_chest",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.355
+     ],
+     "size": [
+      1,
+      0.6,
+      0.71
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.355,
+      0
+     ]
+    },
+    {
+     "name": "ROT_lid",
+     "type": "rotating_mesh",
+     "pos": [
+      0,
+      0.3,
+      0.45
+     ],
+     "pos_gltf": [
+      0,
+      0.45,
+      -0.3
+     ],
+     "axis": "local X (same axis in Blender and three.js); closed = 0, open = negative angle (about -1.9 rad)"
+    }
+   ],
+   "notes": "Same rig as chest (ROT_lid origin y = +0.3, z = 0.45, open = negative rotation.x). M_metal_gold fittings, a small M_crystal gem in the hasp."
+  },
+  "crystal_small": {
+   "file": "crystal_small.glb",
+   "group": "sacred",
+   "description": "Small Astre shard cluster, 0.6 m: four cyan-white crystals on a stone",
+   "size": [
+    0.63,
+    0.6,
+    0.7
+   ],
+   "bounds_min": [
+    -0.34,
+    -0.29,
+    -0.08
+   ],
+   "bounds_max": [
+    0.29,
+    0.31,
+    0.61
+   ],
+   "tris": 124,
+   "tri_budget": 150,
+   "materials": [
+    "M_rock",
+    "M_crystal"
+   ],
+   "footprint": [
+    1.3,
+    1.2
+   ],
+   "footprint_rect": [
+    -0.34,
+    -0.29,
+    0.29,
+    0.31
+   ],
+   "below_ground": 0.08,
+   "nodes": [
+    {
+     "name": "GLOW_core",
+     "type": "glow",
+     "pos": [
+      0,
+      0,
+      0.3
+     ],
+     "pos_gltf": [
+      0,
+      0.3,
+      0
+     ]
+    }
+   ],
+   "notes": "GLOW_core. Scale 0.7 - 1.4 and rotate freely."
+  },
+  "crystal_cluster": {
+   "file": "crystal_cluster.glb",
+   "group": "sacred",
+   "description": "Astre crystal cluster, 2.2 m: a dozen jagged hexagonal shards bursting from cracked rock",
+   "size": [
+    2.7,
+    2.46,
+    2.54
+   ],
+   "bounds_min": [
+    -1.28,
+    -1.22,
+    -0.32
+   ],
+   "bounds_max": [
+    1.42,
+    1.24,
+    2.23
+   ],
+   "tris": 390,
+   "tri_budget": 500,
+   "materials": [
+    "M_rock",
+    "M_crystal"
+   ],
+   "footprint": [
+    3.4,
+    3.1
+   ],
+   "footprint_rect": [
+    -1.28,
+    -1.22,
+    1.42,
+    1.24
+   ],
+   "below_ground": 0.32,
+   "nodes": [
+    {
+     "name": "COL_cluster",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.95
+     ],
+     "size": [
+      1.6,
+      1.4,
+      1.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.95,
+      0
+     ]
+    },
+    {
+     "name": "GLOW_core",
+     "type": "glow",
+     "pos": [
+      0,
+      0,
+      0.9
+     ],
+     "pos_gltf": [
+      0,
+      0.9,
+      0
+     ]
+    }
+   ],
+   "notes": "GLOW_core at z = 0.9. Rock base goes 0.3 m below ground."
+  },
+  "crystal_giant": {
+   "file": "crystal_giant.glb",
+   "group": "sacred",
+   "description": "Giant Astre shard, 7 m: a leaning hexagonal monolith of cold cyan-white crystal that burst through the ground, ring of up-tilted cracked rock slabs, secondary shards, glowing seams",
+   "size": [
+    6.82,
+    6.0,
+    7.96
+   ],
+   "bounds_min": [
+    -3.48,
+    -2.9,
+    -1.15
+   ],
+   "bounds_max": [
+    3.35,
+    3.1,
+    6.81
+   ],
+   "tris": 456,
+   "tri_budget": 900,
+   "materials": [
+    "M_rock",
+    "M_crystal"
+   ],
+   "footprint": [
+    7.5,
+    6.8
+   ],
+   "footprint_rect": [
+    -3.48,
+    -2.9,
+    3.35,
+    3.1
+   ],
+   "below_ground": 1.15,
+   "nodes": [
+    {
+     "name": "COL_base",
+     "type": "collider",
+     "pos": [
+      0.05,
+      0,
+      0.7
+     ],
+     "size": [
+      3.9,
+      3.6,
+      1.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      0.7,
+      0
+     ]
+    },
+    {
+     "name": "COL_shard",
+     "type": "collider",
+     "pos": [
+      0.6,
+      -0.15,
+      4.15
+     ],
+     "size": [
+      2.6,
+      1.9,
+      5.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.6,
+      4.15,
+      0.15
+     ]
+    },
+    {
+     "name": "GLOW_base",
+     "type": "glow",
+     "pos": [
+      0,
+      0,
+      0.9
+     ],
+     "pos_gltf": [
+      0,
+      0.9,
+      0
+     ]
+    },
+    {
+     "name": "GLOW_core",
+     "type": "glow",
+     "pos": [
+      0.75,
+      -0.3,
+      3.2
+     ],
+     "pos_gltf": [
+      0.75,
+      3.2,
+      0.3
+     ]
+    }
+   ],
+   "notes": "GLOW_core half way up the monolith + GLOW_base. Leans towards +X/-Y. COL_base + COL_shard."
+  },
+  "barricade": {
+   "file": "barricade.glb",
+   "group": "bandits",
+   "description": "Spiked log barricade (cheval de frise), 4 m: pine log on crossed sharpened stakes, lashed with rope, extra stakes pointing outwards (-Y)",
+   "size": [
+    4.0,
+    2.37,
+    2.06
+   ],
+   "bounds_min": [
+    -2.0,
+    -1.58,
+    -0.2
+   ],
+   "bounds_max": [
+    2.0,
+    0.79,
+    1.86
+   ],
+   "tris": 366,
+   "tri_budget": 400,
+   "materials": [
+    "M_bark_pine",
+    "M_wood_planks",
+    "M_rope"
+   ],
+   "footprint": [
+    4.6,
+    3.8
+   ],
+   "footprint_rect": [
+    -2.0,
+    -1.58,
+    2.0,
+    0.79
+   ],
+   "below_ground": 0.2,
+   "nodes": [
+    {
+     "name": "COL_barricade",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.75
+     ],
+     "size": [
+      4,
+      1.5,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.75,
+      0
+     ]
+    }
+   ],
+   "notes": "Runs along X (4 m); the extra stakes point to -Y (enemy side)."
+  },
+  "cage_hanging": {
+   "file": "cage_hanging.glb",
+   "group": "bandits",
+   "description": "Iron gibbet cage hanging from a timber gallows post (5 m), a skeleton inside",
+   "size": [
+    2.1,
+    0.69,
+    5.5
+   ],
+   "bounds_min": [
+    -0.88,
+    -0.33,
+    -0.6
+   ],
+   "bounds_max": [
+    1.23,
+    0.36,
+    4.9
+   ],
+   "tris": 479,
+   "tri_budget": 500,
+   "materials": [
+    "M_wood_planks",
+    "M_rock",
+    "M_metal_iron",
+    "M_bone"
+   ],
+   "footprint": [
+    3.1,
+    1.3
+   ],
+   "footprint_rect": [
+    -0.88,
+    -0.33,
+    1.23,
+    0.36
+   ],
+   "below_ground": 0.6,
+   "nodes": [
+    {
+     "name": "COL_post",
+     "type": "collider",
+     "pos": [
+      0.8,
+      0,
+      2.45
+     ],
+     "size": [
+      0.4,
+      0.4,
+      4.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.8,
+      2.45,
+      0
+     ]
+    }
+   ],
+   "notes": "Post at x = +0.8, cage hangs at x = -0.5 between z = 2.35 and 4.2 (no collider: walk under it)."
+  },
+  "skull_pike": {
+   "file": "skull_pike.glb",
+   "group": "bandits",
+   "description": "Warning pike: leaning stake with a skull on top and a rag",
+   "size": [
+    0.52,
+    0.22,
+    2.55
+   ],
+   "bounds_min": [
+    -0.22,
+    -0.09,
+    -0.3
+   ],
+   "bounds_max": [
+    0.3,
+    0.13,
+    2.25
+   ],
+   "tris": 102,
+   "tri_budget": 150,
+   "materials": [
+    "M_bark_oak",
+    "M_wood_planks",
+    "M_bone",
+    "M_cloth"
+   ],
+   "footprint": [
+    1.2,
+    0.9
+   ],
+   "footprint_rect": [
+    -0.22,
+    -0.09,
+    0.3,
+    0.13
+   ],
+   "below_ground": 0.3,
+   "nodes": [
+    {
+     "name": "COL_pike",
+     "type": "collider",
+     "pos": [
+      0.05,
+      0.025,
+      1.1
+     ],
+     "size": [
+      0.3,
+      0.25,
+      2.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      1.1,
+      -0.025
+     ]
+    }
+   ]
+  },
+  "bone_pile": {
+   "file": "bone_pile.glb",
+   "group": "bandits",
+   "description": "Heap of bones: two skulls, long bones and rib arcs",
+   "size": [
+    1.3,
+    1.29,
+    0.33
+   ],
+   "bounds_min": [
+    -0.6,
+    -0.53,
+    0.01
+   ],
+   "bounds_max": [
+    0.7,
+    0.76,
+    0.33
+   ],
+   "tris": 280,
+   "tri_budget": 300,
+   "materials": [
+    "M_bone"
+   ],
+   "footprint": [
+    2.0,
+    2.1
+   ],
+   "footprint_rect": [
+    -0.6,
+    -0.53,
+    0.7,
+    0.76
+   ],
+   "below_ground": -0.0,
+   "nodes": []
+  },
+  "ruin_house": {
+   "file": "ruin_house.glb",
+   "group": "bandits",
+   "description": "Burnt, roofless house shell, 7 x 6 m: rubble-stone walls broken at 1 - 3 m, one gable still standing to 5.3 m with its chimney stack, charred roof timbers, passable doorway in the front wall",
+   "size": [
+    8.69,
+    7.64,
+    7.2
+   ],
+   "bounds_min": [
+    -4.64,
+    -3.11,
+    -0.7
+   ],
+   "bounds_max": [
+    4.05,
+    4.53,
+    6.5
+   ],
+   "tris": 1199,
+   "tri_budget": 2000,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks",
+    "M_rock"
+   ],
+   "footprint": [
+    9.9,
+    9.7
+   ],
+   "footprint_rect": [
+    -4.64,
+    -3.11,
+    4.05,
+    4.53
+   ],
+   "below_ground": 0.7,
+   "nodes": [
+    {
+     "name": "ANCHOR_door",
+     "type": "anchor",
+     "pos": [
+      -1.3,
+      -3.8,
+      0
+     ],
+     "pos_gltf": [
+      -1.3,
+      0,
+      3.8
+     ]
+    },
+    {
+     "name": "COL_back",
+     "type": "collider",
+     "pos": [
+      0,
+      2.75,
+      1.3
+     ],
+     "size": [
+      7,
+      0.5,
+      2.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.3,
+      -2.75
+     ]
+    },
+    {
+     "name": "COL_chimney",
+     "type": "collider",
+     "pos": [
+      3.775,
+      0,
+      3.15
+     ],
+     "size": [
+      0.55,
+      1.4,
+      6.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.775,
+      3.15,
+      0
+     ]
+    },
+    {
+     "name": "COL_front_l",
+     "type": "collider",
+     "pos": [
+      -2.7,
+      -2.75,
+      1.45
+     ],
+     "size": [
+      1.6,
+      0.5,
+      2.9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.7,
+      1.45,
+      2.75
+     ]
+    },
+    {
+     "name": "COL_front_r",
+     "type": "collider",
+     "pos": [
+      1.4,
+      -2.75,
+      1.35
+     ],
+     "size": [
+      4.2,
+      0.5,
+      2.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.4,
+      1.35,
+      2.75
+     ]
+    },
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -3.25,
+      0,
+      1.75
+     ],
+     "size": [
+      0.5,
+      6,
+      3.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.25,
+      1.75,
+      0
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      3.25,
+      0,
+      2.5
+     ],
+     "size": [
+      0.5,
+      6,
+      5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.25,
+      2.5,
+      0
+     ]
+    }
+   ],
+   "notes": "Roofless shell, enterable through the doorway in the front wall (-Y, x = -1.9 .. -0.7) - ANCHOR_door 0.8 m in front of it. Floor = terrain. COL boxes cover the wall stretches and the chimney."
+  },
+  "ruin_wall_a": {
+   "file": "ruin_wall_a.glb",
+   "group": "bandits",
+   "description": "Free-standing corner fragment of a burnt house: 4.5 m wall with a window, 2.3 m return, broken from 4.4 m down to 1.3 m",
+   "size": [
+    4.82,
+    3.22,
+    5.15
+   ],
+   "bounds_min": [
+    -2.6,
+    -0.62,
+    -0.7
+   ],
+   "bounds_max": [
+    2.22,
+    2.6,
+    4.45
+   ],
+   "tris": 448,
+   "tri_budget": 500,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    5.8,
+    5.8
+   ],
+   "footprint_rect": [
+    -2.6,
+    -0.62,
+    2.22,
+    2.6
+   ],
+   "below_ground": 0.7,
+   "nodes": [
+    {
+     "name": "COL_return",
+     "type": "collider",
+     "pos": [
+      1.6,
+      1.45,
+      1.7
+     ],
+     "size": [
+      0.6,
+      2.3,
+      3.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.6,
+      1.7,
+      -1.45
+     ]
+    },
+    {
+     "name": "COL_wall",
+     "type": "collider",
+     "pos": [
+      -0.35,
+      0,
+      1.9
+     ],
+     "size": [
+      4.5,
+      0.6,
+      3.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.35,
+      1.9,
+      0
+     ]
+    }
+   ],
+   "notes": "L-shaped corner fragment. Goes 0.7 m below ground."
+  },
+  "ruin_wall_b": {
+   "file": "ruin_wall_b.glb",
+   "group": "bandits",
+   "description": "Free-standing 6 m wall fragment with a half-collapsed pointed doorway (passable), 5 m high at one end, buttress",
+   "size": [
+    6.23,
+    3.48,
+    5.7
+   ],
+   "bounds_min": [
+    -3,
+    -1.79,
+    -0.7
+   ],
+   "bounds_max": [
+    3.23,
+    1.68,
+    5
+   ],
+   "tris": 446,
+   "tri_budget": 500,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    7.1,
+    4.2
+   ],
+   "footprint_rect": [
+    -3,
+    -1.79,
+    3.23,
+    1.68
+   ],
+   "below_ground": 0.7,
+   "nodes": [
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -1.55,
+      0,
+      2.3
+     ],
+     "size": [
+      2.9,
+      0.6,
+      4.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.55,
+      2.3,
+      0
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      2.05,
+      0,
+      0.75
+     ],
+     "size": [
+      1.9,
+      0.6,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.05,
+      0.75,
+      0
+     ]
+    }
+   ],
+   "notes": "Straight fragment along X with a broken doorway (passable, x = -0.1 .. 1.1)."
+  },
+  "ruin_tower": {
+   "file": "ruin_tower.glb",
+   "group": "bandits",
+   "description": "Collapsed watchtower base, 6 m across: hollow round shell of rubble masonry 1 m thick, 6.2 m at its highest and broken down to 0.9 m on the -X side, doorway on -Y, charred beams, rubble spill",
+   "size": [
+    8.97,
+    7.21,
+    7.0
+   ],
+   "bounds_min": [
+    -5.58,
+    -3.99,
+    -0.8
+   ],
+   "bounds_max": [
+    3.39,
+    3.22,
+    6.2
+   ],
+   "tris": 876,
+   "tri_budget": 1800,
+   "materials": [
+    "M_stone_wall",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    11.8,
+    8.6
+   ],
+   "footprint_rect": [
+    -5.58,
+    -3.99,
+    3.39,
+    3.22
+   ],
+   "below_ground": 0.8,
+   "nodes": [
+    {
+     "name": "COL_wall_1",
+     "type": "collider",
+     "pos": [
+      2.079,
+      1.389,
+      3.1
+     ],
+     "size": [
+      2.4,
+      1.1,
+      6.2
+     ],
+     "rot_z": 2.1598,
+     "pos_gltf": [
+      2.079,
+      3.1,
+      -1.389
+     ]
+    },
+    {
+     "name": "COL_wall_2",
+     "type": "collider",
+     "pos": [
+      0.488,
+      2.452,
+      2.5
+     ],
+     "size": [
+      2.4,
+      1.1,
+      5
+     ],
+     "rot_z": 2.9452,
+     "pos_gltf": [
+      0.488,
+      2.5,
+      -2.452
+     ]
+    },
+    {
+     "name": "COL_wall_3",
+     "type": "collider",
+     "pos": [
+      -1.389,
+      2.079,
+      2.3
+     ],
+     "size": [
+      2.4,
+      1.1,
+      4.6
+     ],
+     "rot_z": -2.5525,
+     "pos_gltf": [
+      -1.389,
+      2.3,
+      -2.079
+     ]
+    },
+    {
+     "name": "COL_wall_4",
+     "type": "collider",
+     "pos": [
+      -2.452,
+      0.488,
+      1.2
+     ],
+     "size": [
+      2.4,
+      1.1,
+      2.4
+     ],
+     "rot_z": -1.7671,
+     "pos_gltf": [
+      -2.452,
+      1.2,
+      -0.488
+     ]
+    },
+    {
+     "name": "COL_wall_5",
+     "type": "collider",
+     "pos": [
+      -2.079,
+      -1.389,
+      1.3
+     ],
+     "size": [
+      2.4,
+      1.1,
+      2.6
+     ],
+     "rot_z": -0.9817,
+     "pos_gltf": [
+      -2.079,
+      1.3,
+      1.389
+     ]
+    },
+    {
+     "name": "COL_wall_6",
+     "type": "collider",
+     "pos": [
+      -0.957,
+      -2.31,
+      1.45
+     ],
+     "size": [
+      1.25,
+      1.1,
+      2.9
+     ],
+     "rot_z": -0.3927,
+     "pos_gltf": [
+      -0.957,
+      1.45,
+      2.31
+     ]
+    },
+    {
+     "name": "COL_wall_7",
+     "type": "collider",
+     "pos": [
+      1.389,
+      -2.079,
+      2.2
+     ],
+     "size": [
+      2.4,
+      1.1,
+      4.4
+     ],
+     "rot_z": 0.589,
+     "pos_gltf": [
+      1.389,
+      2.2,
+      2.079
+     ]
+    },
+    {
+     "name": "COL_wall_8",
+     "type": "collider",
+     "pos": [
+      2.452,
+      -0.488,
+      2.9
+     ],
+     "size": [
+      2.4,
+      1.1,
+      5.8
+     ],
+     "rot_z": 1.3744,
+     "pos_gltf": [
+      2.452,
+      2.9,
+      0.488
+     ]
+    }
+   ],
+   "notes": "Hollow round base, radius 3.0 m, walls 1.0 m: enterable through the doorway on -Y (1.15 m wide, 2.2 m high) only; 8 thin COL_wall_* boxes follow the ring and leave that doorway open (the low collapsed side on -X is NOT passable). Floor = terrain."
+  },
+  "spider_cocoon": {
+   "file": "spider_cocoon.glb",
+   "group": "forest",
+   "description": "Silk-wrapped victim, 1.8 m, standing and leaning, anchored by web strands, a boot sticking out",
+   "size": [
+    1.81,
+    1.61,
+    1.8
+   ],
+   "bounds_min": [
+    -0.76,
+    -0.71,
+    -0.0
+   ],
+   "bounds_max": [
+    1.06,
+    0.9,
+    1.8
+   ],
+   "tris": 168,
+   "tri_budget": 250,
+   "materials": [
+    "M_cloth",
+    "M_leather"
+   ],
+   "footprint": [
+    2.7,
+    2.4
+   ],
+   "footprint_rect": [
+    -0.76,
+    -0.71,
+    1.06,
+    0.9
+   ],
+   "below_ground": 0.0,
+   "nodes": [
+    {
+     "name": "COL_cocoon",
+     "type": "collider",
+     "pos": [
+      0.1,
+      0,
+      0.875
+     ],
+     "size": [
+      0.7,
+      0.5,
+      1.75
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.1,
+      0.875,
+      0
+     ]
+    }
+   ]
+  },
+  "egg_sacs": {
+   "file": "egg_sacs.glb",
+   "group": "forest",
+   "description": "Cluster of seven pale spider egg sacs on a web mat, 0.9 m high",
+   "size": [
+    1.96,
+    1.53,
+    0.98
+   ],
+   "bounds_min": [
+    -1.01,
+    -0.58,
+    -0.01
+   ],
+   "bounds_max": [
+    0.96,
+    0.96,
+    0.97
+   ],
+   "tris": 250,
+   "tri_budget": 250,
+   "materials": [
+    "M_cloth"
+   ],
+   "footprint": [
+    2.6,
+    2.5
+   ],
+   "footprint_rect": [
+    -1.01,
+    -0.58,
+    0.96,
+    0.96
+   ],
+   "below_ground": 0.01,
+   "nodes": [
+    {
+     "name": "COL_eggs",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.4
+     ],
+     "size": [
+      1.2,
+      1.1,
+      0.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.4,
+      0
+     ]
+    }
+   ]
+  },
+  "bramble_arch": {
+   "file": "bramble_arch.glb",
+   "group": "forest",
+   "description": "Giant thorny bramble arch, 6.4 m wide, 4.6 m high (opening 4.4 m wide, 3.3 m clear at the axis): three twisted dark vines with thorns, tendrils and glowing violet corruption veins",
+   "size": [
+    7.46,
+    2.3,
+    5.55
+   ],
+   "bounds_min": [
+    -3.74,
+    -0.95,
+    -0.76
+   ],
+   "bounds_max": [
+    3.73,
+    1.35,
+    4.79
+   ],
+   "tris": 839,
+   "tri_budget": 900,
+   "materials": [
+    "M_bark_oak",
+    "M_rune_glow",
+    "M_rock"
+   ],
+   "footprint": [
+    8.1,
+    3.3
+   ],
+   "footprint_rect": [
+    -3.74,
+    -0.95,
+    3.73,
+    1.35
+   ],
+   "below_ground": 0.76,
+   "nodes": [
+    {
+     "name": "COL_base_l",
+     "type": "collider",
+     "pos": [
+      -3.05,
+      0,
+      1.2
+     ],
+     "size": [
+      1.3,
+      1.5,
+      2.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.05,
+      1.2,
+      0
+     ]
+    },
+    {
+     "name": "COL_base_r",
+     "type": "collider",
+     "pos": [
+      3.05,
+      0,
+      1.2
+     ],
+     "size": [
+      1.3,
+      1.5,
+      2.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.05,
+      1.2,
+      0
+     ]
+    },
+    {
+     "name": "GLOW_veins",
+     "type": "glow",
+     "pos": [
+      0,
+      0,
+      3.4
+     ],
+     "pos_gltf": [
+      0,
+      3.4,
+      0
+     ]
+    }
+   ],
+   "notes": "Passage along Y under the arch (4.4 m wide, 3.3 m clear at the axis). M_rune_glow veins have a violet vertex colour (#b76bff). COL_base_l / COL_base_r only."
+  },
+  "cave_mouth": {
+   "file": "cave_mouth.glb",
+   "group": "forest",
+   "description": "Rock archway of a cave / lair entrance, 9 m wide, 5.6 m high, opening 4.2 m wide x 3.3 m high recessed 2.7 m to a black back wall (not enterable), boulders, stalactites, cobwebs, bones",
+   "size": [
+    12.66,
+    8.15,
+    6.39
+   ],
+   "bounds_min": [
+    -6.18,
+    -2.5,
+    -0.75
+   ],
+   "bounds_max": [
+    6.48,
+    5.64,
+    5.65
+   ],
+   "tris": 810,
+   "tri_budget": 1200,
+   "materials": [
+    "M_rock",
+    "M_obsidian",
+    "M_cloth",
+    "M_bone"
+   ],
+   "footprint": [
+    13.6,
+    11.9
+   ],
+   "footprint_rect": [
+    -6.18,
+    -2.5,
+    6.48,
+    5.64
+   ],
+   "below_ground": 0.75,
+   "nodes": [
+    {
+     "name": "COL_left",
+     "type": "collider",
+     "pos": [
+      -4.5,
+      -0.8,
+      0.8
+     ],
+     "size": [
+      2.2,
+      2.2,
+      1.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -4.5,
+      0.8,
+      0.8
+     ]
+    },
+    {
+     "name": "COL_right",
+     "type": "collider",
+     "pos": [
+      4.4,
+      -0.8,
+      0.75
+     ],
+     "size": [
+      2,
+      2.2,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.4,
+      0.75,
+      0.8
+     ]
+    },
+    {
+     "name": "COL_rock",
+     "type": "collider",
+     "pos": [
+      0,
+      2,
+      2.65
+     ],
+     "size": [
+      8.8,
+      5.2,
+      5.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      2.65,
+      -2
+     ]
+    }
+   ],
+   "notes": "Not enterable: the opening is recessed 2.7 m and closed by a black M_obsidian wall; COL_rock covers everything behind y = -0.6. Put it against a cliff / hillside (the back slopes down to the ground at y = +5.4)."
+  },
+  "swamp_hut": {
+   "file": "swamp_hut.glb",
+   "group": "swamp",
+   "description": "Crooked hermit's hut on stilts: plank platform 2 m above the mud on six leaning logs, leaning board walls, sagging mossy thatch roof, porch with ladder, lantern, hanging bones",
+   "size": [
+    5.13,
+    5.98,
+    7.3
+   ],
+   "bounds_min": [
+    -2.45,
+    -3.79,
+    -1.02
+   ],
+   "bounds_max": [
+    2.69,
+    2.2,
+    6.29
+   ],
+   "tris": 1540,
+   "tri_budget": 2000,
+   "materials": [
+    "M_bark_oak",
+    "M_wood_planks",
+    "M_leather",
+    "M_window_glow",
+    "M_metal_iron",
+    "M_thatch",
+    "M_rope",
+    "M_bone"
+   ],
+   "footprint": [
+    6.0,
+    9.2
+   ],
+   "footprint_rect": [
+    -2.45,
+    -3.79,
+    2.69,
+    2.2
+   ],
+   "below_ground": 1.02,
+   "nodes": [
+    {
+     "name": "ANCHOR_interact",
+     "type": "anchor",
+     "pos": [
+      0,
+      -4.3,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      4.3
+     ]
+    },
+    {
+     "name": "ANCHOR_npc",
+     "type": "anchor",
+     "pos": [
+      0.9,
+      -2.05,
+      2
+     ],
+     "pos_gltf": [
+      0.9,
+      2,
+      2.05
+     ]
+    },
+    {
+     "name": "COL_body",
+     "type": "collider",
+     "pos": [
+      0,
+      -0.4,
+      2.925
+     ],
+     "size": [
+      4.6,
+      4.6,
+      5.85
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      2.925,
+      0.4
+     ]
+    },
+    {
+     "name": "COL_ladder",
+     "type": "collider",
+     "pos": [
+      -0.07,
+      -3.25,
+      0.6
+     ],
+     "size": [
+      1.5,
+      1.1,
+      1.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.07,
+      0.6,
+      3.25
+     ]
+    },
+    {
+     "name": "SMOKE_roof",
+     "type": "smoke",
+     "pos": [
+      1.573,
+      0.784,
+      6.15
+     ],
+     "pos_gltf": [
+      1.573,
+      6.15,
+      -0.784
+     ]
+    }
+   ],
+   "notes": "Hut on stilts, platform top z = 2.0. Not enterable (COL_body from the ground up so nobody walks under it); the ladder is decorative. ANCHOR_npc = on the porch (z = 2.0), ANCHOR_interact = at the foot of the ladder. Window / lantern = M_window_glow. SMOKE_roof = smoke hole."
+  },
+  "sunken_boat": {
+   "file": "sunken_boat.glb",
+   "group": "swamp",
+   "description": "Half-buried wreck of a rowing boat, 4.4 m, heeled over, planking stove in on one side showing the ribs, broken oar",
+   "size": [
+    4.71,
+    2.1,
+    1.38
+   ],
+   "bounds_min": [
+    -2.15,
+    -1.28,
+    -0.48
+   ],
+   "bounds_max": [
+    2.56,
+    0.82,
+    0.91
+   ],
+   "tris": 390,
+   "tri_budget": 400,
+   "materials": [
+    "M_wood_planks"
+   ],
+   "footprint": [
+    5.7,
+    3.2
+   ],
+   "footprint_rect": [
+    -2.15,
+    -1.28,
+    2.56,
+    0.82
+   ],
+   "below_ground": 0.48,
+   "nodes": [
+    {
+     "name": "COL_boat",
+     "type": "collider",
+     "pos": [
+      0,
+      0.05,
+      0.35
+     ],
+     "size": [
+      4.2,
+      1.5,
+      0.7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.35,
+      -0.05
+     ]
+    }
+   ],
+   "notes": "Tilted and meant to be half buried: keep the origin on the mud / water line."
+  },
+  "drowned_chapel": {
+   "file": "drowned_chapel.glb",
+   "group": "swamp",
+   "description": "Chapelle Engloutie: half-sunken ruined chapel, 14 x 9 m. Leaning north wall with lancet windows and buttresses, broken west gable with a pointed doorway, polygonal apse reduced to stumps on the south, south wall almost gone (open nave), flagged floor, altar, toppled bronze bell, fallen timbers",
+   "size": [
+    15.72,
+    11.29,
+    12.38
+   ],
+   "bounds_min": [
+    -7.8,
+    -6.14,
+    -1.05
+   ],
+   "bounds_max": [
+    7.92,
+    5.15,
+    11.33
+   ],
+   "tris": 3984,
+   "tri_budget": 4000,
+   "materials": [
+    "M_stone_brick",
+    "M_stone_wall",
+    "M_cobble",
+    "M_bone",
+    "M_metal_bronze",
+    "M_metal_iron",
+    "M_wood_planks"
+   ],
+   "footprint": [
+    16.4,
+    12.9
+   ],
+   "footprint_rect": [
+    -7.8,
+    -6.14,
+    7.92,
+    5.15
+   ],
+   "below_ground": 1.05,
+   "nodes": [
+    {
+     "name": "COL_altar",
+     "type": "collider",
+     "pos": [
+      5.25,
+      0,
+      0.75
+     ],
+     "size": [
+      1.3,
+      2,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      5.25,
+      0.75,
+      0
+     ]
+    },
+    {
+     "name": "COL_apse_e",
+     "type": "collider",
+     "pos": [
+      7.14,
+      0,
+      3.15
+     ],
+     "size": [
+      2.8,
+      1,
+      6.3
+     ],
+     "rot_z": 1.5708,
+     "pos_gltf": [
+      7.14,
+      3.15,
+      0
+     ]
+    },
+    {
+     "name": "COL_apse_n",
+     "type": "collider",
+     "pos": [
+      4.625,
+      3.461,
+      3.45
+     ],
+     "size": [
+      2.8,
+      1,
+      6.9
+     ],
+     "rot_z": 2.8274,
+     "pos_gltf": [
+      4.625,
+      3.45,
+      -3.461
+     ]
+    },
+    {
+     "name": "COL_apse_ne",
+     "type": "collider",
+     "pos": [
+      6.444,
+      2.139,
+      3.45
+     ],
+     "size": [
+      2.8,
+      1,
+      6.9
+     ],
+     "rot_z": 2.1991,
+     "pos_gltf": [
+      6.444,
+      3.45,
+      -2.139
+     ]
+    },
+    {
+     "name": "COL_apse_se",
+     "type": "collider",
+     "pos": [
+      6.444,
+      -2.139,
+      1.45
+     ],
+     "size": [
+      2.8,
+      1,
+      2.9
+     ],
+     "rot_z": 0.9425,
+     "pos_gltf": [
+      6.444,
+      1.45,
+      2.139
+     ]
+    },
+    {
+     "name": "COL_bell",
+     "type": "collider",
+     "pos": [
+      -3.35,
+      -0.9,
+      0.75
+     ],
+     "size": [
+      1.5,
+      1.4,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -3.35,
+      0.75,
+      0.9
+     ]
+    },
+    {
+     "name": "COL_north",
+     "type": "collider",
+     "pos": [
+      -1.75,
+      4.2,
+      3.7
+     ],
+     "size": [
+      10.5,
+      1.6,
+      7.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.75,
+      3.7,
+      -4.2
+     ]
+    },
+    {
+     "name": "COL_south_e",
+     "type": "collider",
+     "pos": [
+      2.95,
+      -3.85,
+      1.6
+     ],
+     "size": [
+      1.9,
+      0.9,
+      3.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.95,
+      1.6,
+      3.85
+     ]
+    },
+    {
+     "name": "COL_south_m",
+     "type": "collider",
+     "pos": [
+      -0.7,
+      -3.85,
+      1.1
+     ],
+     "size": [
+      2.2,
+      0.9,
+      2.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -0.7,
+      1.1,
+      3.85
+     ]
+    },
+    {
+     "name": "COL_south_w",
+     "type": "collider",
+     "pos": [
+      -5.7,
+      -3.85,
+      1.5
+     ],
+     "size": [
+      2.6,
+      0.9,
+      3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -5.7,
+      1.5,
+      3.85
+     ]
+    },
+    {
+     "name": "COL_west_n",
+     "type": "collider",
+     "pos": [
+      -6.75,
+      2.6,
+      4.5
+     ],
+     "size": [
+      1.3,
+      3.4,
+      9
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.75,
+      4.5,
+      -2.6
+     ]
+    },
+    {
+     "name": "COL_west_s",
+     "type": "collider",
+     "pos": [
+      -6.75,
+      -2.6,
+      3
+     ],
+     "size": [
+      1.3,
+      3.4,
+      6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -6.75,
+      3,
+      2.6
+     ]
+    },
+    {
+     "name": "WALK_floor",
+     "type": "walkable",
+     "pos": [
+      -1.3,
+      0,
+      -0.375
+     ],
+     "size": [
+      9.6,
+      6.8,
+      1.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.3,
+      -0.375,
+      0
+     ]
+    },
+    {
+     "name": "WALK_floor_apse",
+     "type": "walkable",
+     "pos": [
+      4.95,
+      0,
+      -0.375
+     ],
+     "size": [
+      2.9,
+      4.6,
+      1.25
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      4.95,
+      -0.375,
+      0
+     ]
+    }
+   ],
+   "notes": "Boss-arena backdrop. Long axis = X (apse at +X, west door at -X), the south wall (-Y) is mostly gone so the nave is open towards -Y. WALK_floor top z = 0.25 (flagged nave + apse floor). COL boxes: north wall, west gable left / right of the door, apse, south stubs. The toppled bell lies in the nave (COL_bell). Walls go 1 m below ground: sink it in the water / mud."
+  },
+  "ice_spikes_a": {
+   "file": "ice_spikes_a.glb",
+   "group": "mountain",
+   "description": "Cluster of ice spikes on frozen rock, tallest 5 m, upright",
+   "size": [
+    4.07,
+    3.33,
+    5.59
+   ],
+   "bounds_min": [
+    -1.92,
+    -1.78,
+    -0.51
+   ],
+   "bounds_max": [
+    2.15,
+    1.56,
+    5.08
+   ],
+   "tris": 330,
+   "tri_budget": 500,
+   "materials": [
+    "M_rock",
+    "M_ice"
+   ],
+   "footprint": [
+    4.9,
+    4.2
+   ],
+   "footprint_rect": [
+    -1.92,
+    -1.78,
+    2.15,
+    1.56
+   ],
+   "below_ground": 0.51,
+   "nodes": [
+    {
+     "name": "COL_ice",
+     "type": "collider",
+     "pos": [
+      0.05,
+      0,
+      1.8
+     ],
+     "size": [
+      2.7,
+      2.4,
+      3.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      1.8,
+      0
+     ]
+    }
+   ],
+   "notes": "M_ice spikes on M_rock. Scale 0.7 - 1.3."
+  },
+  "ice_spikes_b": {
+   "file": "ice_spikes_b.glb",
+   "group": "mountain",
+   "description": "Leaning fan of ice spikes on frozen rock, 3.8 m, swept towards +X like a frozen wave",
+   "size": [
+    5.63,
+    2.52,
+    3.82
+   ],
+   "bounds_min": [
+    -2.27,
+    -1.24,
+    -0.42
+   ],
+   "bounds_max": [
+    3.36,
+    1.28,
+    3.4
+   ],
+   "tris": 325,
+   "tri_budget": 500,
+   "materials": [
+    "M_rock",
+    "M_ice"
+   ],
+   "footprint": [
+    7.3,
+    3.2
+   ],
+   "footprint_rect": [
+    -2.27,
+    -1.24,
+    3.36,
+    1.28
+   ],
+   "below_ground": 0.42,
+   "nodes": [
+    {
+     "name": "COL_ice",
+     "type": "collider",
+     "pos": [
+      0.25,
+      0,
+      1.4
+     ],
+     "size": [
+      4.3,
+      1.8,
+      2.8
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.25,
+      1.4,
+      0
+     ]
+    }
+   ]
+  },
+  "frost_cairn": {
+   "file": "frost_cairn.glb",
+   "group": "mountain",
+   "description": "Stone cairn, 1.5 m, with two skulls, icicles and a tattered banner on a crooked pole (3.4 m)",
+   "size": [
+    1.72,
+    1.66,
+    3.41
+   ],
+   "bounds_min": [
+    -0.79,
+    -0.89,
+    -0.01
+   ],
+   "bounds_max": [
+    0.93,
+    0.77,
+    3.4
+   ],
+   "tris": 394,
+   "tri_budget": 400,
+   "materials": [
+    "M_rock",
+    "M_bone",
+    "M_bark_pine",
+    "M_wood_planks",
+    "M_cloth",
+    "M_ice"
+   ],
+   "footprint": [
+    2.5,
+    2.4
+   ],
+   "footprint_rect": [
+    -0.79,
+    -0.89,
+    0.93,
+    0.77
+   ],
+   "below_ground": 0.01,
+   "nodes": [
+    {
+     "name": "COL_cairn",
+     "type": "collider",
+     "pos": [
+      0.025,
+      0,
+      0.75
+     ],
+     "size": [
+      1.45,
+      1.4,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.025,
+      0.75,
+      0
+     ]
+    }
+   ],
+   "notes": "Banner = M_cloth (double sided), icicles = M_ice."
+  },
+  "obsidian_spire_a": {
+   "file": "obsidian_spire_a.glb",
+   "group": "ash",
+   "description": "Jagged black obsidian spire, 5 m, with two side shards on scorched rock, glowing ember cracks",
+   "size": [
+    3.97,
+    2.93,
+    5.7
+   ],
+   "bounds_min": [
+    -1.78,
+    -1.24,
+    -0.69
+   ],
+   "bounds_max": [
+    2.19,
+    1.69,
+    5.01
+   ],
+   "tris": 200,
+   "tri_budget": 500,
+   "materials": [
+    "M_rock",
+    "M_obsidian",
+    "M_ember"
+   ],
+   "footprint": [
+    5.0,
+    4.0
+   ],
+   "footprint_rect": [
+    -1.78,
+    -1.24,
+    2.19,
+    1.69
+   ],
+   "below_ground": 0.69,
+   "nodes": [
+    {
+     "name": "COL_spire",
+     "type": "collider",
+     "pos": [
+      0.05,
+      0,
+      2.1
+     ],
+     "size": [
+      1.9,
+      1.6,
+      4.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.05,
+      2.1,
+      0
+     ]
+    },
+    {
+     "name": "GLOW_ember",
+     "type": "glow",
+     "pos": [
+      0.1,
+      -0.2,
+      1.4
+     ],
+     "pos_gltf": [
+      0.1,
+      1.4,
+      0.2
+     ]
+    }
+   ],
+   "notes": "M_obsidian with M_ember cracks; GLOW_ember for a warm point light. Goes 0.6 m below ground."
+  },
+  "obsidian_spire_b": {
+   "file": "obsidian_spire_b.glb",
+   "group": "ash",
+   "description": "Great obsidian spire, 9 m, leaning, with three side shards on scorched rock, glowing ember cracks",
+   "size": [
+    6.39,
+    4.71,
+    9.95
+   ],
+   "bounds_min": [
+    -2.9,
+    -2.05,
+    -1.02
+   ],
+   "bounds_max": [
+    3.49,
+    2.66,
+    8.93
+   ],
+   "tris": 264,
+   "tri_budget": 500,
+   "materials": [
+    "M_rock",
+    "M_obsidian",
+    "M_ember"
+   ],
+   "footprint": [
+    7.6,
+    5.9
+   ],
+   "footprint_rect": [
+    -2.9,
+    -2.05,
+    3.49,
+    2.66
+   ],
+   "below_ground": 1.02,
+   "nodes": [
+    {
+     "name": "COL_spire",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      3.5
+     ],
+     "size": [
+      3,
+      2.6,
+      7
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      3.5,
+      0
+     ]
+    },
+    {
+     "name": "GLOW_ember",
+     "type": "glow",
+     "pos": [
+      0,
+      -0.3,
+      2.2
+     ],
+     "pos_gltf": [
+      0,
+      2.2,
+      0.3
+     ]
+    }
+   ],
+   "notes": "See obsidian_spire_a. Leans towards -X."
+  },
+  "cult_altar": {
+   "file": "cult_altar.glb",
+   "group": "ash",
+   "description": "Altar of the Dead Dawn: blood-stained basalt block on two steps, ember runes, candles, two iron tripod braziers, an iron gallows frame from which the two halves of a split brass sun hang on chains",
+   "size": [
+    5.38,
+    2.8,
+    5.2
+   ],
+   "bounds_min": [
+    -2.69,
+    -1.4,
+    -0.51
+   ],
+   "bounds_max": [
+    2.69,
+    1.4,
+    4.7
+   ],
+   "tris": 793,
+   "tri_budget": 1200,
+   "materials": [
+    "M_rock",
+    "M_rune_glow",
+    "M_bone",
+    "M_ember",
+    "M_metal_bronze",
+    "M_metal_steel",
+    "M_metal_iron",
+    "M_leather",
+    "M_obsidian"
+   ],
+   "footprint": [
+    6.0,
+    5.8
+   ],
+   "footprint_rect": [
+    -2.69,
+    -1.4,
+    2.69,
+    1.4
+   ],
+   "below_ground": 0.51,
+   "nodes": [
+    {
+     "name": "ANCHOR_boss",
+     "type": "anchor",
+     "pos": [
+      0,
+      -2.6,
+      0
+     ],
+     "pos_gltf": [
+      0,
+      0,
+      2.6
+     ]
+    },
+    {
+     "name": "COL_altar",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      0.725
+     ],
+     "size": [
+      2.2,
+      1.14,
+      1.45
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.725,
+      0
+     ]
+    },
+    {
+     "name": "COL_brazier_l",
+     "type": "collider",
+     "pos": [
+      -2.35,
+      -0.9,
+      0.75
+     ],
+     "size": [
+      0.6,
+      0.6,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -2.35,
+      0.75,
+      0.9
+     ]
+    },
+    {
+     "name": "COL_brazier_r",
+     "type": "collider",
+     "pos": [
+      2.35,
+      -0.9,
+      0.75
+     ],
+     "size": [
+      0.6,
+      0.6,
+      1.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.35,
+      0.75,
+      0.9
+     ]
+    },
+    {
+     "name": "COL_post_l",
+     "type": "collider",
+     "pos": [
+      -1.75,
+      0.95,
+      2.3
+     ],
+     "size": [
+      0.4,
+      0.4,
+      4.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      -1.75,
+      2.3,
+      -0.95
+     ]
+    },
+    {
+     "name": "COL_post_r",
+     "type": "collider",
+     "pos": [
+      1.75,
+      0.95,
+      2.3
+     ],
+     "size": [
+      0.4,
+      0.4,
+      4.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      1.75,
+      2.3,
+      -0.95
+     ]
+    },
+    {
+     "name": "FIRE_brazier_l",
+     "type": "fire",
+     "pos": [
+      -2.35,
+      -0.9,
+      1.43
+     ],
+     "pos_gltf": [
+      -2.35,
+      1.43,
+      0.9
+     ]
+    },
+    {
+     "name": "FIRE_brazier_r",
+     "type": "fire",
+     "pos": [
+      2.35,
+      -0.9,
+      1.43
+     ],
+     "pos_gltf": [
+      2.35,
+      1.43,
+      0.9
+     ]
+    },
+    {
+     "name": "FIRE_candle_1",
+     "type": "fire",
+     "pos": [
+      -0.92,
+      -0.38,
+      1.69
+     ],
+     "pos_gltf": [
+      -0.92,
+      1.69,
+      0.38
+     ]
+    },
+    {
+     "name": "FIRE_candle_2",
+     "type": "fire",
+     "pos": [
+      0.9,
+      0.3,
+      1.75
+     ],
+     "pos_gltf": [
+      0.9,
+      1.75,
+      -0.3
+     ]
+    },
+    {
+     "name": "FIRE_candle_3",
+     "type": "fire",
+     "pos": [
+      -1.35,
+      -0.8,
+      0.65
+     ],
+     "pos_gltf": [
+      -1.35,
+      0.65,
+      0.8
+     ]
+    },
+    {
+     "name": "WALK_step_1",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      -0.05
+     ],
+     "size": [
+      4,
+      2.8,
+      0.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      -0.05,
+      0
+     ]
+    },
+    {
+     "name": "WALK_step_2",
+     "type": "walkable",
+     "pos": [
+      0,
+      0,
+      0.2
+     ],
+     "size": [
+      3.2,
+      2.1,
+      0.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      0.2,
+      0
+     ]
+    }
+   ],
+   "notes": "Front = -Y. FIRE_candle_1..3 = small candle flames (use a tiny flame / weak light), FIRE_brazier_l / _r = the two iron tripod braziers. ANCHOR_boss = 1.2 m in front of the first step. WALK_step_1 (0.2) and WALK_step_2 (0.4). The split sun = M_metal_bronze (brass vertex colour), double sided; posts = M_obsidian. Blood = dark red vertex colour on M_rock."
+  },
+  "cult_banner": {
+   "file": "cult_banner.glb",
+   "group": "ash",
+   "description": "Banner of the Dead Dawn: 5.2 m pole, ragged red cloth with a black split sun, brass broken-sun finial, stones at the foot",
+   "size": [
+    1.36,
+    0.59,
+    5.71
+   ],
+   "bounds_min": [
+    -0.62,
+    -0.34,
+    -0.4
+   ],
+   "bounds_max": [
+    0.74,
+    0.25,
+    5.31
+   ],
+   "tris": 205,
+   "tri_budget": 250,
+   "materials": [
+    "M_bark_pine",
+    "M_wood_planks",
+    "M_cloth",
+    "M_metal_bronze",
+    "M_rock"
+   ],
+   "footprint": [
+    2.1,
+    1.3
+   ],
+   "footprint_rect": [
+    -0.62,
+    -0.34,
+    0.74,
+    0.25
+   ],
+   "below_ground": 0.4,
+   "nodes": [
+    {
+     "name": "COL_pole",
+     "type": "collider",
+     "pos": [
+      0.025,
+      0,
+      2.5
+     ],
+     "size": [
+      0.45,
+      0.4,
+      5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0.025,
+      2.5,
+      0
+     ]
+    }
+   ],
+   "notes": "Cloth = M_cloth with a red vertex colour (baked), double sided. Finial = M_metal_bronze."
+  },
+  "lighthouse": {
+   "file": "lighthouse.glb",
+   "group": "coast",
+   "description": "Weathered stone lighthouse, 18 m: battered round tower 6 m across at the base, gallery on corbels with an iron railing, glazed lantern room under a verdigris cap, lean-to store, door on -Y",
+   "size": [
+    9.81,
+    8.71,
+    18.9
+   ],
+   "bounds_min": [
+    -4.46,
+    -4.3,
+    -0.9
+   ],
+   "bounds_max": [
+    5.35,
+    4.41,
+    18
+   ],
+   "tris": 1813,
+   "tri_budget": 3000,
+   "materials": [
+    "M_stone_brick",
+    "M_metal_iron",
+    "M_window_glow",
+    "M_metal_bronze",
+    "M_wood_planks",
+    "M_stone_wall",
+    "M_roof_tiles",
+    "M_rock"
+   ],
+   "footprint": [
+    11.3,
+    9.4
+   ],
+   "footprint_rect": [
+    -4.46,
+    -4.3,
+    5.35,
+    4.41
+   ],
+   "below_ground": 0.9,
+   "nodes": [
+    {
+     "name": "COL_annex",
+     "type": "collider",
+     "pos": [
+      3.7,
+      0.05,
+      1.65
+     ],
+     "size": [
+      2.8,
+      2.5,
+      3.3
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      3.7,
+      1.65,
+      -0.05
+     ]
+    },
+    {
+     "name": "COL_door",
+     "type": "collider",
+     "pos": [
+      0,
+      -3.1,
+      1.7
+     ],
+     "size": [
+      2,
+      1,
+      3.4
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.7,
+      3.1
+     ]
+    },
+    {
+     "name": "COL_tower_1",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      6.75
+     ],
+     "size": [
+      6.3,
+      2.62,
+      13.5
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      6.75,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_2",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      6.75
+     ],
+     "size": [
+      6.3,
+      2.62,
+      13.5
+     ],
+     "rot_z": 0.7854,
+     "pos_gltf": [
+      0,
+      6.75,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_3",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      6.75
+     ],
+     "size": [
+      6.3,
+      2.62,
+      13.5
+     ],
+     "rot_z": 1.5708,
+     "pos_gltf": [
+      0,
+      6.75,
+      0
+     ]
+    },
+    {
+     "name": "COL_tower_4",
+     "type": "collider",
+     "pos": [
+      0,
+      0,
+      6.75
+     ],
+     "size": [
+      6.3,
+      2.62,
+      13.5
+     ],
+     "rot_z": 2.3562,
+     "pos_gltf": [
+      0,
+      6.75,
+      0
+     ]
+    },
+    {
+     "name": "FIRE_top",
+     "type": "fire",
+     "pos": [
+      0,
+      0,
+      14.2
+     ],
+     "pos_gltf": [
+      0,
+      14.2,
+      0
+     ]
+    }
+   ],
+   "notes": "Door faces -Y. FIRE_top = centre of the lantern room (z = 14.2): use a strong warm light / beam. Lantern panes = M_window_glow. Gallery z = 12.6 (not walkable). 4 COL_tower_* boxes form an octagon + COL_annex + COL_door (door case). Goes 0.9 m below ground. Cap = M_metal_bronze with a verdigris vertex colour, annex roof = M_roof_tiles tinted slate."
+  },
+  "shipwreck": {
+   "file": "shipwreck.glb",
+   "group": "coast",
+   "description": "Beached cog broken open, 14 m: keel, stem and stern posts, bare ribs, the surviving planking of the far side and the stern, deck beams, mast stump and the fallen mast with a yard and sail rags, spilled cargo",
+   "size": [
+    15.87,
+    11.53,
+    4.56
+   ],
+   "bounds_min": [
+    -7.74,
+    -8.68,
+    -1.0
+   ],
+   "bounds_max": [
+    8.13,
+    2.84,
+    3.56
+   ],
+   "tris": 1470,
+   "tri_budget": 1500,
+   "materials": [
+    "M_wood_planks",
+    "M_cloth",
+    "M_rope",
+    "M_metal_iron",
+    "M_rock"
+   ],
+   "footprint": [
+    16.9,
+    18.0
+   ],
+   "footprint_rect": [
+    -7.74,
+    -8.68,
+    8.13,
+    2.84
+   ],
+   "below_ground": 1.0,
+   "nodes": [
+    {
+     "name": "COL_hull",
+     "type": "collider",
+     "pos": [
+      0,
+      0.15,
+      1.3
+     ],
+     "size": [
+      14.4,
+      4.9,
+      2.6
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      0,
+      1.3,
+      -0.15
+     ]
+    },
+    {
+     "name": "COL_mast",
+     "type": "collider",
+     "pos": [
+      2.4,
+      -4.6,
+      0.6
+     ],
+     "size": [
+      1.6,
+      1.6,
+      1.2
+     ],
+     "rot_z": 0.0,
+     "pos_gltf": [
+      2.4,
+      0.6,
+      4.6
+     ]
+    }
+   ],
+   "notes": "Long axis = X (bow at +X), heeled over towards -Y (you look into the hull from the front). COL_hull covers the hull, COL_mast a low box on the fallen mast (which runs from the hull to x = 5.6, y = -8.6). Sail rag = M_cloth, double sided. Sunk 1 m: put the origin on the sand."
+  }
+ }
+}

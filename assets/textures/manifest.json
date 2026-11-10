@@ -1,0 +1,927 @@
+{
+ "format": {
+  "<name>_a.png": "RGB = albedo (sRGB), A = height 0..1 (linear; stones / blades high, mortar / gaps low)",
+  "<name>_n.png": "R,G = tangent-space normal x,y as n*0.5+0.5 (OpenGL: +Y = up in the image), B = roughness, A = ambient occlusion (1 = open); all linear. z = sqrt(1 - x^2 - y^2)",
+  "loading": "load with premultiplyAlpha = false; _a is sRGB (alpha stays linear), _n and the fx files are linear data (NoColorSpace). All textures wrap (RepeatWrapping) and are power-of-two (mipmaps OK). Height alpha is clamped to >= 8/255."
+ },
+ "textures": {
+  "terrain_grass": {
+   "files": {
+    "albedo_height": "terrain_grass_a.png",
+    "normal_rough_ao": "terrain_grass_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "short meadow grass seen from above: tufts of blades, a few dry blades, clover",
+   "avg_albedo_srgb": [
+    84,
+    102,
+    48
+   ],
+   "albedo_min_max": [
+    26,
+    185
+   ],
+   "avg_roughness": 0.689,
+   "roughness_p01_p99": [
+    0.537,
+    1.0
+   ],
+   "avg_ao": 0.771,
+   "avg_height": 0.483,
+   "avg_normal_z": 0.869
+  },
+  "terrain_dirt": {
+   "files": {
+    "albedo_height": "terrain_dirt_a.png",
+    "normal_rough_ao": "terrain_dirt_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "packed earth path, embedded pebbles, fine drying cracks",
+   "avg_albedo_srgb": [
+    122,
+    103,
+    81
+   ],
+   "albedo_min_max": [
+    32,
+    221
+   ],
+   "avg_roughness": 0.88,
+   "roughness_p01_p99": [
+    0.576,
+    0.933
+   ],
+   "avg_ao": 0.792,
+   "avg_height": 0.491,
+   "avg_normal_z": 0.907
+  },
+  "terrain_rock": {
+   "files": {
+    "albedo_height": "terrain_rock_a.png",
+    "normal_rough_ao": "terrain_rock_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer / M_rock",
+   "description": "stratified cliff rock, beds run along U (horizontal in the image), fissures, lichen",
+   "avg_albedo_srgb": [
+    133,
+    128,
+    119
+   ],
+   "albedo_min_max": [
+    49,
+    205
+   ],
+   "avg_roughness": 0.825,
+   "roughness_p01_p99": [
+    0.761,
+    0.898
+   ],
+   "avg_ao": 0.824,
+   "avg_height": 0.502,
+   "avg_normal_z": 0.934
+  },
+  "terrain_sand": {
+   "files": {
+    "albedo_height": "terrain_sand_a.png",
+    "normal_rough_ao": "terrain_sand_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "beach sand with wind ripples (crests along U), pebbles and shell bits",
+   "avg_albedo_srgb": [
+    186,
+    164,
+    127
+   ],
+   "albedo_min_max": [
+    76,
+    235
+   ],
+   "avg_roughness": 0.88,
+   "roughness_p01_p99": [
+    0.478,
+    0.925
+   ],
+   "avg_ao": 0.857,
+   "avg_height": 0.49,
+   "avg_normal_z": 0.963
+  },
+  "terrain_snow": {
+   "files": {
+    "albedo_height": "terrain_snow_a.png",
+    "normal_rough_ao": "terrain_snow_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "wind-packed snow: soft drifts, crust scarps, blue hollows, sparkle in roughness",
+   "avg_albedo_srgb": [
+    224,
+    227,
+    234
+   ],
+   "albedo_min_max": [
+    186,
+    236
+   ],
+   "avg_roughness": 0.537,
+   "roughness_p01_p99": [
+    0.157,
+    0.686
+   ],
+   "avg_ao": 0.927,
+   "avg_height": 0.394,
+   "avg_normal_z": 0.98
+  },
+  "terrain_forest": {
+   "files": {
+    "albedo_height": "terrain_forest_a.png",
+    "normal_rough_ao": "terrain_forest_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "forest floor: dark humus, dead leaves, twigs, needles, moss cushions",
+   "avg_albedo_srgb": [
+    70,
+    54,
+    37
+   ],
+   "albedo_min_max": [
+    26,
+    186
+   ],
+   "avg_roughness": 0.87,
+   "roughness_p01_p99": [
+    0.745,
+    0.969
+   ],
+   "avg_ao": 0.673,
+   "avg_height": 0.403,
+   "avg_normal_z": 0.838
+  },
+  "terrain_mud": {
+   "files": {
+    "albedo_height": "terrain_mud_a.png",
+    "normal_rough_ao": "terrain_mud_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "wet swamp mud with glossy puddles (roughness ~0.07) and organic debris",
+   "avg_albedo_srgb": [
+    65,
+    54,
+    41
+   ],
+   "albedo_min_max": [
+    26,
+    117
+   ],
+   "avg_roughness": 0.566,
+   "roughness_p01_p99": [
+    0.071,
+    0.824
+   ],
+   "avg_ao": 0.882,
+   "avg_height": 0.451,
+   "avg_normal_z": 0.961
+  },
+  "terrain_ash": {
+   "files": {
+    "albedo_height": "terrain_ash_a.png",
+    "normal_rough_ao": "terrain_ash_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 4.0,
+   "used_by": "terrain layer",
+   "description": "volcanic ash: cracked charcoal crust, cinders, rust, pale ash dust drifts",
+   "avg_albedo_srgb": [
+    71,
+    67,
+    64
+   ],
+   "albedo_min_max": [
+    26,
+    136
+   ],
+   "avg_roughness": 0.879,
+   "roughness_p01_p99": [
+    0.49,
+    0.969
+   ],
+   "avg_ao": 0.741,
+   "avg_height": 0.433,
+   "avg_normal_z": 0.868
+  },
+  "stone_wall": {
+   "files": {
+    "albedo_height": "stone_wall_a.png",
+    "normal_rough_ao": "stone_wall_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_stone_wall",
+   "description": "rough rubble masonry in horizontal courses, recessed lime mortar, moss in joints",
+   "avg_albedo_srgb": [
+    143,
+    135,
+    118
+   ],
+   "albedo_min_max": [
+    58,
+    200
+   ],
+   "avg_roughness": 0.826,
+   "roughness_p01_p99": [
+    0.69,
+    0.961
+   ],
+   "avg_ao": 0.799,
+   "avg_height": 0.468,
+   "avg_normal_z": 0.906
+  },
+  "stone_brick": {
+   "files": {
+    "albedo_height": "stone_brick_a.png",
+    "normal_rough_ao": "stone_brick_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_stone_brick",
+   "description": "cut ashlar blocks 0.5 x 0.25 m in running bond, chipped arrises, weathering streaks",
+   "avg_albedo_srgb": [
+    143,
+    135,
+    120
+   ],
+   "albedo_min_max": [
+    64,
+    217
+   ],
+   "avg_roughness": 0.787,
+   "roughness_p01_p99": [
+    0.686,
+    0.945
+   ],
+   "avg_ao": 0.851,
+   "avg_height": 0.588,
+   "avg_normal_z": 0.939
+  },
+  "cobble": {
+   "files": {
+    "albedo_height": "cobble_a.png",
+    "normal_rough_ao": "cobble_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_cobble",
+   "description": "rounded cobblestones (~11 cm), packed dirt and a little moss in the gaps",
+   "avg_albedo_srgb": [
+    120,
+    112,
+    100
+   ],
+   "albedo_min_max": [
+    37,
+    202
+   ],
+   "avg_roughness": 0.765,
+   "roughness_p01_p99": [
+    0.518,
+    0.949
+   ],
+   "avg_ao": 0.763,
+   "avg_height": 0.417,
+   "avg_normal_z": 0.886
+  },
+  "plaster": {
+   "files": {
+    "albedo_height": "plaster_a.png",
+    "normal_rough_ao": "plaster_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_plaster",
+   "description": "whitewashed daub: hairline cracks, stains, small flaked patches showing the daub",
+   "avg_albedo_srgb": [
+    207,
+    200,
+    181
+   ],
+   "albedo_min_max": [
+    83,
+    235
+   ],
+   "avg_roughness": 0.869,
+   "roughness_p01_p99": [
+    0.816,
+    0.961
+   ],
+   "avg_ao": 0.896,
+   "avg_height": 0.606,
+   "avg_normal_z": 0.973
+  },
+  "wood_planks": {
+   "files": {
+    "albedo_height": "wood_planks_a.png",
+    "normal_rough_ao": "wood_planks_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_wood_planks",
+   "description": "weathered boards running along V, 8 boards across U, grain, knots, nails, gaps",
+   "avg_albedo_srgb": [
+    104,
+    90,
+    74
+   ],
+   "albedo_min_max": [
+    26,
+    164
+   ],
+   "avg_roughness": 0.82,
+   "roughness_p01_p99": [
+    0.757,
+    0.949
+   ],
+   "avg_ao": 0.819,
+   "avg_height": 0.698,
+   "avg_normal_z": 0.905
+  },
+  "roof_tiles": {
+   "files": {
+    "albedo_height": "roof_tiles_a.png",
+    "normal_rough_ao": "roof_tiles_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_roof_tiles",
+   "description": "flat clay shingles, 16 rows x 12 per tile, top of image = ridge side, lichen",
+   "avg_albedo_srgb": [
+    118,
+    88,
+    71
+   ],
+   "albedo_min_max": [
+    33,
+    189
+   ],
+   "avg_roughness": 0.827,
+   "roughness_p01_p99": [
+    0.71,
+    0.949
+   ],
+   "avg_ao": 0.771,
+   "avg_height": 0.452,
+   "avg_normal_z": 0.917
+  },
+  "thatch": {
+   "files": {
+    "albedo_height": "thatch_a.png",
+    "normal_rough_ao": "thatch_n.png"
+   },
+   "size_px": [
+    1024,
+    1024
+   ],
+   "tile_m": 2.0,
+   "used_by": "M_thatch",
+   "description": "straw thatch, straws along V, 4 overlapping layers per tile (top = ridge side)",
+   "avg_albedo_srgb": [
+    140,
+    125,
+    84
+   ],
+   "albedo_min_max": [
+    36,
+    228
+   ],
+   "avg_roughness": 0.775,
+   "roughness_p01_p99": [
+    0.647,
+    0.949
+   ],
+   "avg_ao": 0.765,
+   "avg_height": 0.52,
+   "avg_normal_z": 0.918
+  },
+  "bark_oak": {
+   "files": {
+    "albedo_height": "bark_oak_a.png",
+    "normal_rough_ao": "bark_oak_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 1.0,
+   "used_by": "M_bark_oak",
+   "description": "deep vertical furrows, grey-brown blocky ridges",
+   "avg_albedo_srgb": [
+    82,
+    75,
+    66
+   ],
+   "albedo_min_max": [
+    26,
+    183
+   ],
+   "avg_roughness": 0.871,
+   "roughness_p01_p99": [
+    0.812,
+    0.925
+   ],
+   "avg_ao": 0.647,
+   "avg_height": 0.35,
+   "avg_normal_z": 0.766
+  },
+  "bark_pine": {
+   "files": {
+    "albedo_height": "bark_pine_a.png",
+    "normal_rough_ao": "bark_pine_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 1.0,
+   "used_by": "M_bark_pine",
+   "description": "reddish-brown scaly plates made of stacked flakes, dark furrows",
+   "avg_albedo_srgb": [
+    99,
+    79,
+    68
+   ],
+   "albedo_min_max": [
+    26,
+    202
+   ],
+   "avg_roughness": 0.868,
+   "roughness_p01_p99": [
+    0.792,
+    0.949
+   ],
+   "avg_ao": 0.735,
+   "avg_height": 0.477,
+   "avg_normal_z": 0.855
+  },
+  "bark_birch": {
+   "files": {
+    "albedo_height": "bark_birch_a.png",
+    "normal_rough_ao": "bark_birch_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 1.0,
+   "used_by": "M_bark_birch",
+   "description": "white papery bark, dark horizontal lenticels, a few black scars",
+   "avg_albedo_srgb": [
+    195,
+    187,
+    174
+   ],
+   "albedo_min_max": [
+    28,
+    229
+   ],
+   "avg_roughness": 0.638,
+   "roughness_p01_p99": [
+    0.584,
+    0.902
+   ],
+   "avg_ao": 0.837,
+   "avg_height": 0.421,
+   "avg_normal_z": 0.959
+  },
+  "metal": {
+   "files": {
+    "albedo_height": "metal_a.png",
+    "normal_rough_ao": "metal_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_metal_iron / steel / gold / bronze",
+   "description": "hammered plate, light scratches, tiny pits (near-white albedo)",
+   "avg_albedo_srgb": [
+    218,
+    218,
+    218
+   ],
+   "albedo_min_max": [
+    200,
+    230
+   ],
+   "avg_roughness": 0.415,
+   "roughness_p01_p99": [
+    0.282,
+    0.643
+   ],
+   "avg_ao": 0.917,
+   "avg_height": 0.574,
+   "avg_normal_z": 0.988
+  },
+  "leather": {
+   "files": {
+    "albedo_height": "leather_a.png",
+    "normal_rough_ao": "leather_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_leather",
+   "description": "pebbled grain, creases, pores (near-white albedo)",
+   "avg_albedo_srgb": [
+    215,
+    215,
+    215
+   ],
+   "albedo_min_max": [
+    200,
+    225
+   ],
+   "avg_roughness": 0.556,
+   "roughness_p01_p99": [
+    0.439,
+    0.753
+   ],
+   "avg_ao": 0.838,
+   "avg_height": 0.567,
+   "avg_normal_z": 0.955
+  },
+  "cloth": {
+   "files": {
+    "albedo_height": "cloth_a.png",
+    "normal_rough_ao": "cloth_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_cloth",
+   "description": "plain weave, 64 x 64 threads per tile (near-white albedo)",
+   "avg_albedo_srgb": [
+    217,
+    217,
+    217
+   ],
+   "albedo_min_max": [
+    200,
+    232
+   ],
+   "avg_roughness": 0.883,
+   "roughness_p01_p99": [
+    0.812,
+    0.957
+   ],
+   "avg_ao": 0.801,
+   "avg_height": 0.597,
+   "avg_normal_z": 0.932
+  },
+  "rope": {
+   "files": {
+    "albedo_height": "rope_a.png",
+    "normal_rough_ao": "rope_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_rope",
+   "description": "twisted strands at 45 degrees, rope axis along V (near-white albedo)",
+   "avg_albedo_srgb": [
+    217,
+    217,
+    217
+   ],
+   "albedo_min_max": [
+    200,
+    231
+   ],
+   "avg_roughness": 0.886,
+   "roughness_p01_p99": [
+    0.851,
+    0.929
+   ],
+   "avg_ao": 0.772,
+   "avg_height": 0.573,
+   "avg_normal_z": 0.871
+  },
+  "fur": {
+   "files": {
+    "albedo_height": "fur_a.png",
+    "normal_rough_ao": "fur_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_fur",
+   "description": "short strands, roots up / tips down the image = flowing towards -V (near-white albedo)",
+   "avg_albedo_srgb": [
+    215,
+    215,
+    215
+   ],
+   "albedo_min_max": [
+    200,
+    235
+   ],
+   "avg_roughness": 0.69,
+   "roughness_p01_p99": [
+    0.565,
+    0.949
+   ],
+   "avg_ao": 0.779,
+   "avg_height": 0.531,
+   "avg_normal_z": 0.919
+  },
+  "hide": {
+   "files": {
+    "albedo_height": "hide_a.png",
+    "normal_rough_ao": "hide_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_hide",
+   "description": "thick monster hide: tubercles, warts, deep wrinkles (near-white albedo)",
+   "avg_albedo_srgb": [
+    217,
+    217,
+    217
+   ],
+   "albedo_min_max": [
+    200,
+    227
+   ],
+   "avg_roughness": 0.679,
+   "roughness_p01_p99": [
+    0.569,
+    0.824
+   ],
+   "avg_ao": 0.822,
+   "avg_height": 0.438,
+   "avg_normal_z": 0.93
+  },
+  "chitin": {
+   "files": {
+    "albedo_height": "chitin_a.png",
+    "normal_rough_ao": "chitin_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_chitin",
+   "description": "smooth glossy shell, faint growth ridges across V, micro pits (near-white albedo)",
+   "avg_albedo_srgb": [
+    219,
+    219,
+    219
+   ],
+   "albedo_min_max": [
+    200,
+    225
+   ],
+   "avg_roughness": 0.253,
+   "roughness_p01_p99": [
+    0.169,
+    0.553
+   ],
+   "avg_ao": 0.957,
+   "avg_height": 0.516,
+   "avg_normal_z": 0.996
+  },
+  "bone": {
+   "files": {
+    "albedo_height": "bone_a.png",
+    "normal_rough_ao": "bone_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_bone",
+   "description": "porous bone, pores and fine cracks elongated along V (near-white albedo)",
+   "avg_albedo_srgb": [
+    215,
+    215,
+    215
+   ],
+   "albedo_min_max": [
+    200,
+    230
+   ],
+   "avg_roughness": 0.673,
+   "roughness_p01_p99": [
+    0.537,
+    0.969
+   ],
+   "avg_ao": 0.848,
+   "avg_height": 0.543,
+   "avg_normal_z": 0.958
+  },
+  "skin": {
+   "files": {
+    "albedo_height": "skin_a.png",
+    "normal_rough_ao": "skin_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_skin",
+   "description": "very subtle pores and crosshatch micro wrinkles (near-white albedo)",
+   "avg_albedo_srgb": [
+    217,
+    217,
+    217
+   ],
+   "albedo_min_max": [
+    200,
+    222
+   ],
+   "avg_roughness": 0.52,
+   "roughness_p01_p99": [
+    0.427,
+    0.62
+   ],
+   "avg_ao": 0.924,
+   "avg_height": 0.506,
+   "avg_normal_z": 0.994
+  },
+  "hair": {
+   "files": {
+    "albedo_height": "hair_a.png",
+    "normal_rough_ao": "hair_n.png"
+   },
+   "size_px": [
+    512,
+    512
+   ],
+   "tile_m": 0.5,
+   "used_by": "M_hair",
+   "description": "fine strands running along V (near-white albedo)",
+   "avg_albedo_srgb": [
+    219,
+    219,
+    219
+   ],
+   "albedo_min_max": [
+    200,
+    235
+   ],
+   "avg_roughness": 0.462,
+   "roughness_p01_p99": [
+    0.302,
+    0.624
+   ],
+   "avg_ao": 0.86,
+   "avg_height": 0.516,
+   "avg_normal_z": 0.97
+  }
+ },
+ "fx": {
+  "water_n": {
+   "file": "water_n.png",
+   "size_px": [
+    512,
+    512
+   ],
+   "channels": 4,
+   "description": "R,G = tiling water ripple normal (OpenGL, two blended wave scales), B = foam / caustic web noise, A = 255",
+   "channel_means": [
+    0.5,
+    0.5,
+    0.434,
+    1.0
+   ]
+  },
+  "fx_noise": {
+   "file": "fx_noise.png",
+   "size_px": [
+    512,
+    512
+   ],
+   "channels": 4,
+   "description": "R = low-frequency perlin fbm, G = worley F1 (0 at the cell seeds), B = high-frequency fbm, A = billowy perlin-worley cloud; every channel tiles",
+   "channel_means": [
+    0.533,
+    0.418,
+    0.502,
+    0.525
+   ]
+  },
+  "fx_bluenoise": {
+   "file": "fx_bluenoise.png",
+   "size_px": [
+    64,
+    64
+   ],
+   "channels": 1,
+   "description": "8-bit greyscale void-and-cluster blue noise, flat histogram, tiles",
+   "channel_means": [
+    0.5
+   ]
+  }
+ },
+ "overview_order": [
+  "terrain_grass",
+  "terrain_dirt",
+  "terrain_rock",
+  "terrain_sand",
+  "terrain_snow",
+  "terrain_forest",
+  "terrain_mud",
+  "terrain_ash",
+  "stone_wall",
+  "stone_brick",
+  "cobble",
+  "plaster",
+  "wood_planks",
+  "roof_tiles",
+  "thatch",
+  "bark_oak",
+  "bark_pine",
+  "bark_birch",
+  "metal",
+  "leather",
+  "cloth",
+  "rope",
+  "fur",
+  "hide",
+  "chitin",
+  "bone",
+  "skin",
+  "hair",
+  "water_n",
+  "fx_noise",
+  "fx_bluenoise"
+ ],
+ "generator": "tools/blender/tex_terrain.py, tex_building.py, tex_bark.py, tex_detail.py, tex_fx.py (library tex_lib.py), checked by tex_finish.py"
+}

@@ -1,0 +1,148 @@
+{
+ "file": "wolf.glb",
+ "fps": 30,
+ "description": "Grey wolf, rigged + skinned, 9 in-place clips. Scale 1-1.3 for wolves, 2.3 for the giant boss.",
+ "size": {
+  "length": 1.632,
+  "height": 1.093,
+  "radius": 0.45,
+  "width": 0.322,
+  "shoulder_height": 0.8,
+  "nose_to_rump": 1.47
+ },
+ "triangles": 5593,
+ "materials": {
+  "M_fur": "coat (COLOR_0 = neutral light-grey pattern 0.5-1.0 x baked AO, to be multiplied by the variant tint)",
+  "M_bone": "teeth (ivory vertex colour) and claws (dark vertex colour)",
+  "M_mouth": "NEW: dark wet gums / palate / tongue, vertex colour = dark red tint",
+  "M_eye_glow": "eyeballs (vertex colour amber iris, dark pupil); make emissive for corrupted variants"
+ },
+ "bones": {
+  "root": "root",
+  "hips": "hips",
+  "head": "head",
+  "jaw": "jaw",
+  "chest": "chest",
+  "spine": [
+   "hips",
+   "spine1",
+   "spine2",
+   "chest",
+   "neck1",
+   "neck2",
+   "head"
+  ],
+  "tail": [
+   "tail1",
+   "tail2",
+   "tail3",
+   "tail4"
+  ],
+  "ears": [
+   "ear_L",
+   "ear_R"
+  ],
+  "paws": [
+   "fpaw_L",
+   "fpaw_R",
+   "hpaw_L",
+   "hpaw_R"
+  ]
+ },
+ "notes": "Only bone rotations are animated, plus the location of \"hips\" (root stays at the origin). All clips are in place. One-shots start from and return to the idle pose (= rest pose).",
+ "clips": {
+  "idle": {
+   "duration": 3.0,
+   "loop": true,
+   "events": {
+    "sound": 1.0
+   }
+  },
+  "walk": {
+   "duration": 1.0,
+   "loop": true,
+   "speed": 1.8,
+   "events": {
+    "steps": [
+     0.0,
+     0.125,
+     0.25,
+     0.375,
+     0.5,
+     0.625,
+     0.75,
+     0.875
+    ]
+   }
+  },
+  "run": {
+   "duration": 0.5,
+   "loop": true,
+   "speed": 6.5,
+   "events": {
+    "steps": [
+     0.0,
+     0.045,
+     0.25,
+     0.295
+    ]
+   }
+  },
+  "bite": {
+   "duration": 0.7,
+   "loop": false,
+   "events": {
+    "hit": [
+     0.24,
+     0.36
+    ],
+    "sound": 0.18
+   }
+  },
+  "lunge": {
+   "duration": 1.1,
+   "loop": false,
+   "events": {
+    "hit": [
+     0.5,
+     0.72
+    ],
+    "impact": 0.7,
+    "sound": 0.36
+   }
+  },
+  "swipe": {
+   "duration": 0.9,
+   "loop": false,
+   "events": {
+    "hit": [
+     0.3,
+     0.46
+    ],
+    "sound": 0.27
+   }
+  },
+  "howl": {
+   "duration": 2.4,
+   "loop": false,
+   "events": {
+    "sound": 0.45
+   }
+  },
+  "hit": {
+   "duration": 0.4,
+   "loop": false,
+   "events": {
+    "sound": 0.03
+   }
+  },
+  "death": {
+   "duration": 1.6,
+   "loop": false,
+   "events": {
+    "impact": 0.85,
+    "sound": 0.08
+   }
+  }
+ }
+}
