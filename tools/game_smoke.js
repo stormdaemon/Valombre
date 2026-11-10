@@ -1,7 +1,6 @@
 // Smoke test of the real UI against the real game (not the mock bench).
 // Usage, in a page of the game while playing:  (await import('/tools/game_smoke.js')).run()
 // Returns { ok, steps, errors }. It changes the current game (gold, items, death...): use a throwaway game.
-import { NPCS } from '../src/game/data/story.js';
 
 export async function run() {
   const a = window.__app, ui = a.ui, S = ui.screens;
